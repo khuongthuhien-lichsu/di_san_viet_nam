@@ -77,12 +77,14 @@ select{min-height:44px;padding:6px 10px;border:1px solid var(--line);border-radi
 .pill{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:6px 10px;cursor:pointer;text-align:left;font-size:14px;display:flex;gap:8px;align-items:baseline}
 .pill small{color:var(--mut);white-space:nowrap}
 .ywrap{position:relative}
-.years{display:flex;gap:8px;align-items:flex-end;overflow-x:auto;padding:28px 4px 6px;margin-top:8px}
-.yr{flex:1 0 40px;display:flex;flex-direction:column-reverse;gap:4px;align-items:center}
-.yr span{font-size:12px;font-weight:700;color:#fff;background:var(--yc);border-radius:6px;padding:2px 6px;margin-top:6px;white-space:nowrap}
+.years{overflow-x:auto;padding:28px 0 6px;margin-top:8px}
+.ytrack{--yl:light-dark(#a66a00,#e6a93a);display:flex;gap:6px;align-items:flex-end;position:relative;min-width:max-content;width:100%;padding:0 6px}
+.ytrack::before{content:"";position:absolute;left:0;right:0;bottom:11px;height:4px;border-radius:2px;background:var(--yl)}
+.yr{flex:1 0 42px;display:flex;flex-direction:column-reverse;gap:4px;align-items:center;position:relative}
+.yr span{position:relative;z-index:1;font-size:11.5px;font-weight:700;color:#fff;background:var(--yl);border:2px solid var(--bg);border-radius:999px;padding:2px 5px;margin-top:6px;white-space:nowrap}
+.yr span::before{content:"";position:absolute;left:50%;top:-8px;width:2px;height:6px;background:var(--yl);transform:translateX(-50%)}
 .yr b{font-size:11px;color:var(--mut);font-weight:600}
-.sq{width:30px;height:22px;border-radius:5px;border:0;cursor:pointer;padding:0;background:var(--yc);position:relative;transition:transform .12s}
-.sq i{position:absolute;right:3px;bottom:3px;width:7px;height:7px;border-radius:50%;background:#fff;opacity:.9}
+.sq{width:30px;height:22px;border-radius:5px;border:0;cursor:pointer;padding:0;position:relative;transition:transform .12s}
 .sq:hover,.sq:focus-visible{transform:scale(1.18)}
 .ytip{position:fixed;z-index:60;pointer-events:none;background:#1a1714;color:#fff;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:8px;max-width:260px;opacity:0;transform:translate(-50%,calc(-100% - 10px));transition:opacity .1s}
 .ytip small{display:block;color:#d9cfc4}
@@ -439,8 +441,7 @@ renderGrid();
 const EC={tien:'#b7791f',cham:'#c2532b',dai:'#b3261e',le:'#9c2f6e',nguyen:'#7b3fa0',hiendai:'#2b6cb0',nhieu:'#2c7a7b',song:'#2f855a',tn:'#4f7d1f'};
 $('#eras').innerHTML=ERA.map(([k,n,s])=>{const L=D.filter(x=>x.e===k);return `<div class="era" style="--ec:${EC[k]}"><div class="lab"><h3>${n}</h3><p>${s}</p><span class="n">${L.length} di sản</span></div><div class="pills">${L.map(x=>`<button class="pill" type="button" data-id="${x.id}"><span class="tag c-${x.c}" aria-label="${CAT[x.c]}"></span>${esc(x.t)} <small>${esc(x.pd)}</small></button>`).join('')}</div></div>`}).join('');
 const ys=[...new Set(D.map(x=>x.y))].sort((a,b)=>a-b);
-const yc=i=>`hsl(${Math.round(18+i*(300/Math.max(1,ys.length-1)))%360} 62% 44%)`;
-$('#years').innerHTML=ys.map((y,i)=>{const L=D.filter(x=>x.y===y);return `<div class="yr" style="--yc:${yc(i)}"><span>${y}</span>${L.map(x=>`<button class="sq" type="button" data-id="${x.id}" data-y="${y}" aria-label="${esc(x.t)}, ghi danh ${y}"><i style="background:var(--${x.c})"></i></button>`).join('')}<b>${L.length}</b></div>`}).join('');
+$('#years').innerHTML='<div class="ytrack">'+ys.map(y=>{const L=D.filter(x=>x.y===y);return `<div class="yr"><span>${y}</span>${L.map(x=>`<button class="sq" type="button" data-id="${x.id}" data-y="${y}" aria-label="${esc(x.t)}, ghi danh ${y}" style="background:var(--${x.c})"></button>`).join('')}<b>${L.length}</b></div>`}).join('')+'</div>';
 {const tip=$('#ytip');let hide;
  const showTip=b=>{const x=byId[b.dataset.id],r=b.getBoundingClientRect();clearTimeout(hide);tip.innerHTML=`${esc(x.t)}<small>${esc(b.dataset.y)} · ${esc(CAT[x.c])}</small>`;tip.style.left=(r.left+r.width/2)+'px';tip.style.top=r.top+'px';tip.style.opacity=1};
  const hideTip=()=>{hide=setTimeout(()=>tip.style.opacity=0,80)};
@@ -449,7 +450,7 @@ $('#years').innerHTML=ys.map((y,i)=>{const L=D.filter(x=>x.y===y);return `<div c
  $('#years').addEventListener('focusin',e=>{const b=e.target.closest('.sq');if(b)showTip(b)});
  $('#years').addEventListener('focusout',hideTip);
  $('#years').addEventListener('scroll',hideTip,{passive:true});addEventListener('scroll',hideTip,{passive:true})}
-$('#years').insertAdjacentHTML('afterend',`<div class="ylegend">Chấm nhỏ trong ô cho biết loại di sản: ${Object.entries(CAT).map(([c,n])=>`<span class="tag c-${c}">${n}</span>`).join('')}</div>`);
+$('#years').insertAdjacentHTML('afterend',`<div class="ylegend">Màu ô theo loại di sản: ${Object.entries(CAT).map(([c,n])=>`<span class="tag c-${c}">${n}</span>`).join('')}</div>`);
 $('#thoi-gian').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openD(b.dataset.id)});
 
 /* ---------- detail modal ---------- */
