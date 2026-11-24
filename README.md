@@ -36,16 +36,17 @@ Không nên dán toàn bộ mã vào **Nhúng → Mã nhúng**: Google Sites b�
 
 ## Ảnh và video
 
-- Ảnh được lấy tự động từ Wikipedia tiếng Việt và Wikimedia Commons khi người dùng mở trang. Chỉ lấy tệp trên Commons (giấy phép tự do); mỗi ảnh ghi tác giả, giấy phép và liên kết tới trang gốc, đúng yêu cầu ghi công của giấy phép CC.
-- Ảnh đại diện hiện trên thẻ di sản; bấm vào thẻ để xem thư viện ảnh (vuốt ngang, nút ‹ ›, phím mũi tên). Nếu bài Wikipedia có video trên Commons, video hiện trong thư viện.
-- Cần kết nối Internet và mạng của trường không chặn wikipedia.org, wikimedia.org.
+- Ảnh chỉ lấy từ Wikimedia Commons (giấy phép tự do), theo danh sách đã chọn cho từng di sản: các tệp cụ thể (bảng `PIN`) và các thể loại Commons dành riêng cho di sản đó (bảng `CATS`, ví dụ `Stelae of Doctors (Temple of Literature, Hanoi)` cho 82 bia tiến sĩ). Trang KHÔNG tự tìm ảnh theo từ khóa, để tránh ảnh không liên quan. Mỗi ảnh ghi tác giả, giấy phép và liên kết tới trang gốc.
+- Di sản chưa có ảnh tự do thể hiện đúng nội dung thì trang không hiện ảnh, chỉ hiện ghi chú, video và liên kết.
+- Ảnh đại diện hiện trên thẻ di sản; bấm vào thẻ để xem thư viện ảnh (vuốt ngang, nút ‹ ›, phím mũi tên). Nếu thể loại Commons có video, video hiện trong thư viện.
+- Cần kết nối Internet và mạng của trường không chặn wikimedia.org.
 - Video: 37/39 di sản đã có video gắn sẵn từ nguồn chính thống, đã kiểm tra mã, tiêu đề và kênh đăng (24/11/2026): kênh UNESCO (17 di sản phi vật thể, 6 di sản thế giới – loạt UNESCO/NHK), VTV, TTXVN (VNA Media), VOV, Truyền hình Quốc hội, Trung tâm Lưu trữ quốc gia IV, Đài Hà Nội và đài truyền hình Quảng Ninh, Thanh Hóa, Hà Tĩnh, Hưng Yên. Video chỉ tải khi người dùng bấm nút phát (chế độ youtube-nocookie), nên trang vẫn nhẹ.
 - Thơ văn trên kiến trúc cung đình Huế dùng phim tài liệu của THVL; Ma nhai núi Non Nước tạm dùng video của một kênh cá nhân (ghi rõ tên kênh) vì chưa có video từ kênh chính thống – nên thay khi có video của Đài PT-TH Ninh Bình.
-- Ảnh: nếu bài Wikipedia có ít ảnh, trang tự tìm thêm ảnh trên Wikimedia Commons theo từ khóa (bảng `CQ` trong `index.html`).
+- Thêm ảnh: mở `index.html`, tìm `const PIN={`, thêm đúng tên tệp trên Commons (phần sau `File:`) vào dòng của di sản; hoặc thêm tên thể loại vào `const CATS={`.
 - Đổi hoặc thêm video: mở `index.html`, tìm `const VIDEOS={`, sửa dòng của di sản tương ứng theo dạng `['MÃ_VIDEO','Tiêu đề','Kênh đăng']` (mã là 11 ký tự sau `v=` trong link YouTube).
 - Video của UNESCO/NHK có lời thuyết minh tiếng Anh; video của các đài trong nước bằng tiếng Việt. Video đăng trên YouTube có thể bị chủ kênh gỡ; khi đó thay mã khác.
 - Di sản phi vật thể có thêm nút “Trang UNESCO” dẫn tới hồ sơ chính thức trên ich.unesco.org.
-- Thầy/cô nên mở thử từng hồ sơ trước khi dạy: ảnh lấy tự động từ bài Wikipedia nên đôi khi có ảnh chưa thật sát chủ đề.
+- Thể loại Commons do cộng đồng Wikimedia phân loại, có thể được bổ sung ảnh mới theo thời gian; thầy/cô nên mở thử hồ sơ trước khi dạy và báo lỗi nếu thấy ảnh chưa đúng.
 
 ## Dùng AI miễn phí, không cần máy chủ
 
