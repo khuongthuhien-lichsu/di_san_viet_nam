@@ -519,6 +519,42 @@ function deep() { const m = location.hash.match(/^#ds=([\w-]+)/); if (m && byId[
 addEventListener('hashchange', deep);
 deep();
 
+/* ---- Chế độ xem từng phần: chỉ hiện một phần, tránh phân tán ---- */
+document.head.insertAdjacentHTML('beforeend', `<style id="tt-sec">.one-sec>.band.sec-off{display:none!important}
+nav.top .scroll a[aria-current="page"]{background:var(--btn);color:var(--btnink);border-radius:6px}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:28px;padding-top:14px;border-top:1px solid var(--line)}
+.pager a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit;background:var(--panel)}
+.pager a:hover,.pager a:focus{border-color:var(--btn)}
+.pager .nx{margin-left:auto}
+@media print{.pager{display:none}.one-sec>.band.sec-off{display:block!important}}</style>`);
+const secs = () => [...document.querySelectorAll('body>.band[id]')];
+const navName = id => { const a = $(`nav.top .scroll a[href="#${id}"]`); return a ? a.textContent.trim() : (document.getElementById(id)?.querySelector('h1,h2')?.textContent.trim() || id); };
+let cur = 'ban-do';
+function showSec(id, top) {
+  const L = secs(); let el = L.find(x => x.id === id);
+  if (!el) { el = L.find(x => x.id === cur) || L[0]; id = el.id; }
+  cur = id; document.body.classList.add('one-sec');
+  L.forEach(x => x.classList.toggle('sec-off', x !== el));
+  document.querySelectorAll('nav.top .scroll a').forEach(a => { if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  const i = L.indexOf(el), w = el.querySelector(':scope>.wrap') || el;
+  let pg = w.querySelector(':scope>.pager'); if (!pg) { pg = document.createElement('div'); pg.className = 'pager'; w.appendChild(pg); }
+  pg.innerHTML = (i > 0 ? `<a href="#${L[i - 1].id}">‹ ${esc(navName(L[i - 1].id))}</a>` : '') + (i < L.length - 1 ? `<a class="nx" href="#${L[i + 1].id}">${esc(navName(L[i + 1].id))} ›</a>` : '');
+  if (top) scrollTo(0, 0);
+}
+function route() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (!h || /^ds=/.test(h)) { if (!document.body.classList.contains('one-sec')) showSec(cur, false); return; }
+  const t = document.getElementById(h); if (!t) return;
+  const sec = t.closest('body>.band[id]'); if (!sec) return;
+  showSec(sec.id, true);
+  if (t !== sec) requestAnimationFrame(() => t.scrollIntoView({ block: 'start' }));
+}
+DS.hooks.reveal = id => showSec(id, false);
+addEventListener('hashchange', route);
+/* Phần Trợ lý AI/Hỏi AI bị gỡ sau khi kiểm tra AI: cập nhật lại thanh chuyển phần */
+new MutationObserver(() => showSec(cur, false)).observe(document.body, { childList: true });
+route();
+
 /* ---- Khởi tạo ---- */
 decorate(); checkBadges();
 })();

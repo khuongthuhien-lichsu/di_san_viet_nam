@@ -48,6 +48,9 @@ Không nên dán toàn bộ mã vào **Nhúng → Mã nhúng**: Google Sites b�
 - Di sản phi vật thể có thêm nút “Trang UNESCO” dẫn tới hồ sơ chính thức trên ich.unesco.org.
 - Thể loại Commons do cộng đồng Wikimedia phân loại, có thể được bổ sung ảnh mới theo thời gian; thầy/cô nên mở thử hồ sơ trước khi dạy và báo lỗi nếu thấy ảnh chưa đúng.
 
+
+**Di sản chưa có ảnh tự do.** Với 13 di sản chưa tìm được ảnh có giấy phép tự do đúng chủ đề (chủ yếu là di sản tư liệu và một số di sản phi vật thể), hồ sơ hiện khung "Xem ảnh tại nguồn chính thức" gồm liên kết tới bài viết có ảnh trên trang của UNESCO, cơ quan nhà nước và báo chí, ghi rõ tên nguồn. Trang chỉ đặt liên kết, không sao chép ảnh, vì ảnh trên các trang đó thuộc bản quyền của nơi đăng; ghi nguồn không thay cho việc được phép đăng lại. Danh sách nằm trong biến `EXT` của `index.html`. Nếu thầy cô có ảnh tự chụp hoặc được cơ quan sở hữu cho phép, có thể thêm vào `PIN` (nếu đưa lên Wikimedia Commons) hoặc thêm liên kết vào `EXT`.
+
 ## Dùng AI miễn phí, không cần máy chủ
 
 ### Cách 1 – Mục “Hỏi AI” trên trang (đã có sẵn)
@@ -87,3 +90,7 @@ Bản đồ nền dựng từ dữ liệu Natural Earth (thông qua gói `world-
 - **Sổ tay học tập** (di sản đã tìm hiểu, ghi chép, câu sai, huy hiệu) chỉ lưu trên trình duyệt của từng máy (localStorage). Trang không có tài khoản và không gửi dữ liệu đi đâu. Xóa dữ liệu trình duyệt hoặc đổi máy thì Sổ tay bắt đầu lại; học sinh có thể bấm “Tải sổ tay (.txt)” để nộp bài.
 - **Liên kết tới từng hồ sơ:** thêm `#ds=<mã di sản>` vào cuối địa chỉ, ví dụ `…/di_san_viet_nam/#ds=hue`. Nút “Mã QR” trong hồ sơ tạo sẵn mã này.
 - **Báo lỗi nội dung:** tạo một Google Form góp ý, rồi mở `tuong-tac.js`, dán link vào dòng `const FORM_URL = '';` ở đầu tệp. Khi để trống, nút “Báo lỗi” chỉ giúp sao chép nội dung để gửi cho giáo viên.
+
+## Xem từng phần
+
+Trang hiển thị một phần mỗi lần (Bản đồ, Khám phá, So sánh, ...), để học sinh tập trung vào nội dung đang học. Bấm tên phần trên thanh điều hướng hoặc nút "‹ Phần trước / Phần tiếp theo ›" ở cuối mỗi phần để chuyển. Mỗi phần có địa chỉ riêng (ví dụ `.../#trac-nghiem`), nên giáo viên có thể gửi link mở thẳng đúng phần cần dùng. Khi in trang, tất cả các phần được in đầy đủ. Mã nằm ở mục "Chế độ xem từng phần" trong `tuong-tac.js`.
