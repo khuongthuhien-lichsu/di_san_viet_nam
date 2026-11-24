@@ -1,11 +1,11 @@
 /* TÀI LIỆU GIÁO VIÊN: 3 kế hoạch bài dạy (cấu trúc Công văn 5512) và 3 phiếu học tập.
-   Đây là bản mẫu: giáo viên điều chỉnh theo bộ sách giáo khoa, phân phối chương trình và đối tượng học sinh.
+   Đây là bản mẫu: giáo viên điều chỉnh theo sách giáo khoa Kết nối tri thức với cuộc sống, phân phối chương trình và đối tượng học sinh.
    Những chỗ ghi [GV bổ sung] là phần giáo viên tự thêm tư liệu, số liệu từ sách giáo khoa đang dùng. */
 window.KH=[
 {
 id:'kh-dai-viet',
 title:'Văn minh Đại Việt qua các di sản UNESCO',
-meta:'Lớp 10 · 1 tiết (45 phút) · Dùng cho phần “Thành tựu văn minh Đại Việt” hoặc tiết ôn tập chủ đề',
+meta:'Lớp 10 · 1 tiết (45 phút) · SGK Lịch sử 10 (Kết nối tri thức với cuộc sống), Bài 10. Văn minh Đại Việt – phần thành tựu, hoặc tiết ôn tập Chủ đề 6',
 plan:`
 <h4>I. MỤC TIÊU</h4>
 <p><strong>1. Kiến thức</strong></p>
@@ -27,7 +27,7 @@ plan:`
 <li>Máy chiếu, máy tính có Internet; website “Di sản Việt Nam trong các danh mục của UNESCO” (mục Bản đồ, Khám phá, Dòng thời gian, Trắc nghiệm).</li>
 <li>Phiếu học tập số 1 (in theo số nhóm); giấy A0, bút dạ.</li>
 <li>Học sinh: điện thoại/máy tính bảng (nếu nhà trường cho phép) hoặc dùng chung máy chiếu.</li>
-<li>Sách giáo khoa Lịch sử 10, bài Văn minh Đại Việt [GV bổ sung số trang theo bộ sách].</li>
+<li>Sách giáo khoa Lịch sử 10 (Kết nối tri thức với cuộc sống), Bài 10. Văn minh Đại Việt [GV bổ sung số trang].</li>
 </ul>
 
 <h4>III. TIẾN TRÌNH DẠY HỌC</h4>
@@ -97,7 +97,7 @@ sheet:`
 {
 id:'kh-cai-cach',
 title:'Cải cách của Hồ Quý Ly và Minh Mạng qua dấu tích di sản',
-meta:'Lớp 11 · 1 tiết (45 phút) · Dùng sau khi học hai bài về cải cách của Hồ Quý Ly và Minh Mạng, hoặc tiết ôn tập chủ đề',
+meta:'Lớp 11 · 1 tiết (45 phút) · SGK Lịch sử 11 (Kết nối tri thức với cuộc sống), dùng sau Bài 9. Cuộc cải cách của Hồ Quý Ly và triều Hồ và Bài 11. Cuộc cải cách của Minh Mạng, hoặc tiết ôn tập Chủ đề 5',
 plan:`
 <h4>I. MỤC TIÊU</h4>
 <p><strong>1. Kiến thức</strong></p>
@@ -113,7 +113,7 @@ plan:`
 <ul>
 <li>Website (hồ sơ Thành nhà Hồ, Cố đô Huế, Cửu đỉnh, Châu bản, Mộc bản triều Nguyễn, kèm video).</li>
 <li>Phiếu học tập số 2.</li>
-<li>Sách giáo khoa Lịch sử 11, hai bài về cải cách của Hồ Quý Ly và Minh Mạng [GV bổ sung số trang, nội dung cải cách theo bộ sách].</li>
+<li>Sách giáo khoa Lịch sử 11 (Kết nối tri thức với cuộc sống), Bài 9 và Bài 11 [GV bổ sung số trang].</li>
 </ul>
 
 <h4>III. TIẾN TRÌNH DẠY HỌC</h4>
@@ -184,7 +184,7 @@ sheet:`
 {
 id:'kh-bao-ton',
 title:'Bảo tồn và phát huy giá trị di sản văn hóa – học từ các trường hợp được UNESCO ghi danh',
-meta:'Lớp 10 · 1 tiết (45 phút) · Dùng cho nội dung “Sử học với công tác bảo tồn và phát huy giá trị di sản văn hóa, di sản thiên nhiên” hoặc chuyên đề học tập về bảo tồn di sản',
+meta:'Lớp 10 · 1 tiết (45 phút) · SGK Lịch sử 10 (Kết nối tri thức với cuộc sống), Bài 3. Vai trò của Sử học – nội dung Sử học với công tác bảo tồn và phát huy giá trị di sản; hoặc Chuyên đề học tập Lịch sử 10, Chuyên đề 2',
 plan:`
 <h4>I. MỤC TIÊU</h4>
 <p><strong>1. Kiến thức</strong></p>
