@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Di sản Việt Nam – UNESCO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: trang học liệu nghiêm túc, ấm áp, cho học sinh THPT và giáo viên Lịch sử.
+   IDEA: một tấm sơn mài – nền son thẫm, bản đồ như lá giấy dó, mỗi di sản là một dấu triện.
+   PICTURE: bản đồ Việt Nam lớn với 39 điểm di sản, có Hoàng Sa, Trường Sa; bấm để mở hồ sơ.
+   COLOUR and TYPE: son thẫm chủ đạo, đỏ triện / xanh ngọc / chàm cho 3 loại di sản; Noto Serif + Be Vietnam Pro.
+   LAYOUT: dải hero son thẫm, rồi các khu vực Khám phá, Thời gian, Trợ lý AI, Trắc nghiệm, Giáo viên, Nguồn. */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#12110f);--ink:light-dark(#1a1714,#f1ece4);--mut:light-dark(#5b554e,#b5ada2);
+--line:light-dark(#e6e0d7,#2e2b27);--panel:light-dark(#f5f2ec,#1c1a17);--lac:light-dark(#7a1a13,#4e110c);
+--paper:#f3e8d8;--tg:light-dark(#b3261e,#f07a6e);--pvt:light-dark(#1d6b55,#5cc4a2);--tl:light-dark(#33418f,#8f9cf0);
+--btn:light-dark(#7a1a13,#f07a6e);--btnink:light-dark(#fff,#1a0d0b)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Be Vietnam Pro",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Noto Serif",Georgia,serif;line-height:1.12;text-wrap:balance;margin:0 0 .4em}
+h1{font-size:clamp(32px,4.6vw,52px)}h2{font-size:clamp(26px,3.2vw,36px)}h3{font-size:20px}
+a{color:inherit}button,input,select,textarea{font:inherit;color:inherit}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}.wrap{max-width:1240px;margin:0 auto}
+.lead{color:var(--mut);max-width:68ch;margin:0 0 1.2em}
+html{scroll-padding-top:72px;scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+nav.top{position:relative;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+@media(min-width:900px){nav.top{position:sticky;top:0}}
+nav.top .wrap{display:flex;align-items:center;gap:6px 18px;padding:10px max(5vw,16px);flex-wrap:wrap}
+nav.top b{font-family:"Noto Serif",serif;margin-right:auto;display:flex;gap:8px;align-items:center}
+.scroll{display:flex;gap:4px;overflow-x:auto}.scroll a{flex:none;text-decoration:none;padding:8px 10px;border-radius:8px;font-size:15px;color:var(--mut)}
+.scroll a:hover,.scroll a:focus-visible{background:var(--panel);color:var(--ink)}
+.seal{width:22px;height:22px;border-radius:4px;background:var(--tg);display:inline-grid;place-items:center;color:#fff;font-size:12px}
+/* hero */
+.hero{background:var(--lac);color:#fff}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(20px,4vw,56px);align-items:center}
+.hero .lead{color:#f1d9cf}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}
+.stat{border-top:2px solid rgba(255,255,255,.35);padding-top:8px}.stat b{display:block;font:700 clamp(26px,3vw,36px)/1 "Noto Serif",serif}.stat span{font-size:13px;color:#f1d9cf}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.tog{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;cursor:pointer}
+.tog[aria-pressed=false]{opacity:.45}.tog i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.mapbox{position:relative;aspect-ratio:608/616;max-height:78vh;margin-inline:auto;width:100%}
+.mapbox svg{width:100%;height:100%;display:block}
+.dot{cursor:pointer;stroke:#fff;stroke-width:1.6;transition:r .15s}.dot:hover,.dot:focus{r:9;outline:none}
+.tip{position:absolute;pointer-events:none;background:#1a1714;color:#fff;padding:6px 10px;border-radius:6px;font-size:13px;max-width:240px;transform:translate(-50%,calc(-100% - 12px));opacity:0;transition:opacity .12s}
+.mapnote{font-size:13px;color:#f1d9cf;margin-top:8px}
+/* explore */
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px;align-items:center}
+.tools input[type=search]{flex:1 1 240px;min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:16px}
+.chip{min-height:44px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:var(--bg);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select{min-height:44px;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.card{text-align:left;border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:14px 16px;cursor:pointer;display:flex;flex-direction:column;gap:6px}
+.card:hover,.card:focus-visible{border-color:var(--mut)}
+.card h3{font-size:17px;margin:0}.meta{font-size:13px;color:var(--mut)}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600}
+.tag::before{content:"";width:10px;height:10px;border-radius:2px;background:currentColor}
+.c-tg{color:var(--tg)}.c-pvt{color:var(--pvt)}.c-tl{color:var(--tl)}
+.empty{padding:24px;color:var(--mut)}
+/* timeline */
+.alt{background:var(--panel)}
+.era{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.era h3{font-size:17px;margin:0}.era p{margin:2px 0 0;font-size:13px;color:var(--mut)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:6px 10px;cursor:pointer;text-align:left;font-size:14px;display:flex;gap:8px;align-items:baseline}
+.pill small{color:var(--mut);white-space:nowrap}
+.years{display:flex;gap:6px;align-items:flex-end;overflow-x:auto;padding:8px 0 4px;margin-top:8px}
+.yr{flex:1 0 34px;display:flex;flex-direction:column-reverse;gap:3px;align-items:center}
+.yr span{font-size:12px;color:var(--mut);margin-top:4px;white-space:nowrap}
+.sq{width:22px;height:14px;border-radius:3px;border:0;cursor:pointer;padding:0}
+/* AI */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);gap:24px}
+.chat{border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;height:min(620px,80vh);background:var(--bg)}
+.log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:88%;padding:10px 14px;border-radius:12px;line-height:1.55}
+.msg.u{align-self:flex-end;background:var(--ink);color:var(--bg)}.msg.a{background:var(--panel)}
+.msg p{margin:.3em 0}.msg ul,.msg ol{margin:.3em 0;padding-left:1.3em}
+.compose{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+.compose textarea{flex:1;min-height:48px;max-height:140px;resize:vertical;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:16px}
+.btn{min-height:44px;padding:8px 18px;border:0;border-radius:10px;background:var(--btn);color:var(--btnink);font-weight:600;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+:focus-visible{outline:3px solid var(--tl);outline-offset:2px}
+.side h3{font-size:16px;margin-top:4px}.side .pill{width:100%}
+.note{font-size:13px;color:var(--mut)}
+.warn{border-left:3px solid var(--tg);padding:8px 12px;background:var(--panel);font-size:14px;border-radius:0 8px 8px 0}
+label.sw{display:flex;gap:10px;align-items:center;min-height:44px;cursor:pointer}
+label.sw input{width:20px;height:20px}
+/* quiz */
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--mut)}
+.q{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;background:var(--bg)}
+.q h4{margin:0 0 10px;font-size:16px}
+.opt{display:block;width:100%;text-align:left;min-height:44px;margin:6px 0;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);cursor:pointer}
+.opt.ok{border-color:var(--pvt);background:color-mix(in srgb,var(--pvt) 14%,transparent)}
+.opt.no{border-color:var(--tg);background:color-mix(in srgb,var(--tg) 12%,transparent)}
+.exp{font-size:14px;color:var(--mut);margin-top:6px}
+.score{font:700 28px "Noto Serif",serif}
+/* teacher */
+.checks{max-height:240px;overflow-y:auto;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--bg)}
+.checks label{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--ink);min-height:32px}
+.out{border:1px solid var(--line);border-radius:12px;padding:16px 20px;background:var(--bg);margin-top:16px}
+.out:empty{display:none}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:20px}
+.act{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--bg)}
+.act h3{font-size:16px}.act p{margin:0;font-size:14px;color:var(--mut)}
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(10,8,6,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+.ov.on{display:flex}
+.dlg{background:var(--bg);border-radius:16px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;padding:24px clamp(18px,3vw,32px);position:relative}
+.x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:10px;border:0;background:var(--panel);cursor:pointer;font-size:20px}
+.dlg dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 14px;font-size:14px;margin:12px 0}
+.dlg dt{color:var(--mut)}.dlg dd{margin:0}
+.dlg ul{padding-left:1.2em}.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.thumb{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:8px;background:var(--panel);display:block}
+.cred{font-size:12px;color:var(--mut);line-height:1.3}
+.media{margin:10px 0 6px}
+.gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;scrollbar-width:thin}
+.gal figure{flex:0 0 100%;scroll-snap-align:start;margin:0}
+.gal img,.gal video{width:100%;height:clamp(220px,42vh,420px);object-fit:contain;background:#141210;border-radius:10px;display:block}
+.gal figcaption{font-size:13px;color:var(--mut);margin-top:6px}
+.galnav{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:6px}
+.galnav button{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-size:18px}
+.vface{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;border-radius:10px;overflow:hidden;cursor:pointer;background:#141210}
+.vface img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9}
+.vface .play{position:absolute;left:50%;top:50%;width:72px;height:50px;margin:-25px 0 0 -36px;border-radius:12px;background:rgba(180,30,25,.92)}
+.vface .play::after{content:"";position:absolute;left:29px;top:15px;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent}
+.vface:hover .play,.vface:focus-visible .play{background:#d1281f}
+.vbadge{font-size:12px;font-weight:600;color:var(--mut)}
+.vid{position:relative;aspect-ratio:16/9;margin-top:10px}.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:10px}
+.kbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.kdoc table{border-collapse:collapse;width:100%;margin:8px 0;font-size:14px}.kdoc th,.kdoc td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}.kdoc td{height:44px}
+.kdoc h4{margin:18px 0 6px;font-size:16px}.kdoc .meta{margin-bottom:8px}
+.kdoc .sheet{border-top:2px dashed var(--line);margin-top:24px;padding-top:8px}
+@media print{body>*:not(#giao-vien){display:none!important}#giao-vien>.wrap>*:not(#kOut){display:none!important}#kOut{border:0;padding:0}.kdoc .sheet{break-before:page}}
+footer{font-size:13px;color:var(--mut)}
+@media(max-width:900px){.hero .wrap,.two{grid-template-columns:minmax(0,1fr)}.era{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.msg{max-width:96%}}
+</style>
+</head>
+<body>
+<nav class="top"><div class="wrap"><b><span class="seal">印</span>Di sản Việt Nam</b>
+<div class="scroll"><a href="#ban-do">Bản đồ</a><a href="#kham-pha">Khám phá</a><a href="#thoi-gian">Dòng thời gian</a><a href="#tro-ly">Trợ lý AI</a><a href="#hoi-ai">Hỏi AI</a><a href="#trac-nghiem">Trắc nghiệm</a><a href="#giao-vien">Giáo viên</a><a href="#nguon">Nguồn</a></div></div></nav>
+
+<header class="hero band" id="ban-do"><div class="wrap">
+<div>
+<h1>Di sản Việt Nam trong các danh mục của UNESCO</h1>
+<p class="lead">Học liệu số cho môn Lịch sử THPT: tra cứu 39 di sản trên bản đồ và dòng thời gian, luyện trắc nghiệm và gợi ý hoạt động dạy học<span class="ai-only">, hỏi đáp với trợ lý AI</span>.</p>
+<div class="stats"><div class="stat"><b id="sAll">39</b><span>di sản tất cả</span></div><div class="stat"><b id="sTg">9</b><span>di sản thế giới</span></div><div class="stat"><b id="sPvt">17</b><span>văn hóa phi vật thể</span></div><div class="stat"><b id="sTl">13</b><span>di sản tư liệu</span></div></div>
+<div class="legend" id="legend"></div>
+<p class="mapnote">Số liệu cập nhật đến 24/11/2026. Bấm vào một điểm trên bản đồ để mở hồ sơ di sản.</p>
+</div>
+<div><div class="mapbox" id="mapbox"><svg id="map" viewBox="0 0 608 616" role="img" aria-label="Bản đồ các di sản của Việt Nam được UNESCO ghi danh"></svg><div class="tip" id="tip"></div></div>
+<p class="mapnote">Bản đồ minh họa vị trí tương đối, không dùng để xác định đường biên giới. Quần đảo Hoàng Sa và Trường Sa thuộc chủ quyền của Việt Nam.</p></div>
+</div></header>
+
+<section class="band" id="kham-pha"><div class="wrap">
+<h2>Khám phá từng di sản</h2>
+<p class="lead">Lọc theo loại hình, tìm theo tên hoặc địa phương. Mỗi hồ sơ có năm ghi danh, thời kỳ lịch sử, ý nghĩa và gợi ý gắn với chương trình Lịch sử 2018.</p>
+<div class="tools"><input type="search" id="q" placeholder="Tìm: Huế, nhà Trần, Champa, mộc bản…" aria-label="Tìm di sản">
+<div id="cats" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+<select id="sort" aria-label="Sắp xếp"><option value="y">Theo năm ghi danh</option><option value="t">Theo tên</option><option value="n">Bắc vào Nam</option></select></div>
+<div class="grid" id="grid"></div>
+</div></section>
+
+<section class="band alt" id="thoi-gian"><div class="wrap">
+<h2>Di sản trên dòng lịch sử</h2>
+<p class="lead">Xếp di sản theo thời kỳ lịch sử mà chúng phản ánh, giúp học sinh nối di sản với tiến trình lịch sử dân tộc. Di sản phi vật thể là “di sản sống”, được thực hành và trao truyền qua nhiều thế hệ nên được xếp riêng (trừ những di sản gắn rõ với một thời kỳ).</p>
+<div id="eras"></div>
+<h3 style="margin-top:28px">Hành trình ghi danh, 1993 – 2026</h3>
+<p class="note">Mỗi ô là một di sản, theo năm được UNESCO ghi danh lần đầu.</p>
+<div class="years" id="years"></div>
+</div></section>
+
+<section class="band" id="tro-ly"><div class="wrap">
+<h2>Trợ lý AI hỏi – đáp về di sản</h2>
+<p class="lead">Trợ lý trả lời dựa trên dữ liệu đã kiểm chứng của trang. Bật chế độ gợi mở để trợ lý dẫn dắt bằng câu hỏi thay vì đưa ngay đáp án.</p>
+<div class="two">
+<div class="chat"><div class="log" id="log" aria-live="polite"></div>
+<form class="compose" id="chatForm"><textarea id="chatIn" placeholder="Ví dụ: Vì sao Thành nhà Hồ được UNESCO ghi danh?" aria-label="Câu hỏi"></textarea><button class="btn" id="chatBtn">Gửi</button></form></div>
+<aside class="side">
+<label class="sw"><input type="checkbox" id="socratic"> Chế độ gợi mở (học sinh tự tìm đáp án)</label>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--mut);margin:8px 0 14px">Tập trung vào di sản<select id="focus"><option value="">Tất cả di sản</option></select></label>
+<h3>Câu hỏi gợi ý</h3><div id="sugg" style="display:flex;flex-direction:column;gap:8px"></div>
+<p class="warn" style="margin-top:16px">AI có thể sai. Hãy đối chiếu thông tin quan trọng với sách giáo khoa và nguồn chính thức ở mục Nguồn.</p>
+<button class="btn ghost" id="clearChat" type="button">Xóa hội thoại</button>
+</aside></div>
+</div></section>
+
+<section class="band" id="hoi-ai"><div class="wrap">
+<h2>Hỏi AI miễn phí với dữ liệu đã kiểm chứng</h2>
+<p class="lead">Trang tạo sẵn một câu lệnh gồm nguyên tắc trả lời và toàn bộ dữ liệu đã kiểm chứng. Em sao chép rồi dán vào một trợ lý AI miễn phí; AI sẽ trả lời dựa trên dữ liệu này thay vì tự suy đoán.</p>
+<div id="nbBox" hidden style="margin-bottom:18px"><a class="btn" id="nbLink" style="display:inline-flex;align-items:center;text-decoration:none" href="#">Mở trợ lý NotebookLM của lớp</a> <span class="note">Cần đăng nhập tài khoản Google.</span></div>
+<form class="form" id="pForm" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+<label>Mục đích<select id="pMode"><option value="ask">Hỏi – đáp</option><option value="hint">Gợi mở (tự tìm đáp án)</option><option value="quiz">Tạo 10 câu trắc nghiệm</option><option value="plan">Soạn kế hoạch bài dạy (giáo viên)</option></select></label>
+<label>Di sản<select id="pFocus"><option value="">Tất cả di sản</option></select></label>
+<label style="grid-column:1/-1">Câu hỏi hoặc yêu cầu<textarea id="pQ" rows="3" style="padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:16px" placeholder="Ví dụ: Vì sao Thành nhà Hồ được UNESCO ghi danh?"></textarea></label>
+</form>
+<div class="row"><button class="btn" type="button" id="pCopy">Sao chép câu lệnh</button>
+<a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none" href="https://gemini.google.com/app" target="_blank" rel="noopener">Mở Gemini</a>
+<a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none" href="https://chatgpt.com/" target="_blank" rel="noopener">Mở ChatGPT</a>
+<a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none" href="https://claude.ai/new" target="_blank" rel="noopener">Mở Claude</a></div>
+<p class="note" id="pMsg" aria-live="polite"></p>
+<details><summary class="note" style="cursor:pointer;min-height:44px;display:flex;align-items:center">Xem câu lệnh sẽ được sao chép</summary><textarea id="pOut" readonly rows="8" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:14px"></textarea></details>
+<p class="warn">AI có thể sai. Đối chiếu thông tin quan trọng với sách giáo khoa và nguồn chính thức ở mục Nguồn. Mỗi trợ lý AI có quy định độ tuổi riêng; học sinh dùng theo hướng dẫn của giáo viên.</p>
+</div></section>
+
+<section class="band alt" id="trac-nghiem"><div class="wrap">
+<h2>Luyện tập trắc nghiệm</h2>
+<p class="lead">Ngân hàng 235 câu hỏi soạn sẵn cho 39 di sản, chia ba mức độ Nhận biết – Thông hiểu – Vận dụng, mỗi câu có giải thích. Mỗi lần tạo đề, câu hỏi và thứ tự đáp án được xáo trộn.</p>
+<form class="form" id="quizForm">
+<label>Phạm vi<select id="qScope"><option value="all">Tất cả di sản</option><option value="tg">Di sản thế giới</option><option value="pvt">Di sản phi vật thể</option><option value="tl">Di sản tư liệu</option></select></label>
+<label>Số câu<select id="qN"><option>5</option><option selected>10</option><option>15</option></select></label>
+<label>Mức độ<select id="qLv"><option>Nhận biết</option><option selected>Thông hiểu</option><option>Vận dụng</option><option>Hỗn hợp</option></select></label>
+<label>Nguồn câu hỏi<select id="qSrc"><option value="hand">Ngân hàng soạn sẵn (235 câu)</option><option value="bank">Câu hỏi tự sinh từ dữ liệu</option><option value="ai">AI tạo đề</option></select></label>
+<label style="justify-content:flex-end"><button class="btn">Tạo đề</button></label>
+</form>
+<div id="quiz"></div>
+</div></section>
+
+<section class="band" id="giao-vien"><div class="wrap">
+<h2>Khu vực giáo viên</h2>
+<p class="lead">Các hoạt động gợi ý dưới đây dùng trực tiếp các công cụ trên trang.</p><p class="lead ai-only">Soạn nhanh bản nháp kế hoạch bài dạy, phiếu học tập hoặc câu hỏi thảo luận gắn với di sản. Đây là bản gợi ý: thầy cô cần rà soát, chỉnh sửa theo bộ sách giáo khoa và đối tượng học sinh.</p>
+<form id="tForm">
+<div class="form">
+<label>Sản phẩm<select id="tType"><option>Kế hoạch bài dạy (theo Công văn 5512)</option><option>Phiếu học tập</option><option>Câu hỏi thảo luận – tranh biện</option><option>Nhiệm vụ dự án học tập</option></select></label>
+<label>Lớp<select id="tGrade"><option>Lớp 10</option><option>Lớp 11</option><option>Lớp 12</option></select></label>
+<label>Thời lượng<select id="tTime"><option>1 tiết (45 phút)</option><option>2 tiết</option><option>Hoạt động 15 phút</option><option>Dự án 2 tuần</option></select></label>
+<label>Chủ đề / bài học<input id="tTopic" style="min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:16px" value="Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam"></label>
+</div>
+<div class="form" style="grid-template-columns:minmax(0,2fr) minmax(0,1fr)">
+<div><div class="note" style="margin-bottom:4px">Chọn di sản sử dụng trong bài (một hoặc nhiều)</div><div class="checks" id="tChecks"></div></div>
+<label>Yêu cầu thêm<textarea id="tExtra" rows="6" style="padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:16px" placeholder="Ví dụ: lớp đông 45 HS, có máy chiếu; dùng kỹ thuật mảnh ghép; có phần đánh giá bằng rubric"></textarea></label>
+</div>
+<div class="row"><button class="btn" id="tBtn">Soạn bằng AI</button><button class="btn ghost" type="button" id="tCopy">Sao chép kết quả</button></div>
+</form>
+<div class="out" id="tOut"></div>
+<h3 style="margin-top:32px">Kế hoạch bài dạy và phiếu học tập mẫu</h3>
+<p class="note">Bản mẫu theo cấu trúc Công văn 5512. Thầy cô điều chỉnh theo bộ sách giáo khoa và đối tượng học sinh; chỗ ghi [GV bổ sung] là phần cần thêm tư liệu từ SGK.</p>
+<div class="kbar" id="kTabs" role="tablist"></div>
+<div class="row" id="kActs"><button class="btn" type="button" id="kDoc">Tải về file Word (.doc)</button><button class="btn ghost" type="button" id="kPrint">In / Lưu PDF</button><button class="btn ghost" type="button" id="kCopy">Sao chép nội dung</button></div>
+<article class="out kdoc" id="kOut"></article>
+<h3 style="margin-top:32px">Gợi ý hoạt động số dùng ngay trên trang</h3>
+<div class="acts" id="acts"></div>
+</div></section>
+
+<section class="band alt" id="nguon"><div class="wrap">
+<h2>Nguồn dữ liệu và lưu ý sử dụng</h2>
+<p class="lead">Danh sách được đối chiếu với danh mục của UNESCO và thông tin từ Bộ Văn hóa, Thể thao và Du lịch, Ủy ban Quốc gia UNESCO Việt Nam, cập nhật đến 24/11/2026. Địa danh hành chính ghi theo đơn vị sau sắp xếp năm 2025, kèm tên cũ khi cần.</p>
+<ul>
+<li><a href="https://whc.unesco.org/en/statesparties/vn">UNESCO World Heritage Centre – Viet Nam</a> (di sản thế giới)</li>
+<li><a href="https://ich.unesco.org/en/state/viet-nam-VN">UNESCO Intangible Cultural Heritage – Viet Nam</a> (di sản phi vật thể)</li>
+<li><a href="https://www.unesco.org/en/memory-world">UNESCO Memory of the World</a> (di sản tư liệu thế giới và khu vực)</li>
+<li><a href="https://baovanhoa.vn/van-hoa/bo-vhttdl-se-tiep-tuc-dong-hanh-cung-cac-dia-phuong-228574.html">Báo Văn hóa – Yên Tử – Vĩnh Nghiêm – Côn Sơn, Kiếp Bạc được ghi danh ngày 12/7/2025</a></li>
+<li><a href="https://daibieunhandan.vn/unesco-dua-nghe-lam-tranh-dan-gian-dong-ho-vao-danh-sach-di-san-can-bao-ve-khan-cap-10399805.html">Đại biểu Nhân dân – Nghề làm tranh dân gian Đông Hồ, di sản phi vật thể thứ 17 (9/12/2025)</a></li>
+<li><a href="https://www.vietnamplus.vn/hai-di-san-tu-lieu-viet-nam-vuon-tam-khu-vuc-nhan-len-gia-tri-bao-ton-post1146578.vnp">Vietnam+ – Văn bia Phố Hiến và Ma nhai núi Non Nước, nâng tổng số di sản tư liệu lên 13 (11/2026)</a></li>
+</ul>
+<p class="note">Cách đếm: 9 di sản thế giới (văn hóa, thiên nhiên, hỗn hợp); 17 di sản văn hóa phi vật thể (danh sách đại diện và danh sách cần bảo vệ khẩn cấp); 13 di sản tư liệu (4 cấp thế giới, 9 cấp khu vực châu Á – Thái Bình Dương). Bia tiến sĩ Văn Miếu và Châu bản triều Nguyễn từng được ghi danh cấp khu vực trước khi lên cấp thế giới, chỉ tính một lần. Khu di tích khảo cổ Óc Eo – Ba Thê đang trong quá trình thẩm định, chưa được ghi danh.</p>
+<p class="note">Gợi ý gắn chương trình là để giáo viên tham khảo, đối chiếu với Chương trình GDPT 2018 môn Lịch sử và bộ sách giáo khoa nhà trường đang sử dụng.</p>
+<footer style="margin-top:20px">Học liệu phục vụ dạy học, phi thương mại.</footer>
+</div></section>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="dT"><div class="dlg" id="dlg"></div></div>
+
+<script src="ngan-hang-cau-hoi.js"></script>
+<script src="tai-lieu-giao-vien.js"></script>
+<script>
+{
+const D=[
+{id:'hue',t:'Quần thể di tích Cố đô Huế',c:'tg',k:'Di sản văn hóa',y:1993,p:'TP Huế',la:16.47,lo:107.58,e:'nguyen',pd:'1802 – 1945',d:'Kinh đô của Việt Nam thời Nguyễn, gồm hệ thống Kinh thành, Hoàng thành, Tử Cấm thành cùng các lăng tẩm, đàn miếu bên sông Hương. Quần thể phản ánh quy hoạch kinh đô và kiến trúc cung đình hòa với cảnh quan tự nhiên.',f:['Di sản thế giới đầu tiên của Việt Nam (1993)','Huế còn có các di sản Nhã nhạc, Thơ văn trên kiến trúc cung đình, Cửu đỉnh'],g:['L10: Văn minh Đại Việt','L11: Cuộc cải cách của Minh Mạng']},
+{id:'halong',t:'Vịnh Hạ Long – Quần đảo Cát Bà',c:'tg',k:'Di sản thiên nhiên',y:1994,yt:'1994, 2000; mở rộng 2023',p:'Quảng Ninh, TP Hải Phòng',la:20.88,lo:107.1,e:'tn',pd:'Giá trị địa chất, cảnh quan',d:'Vùng vịnh với hệ thống đảo đá vôi, hang động và cảnh quan karst nổi bật trên biển. Năm 2023, di sản được điều chỉnh ranh giới, mở rộng sang quần đảo Cát Bà và trở thành di sản thế giới liên tỉnh đầu tiên của Việt Nam.',f:['1994: ghi danh về giá trị thẩm mỹ','2000: ghi danh thêm giá trị địa chất, địa mạo','2023: mở rộng thành Vịnh Hạ Long – Quần đảo Cát Bà'],g:['L10: Sử học với công tác bảo tồn di sản văn hóa và thiên nhiên']},
+{id:'hoian',t:'Đô thị cổ Hội An',c:'tg',k:'Di sản văn hóa',y:1999,p:'TP Đà Nẵng (Quảng Nam cũ)',la:15.88,lo:108.33,e:'le',pd:'Thế kỷ XV – XIX',d:'Thương cảng quốc tế tiêu biểu ở Đông Nam Á, còn bảo tồn quần thể nhà ở, hội quán, đình chùa, cầu… phản ánh sự giao thoa văn hóa Việt với Nhật Bản, Trung Hoa và phương Tây.',f:['Phát triển mạnh ở thế kỷ XVII – XVIII dưới thời các chúa Nguyễn ở Đàng Trong','Ghi danh cùng năm với Khu đền tháp Mỹ Sơn (1999)'],g:['L10: Văn minh Đại Việt (kinh tế, đô thị)','L10: Văn minh Đông Nam Á – giao lưu văn hóa']},
+{id:'myson',t:'Khu đền tháp Mỹ Sơn',c:'tg',k:'Di sản văn hóa',y:1999,p:'TP Đà Nẵng (Quảng Nam cũ)',la:15.76,lo:108.12,e:'cham',pd:'Thế kỷ IV – XIII',d:'Trung tâm tôn giáo của vương quốc Champa, gồm các đền tháp gạch thờ thần Hindu giáo, tiêu biểu là thần Shiva. Di sản minh chứng cho sự tiếp nhận và bản địa hóa văn hóa Ấn Độ ở Đông Nam Á.',f:['Kiến trúc gạch nung đặc sắc của người Chăm','Phản ánh ảnh hưởng của văn minh Ấn Độ đối với Đông Nam Á'],g:['L10: Văn minh Champa','L10: Văn minh Đông Nam Á']},
+{id:'phongnha',t:'Vườn quốc gia Phong Nha – Kẻ Bàng và Hin Nam Nô',c:'tg',k:'Di sản thiên nhiên',y:2003,yt:'2003; mở rộng 2015; xuyên biên giới 2025',p:'Quảng Trị (Quảng Bình cũ) và Lào',la:17.55,lo:106.2,e:'tn',pd:'Giá trị địa chất, sinh học',d:'Vùng núi đá vôi với hệ thống hang động lớn, lịch sử kiến tạo địa chất lâu dài và đa dạng sinh học cao. Năm 2025, di sản được mở rộng sang Vườn quốc gia Hin Nam Nô (Lào), trở thành di sản thiên nhiên liên biên giới đầu tiên của Việt Nam và Lào.',f:['2003: ghi danh về giá trị địa chất, địa mạo','2015: ghi danh mở rộng về hệ sinh thái và đa dạng sinh học','2025: mở rộng xuyên biên giới với Lào'],g:['L10: Sử học với công tác bảo tồn di sản văn hóa và thiên nhiên']},
+{id:'thanglong',t:'Khu trung tâm Hoàng thành Thăng Long – Hà Nội',c:'tg',k:'Di sản văn hóa',y:2010,p:'TP Hà Nội',la:21.035,lo:105.84,e:'dai',pd:'Từ năm 1010, kế thừa các tầng văn hóa trước đó',d:'Trung tâm quyền lực liên tục qua nhiều triều đại, từ khi Lý Công Uẩn dời đô về Thăng Long năm 1010. Các tầng khảo cổ tại 18 Hoàng Diệu cùng các công trình trên mặt đất như Đoan Môn, nền điện Kính Thiên, Hậu Lâu, Bắc Môn, Cột cờ phản ánh lịch sử kinh thành qua nhiều thế kỷ.',f:['Năm 1010: Lý Công Uẩn ban Chiếu dời đô, đổi Đại La thành Thăng Long','Được ghi danh đúng năm kỷ niệm 1000 năm Thăng Long – Hà Nội (2010)'],g:['L10: Văn minh Đại Việt']},
+{id:'thanhho',t:'Thành nhà Hồ',c:'tg',k:'Di sản văn hóa',y:2011,p:'Thanh Hóa',la:20.08,lo:105.6,e:'dai',pd:'Xây năm 1397',d:'Tòa thành đá do Hồ Quý Ly cho xây dựng năm 1397, làm kinh đô của nhà Hồ (còn gọi là thành Tây Đô). Thành ghép bằng những khối đá lớn, minh chứng cho trình độ kỹ thuật và những cải cách cuối thế kỷ XIV – đầu thế kỷ XV.',f:['Nhà Hồ tồn tại từ năm 1400 đến 1407','Khối đá lớn được ghép khít, không dùng vữa kết dính'],g:['L11: Cuộc cải cách của Hồ Quý Ly và triều Hồ']},
+{id:'trangan',t:'Quần thể danh thắng Tràng An',c:'tg',k:'Di sản hỗn hợp (văn hóa và thiên nhiên)',y:2014,p:'Ninh Bình',la:20.25,lo:105.9,e:'dai',pd:'Tiền sử; cố đô Hoa Lư thế kỷ X',d:'Di sản hỗn hợp đầu tiên của Việt Nam, gồm cảnh quan núi đá vôi, thung lũng, sông ngòi; các hang động lưu giữ dấu tích cư trú của con người thời tiền sử; và khu di tích cố đô Hoa Lư – kinh đô thời Đinh, Tiền Lê.',f:['Hoa Lư là kinh đô nước Đại Cồ Việt từ năm 968 đến năm 1010','Kết hợp giá trị văn hóa, thẩm mỹ và địa chất'],g:['L10: Văn minh Đại Việt (thời Đinh – Tiền Lê)']},
+{id:'yentu',t:'Quần thể di tích và danh thắng Yên Tử – Vĩnh Nghiêm – Côn Sơn, Kiếp Bạc',c:'tg',k:'Di sản văn hóa',y:2025,p:'Quảng Ninh, Bắc Ninh, TP Hải Phòng',la:21.15,lo:106.72,e:'dai',pd:'Thời Trần (thế kỷ XIII – XIV) và các giai đoạn tiếp nối',d:'Di sản theo chuỗi gồm 12 cụm, điểm di tích gắn với sự hình thành và lan tỏa của Thiền phái Trúc Lâm do Phật hoàng Trần Nhân Tông khởi xướng, cùng các di tích nhà Trần như đền Kiếp Bạc (thờ Trần Hưng Đạo), Côn Sơn (gắn với Nguyễn Trãi, Huyền Quang) và bãi cọc Bạch Đằng.',f:['Ghi danh ngày 12/7/2025 tại kỳ họp 47 Ủy ban Di sản thế giới, theo tiêu chí (iii) và (vi)','Di sản văn hóa theo chuỗi đầu tiên của Việt Nam','Di sản thế giới liên tỉnh thứ hai, sau Vịnh Hạ Long – Quần đảo Cát Bà'],g:['L10: Văn minh Đại Việt (tư tưởng, tôn giáo)','L11: Kháng chiến chống quân Mông – Nguyên']},
+{id:'nhanhac',t:'Nhã nhạc – Âm nhạc cung đình Việt Nam',c:'pvt',k:'Danh sách đại diện',y:2003,yt:'2003 (Kiệt tác); 2008 (Danh sách đại diện)',p:'TP Huế',la:16.47,lo:107.58,e:'nguyen',pd:'Hoàn thiện dưới triều Nguyễn',d:'Thể loại âm nhạc cung đình dùng trong các nghi lễ của triều đình như tế Nam Giao, lễ đăng quang, thiết triều. Nhã nhạc đạt độ hoàn thiện dưới triều Nguyễn.',f:['Di sản văn hóa phi vật thể đầu tiên của Việt Nam được UNESCO vinh danh'],g:['L10: Văn minh Đại Việt (nghệ thuật)']},
+{id:'congchieng',t:'Không gian văn hóa Cồng chiêng Tây Nguyên',c:'pvt',k:'Danh sách đại diện',y:2005,yt:'2005 (Kiệt tác); 2008 (Danh sách đại diện)',p:'Các tỉnh Tây Nguyên',la:13.2,lo:108.2,e:'song',pd:'Di sản sống',d:'Không gian văn hóa gắn với cồng chiêng của các dân tộc ở Tây Nguyên, gồm người chơi, nhạc cụ, nghi lễ, lễ hội và không gian buôn làng, nương rẫy nơi diễn ra thực hành.',f:['Cồng chiêng gắn với nghi lễ vòng đời người và chu kỳ nông nghiệp'],g:['L10: Văn minh Đông Nam Á – đời sống văn hóa các dân tộc']},
+{id:'quanho',t:'Dân ca Quan họ Bắc Ninh',c:'pvt',k:'Danh sách đại diện',y:2009,p:'Bắc Ninh',la:21.19,lo:106.07,e:'song',pd:'Di sản sống',d:'Lối hát đối đáp giữa “liền anh” và “liền chị” của các làng Quan họ vùng Kinh Bắc, gắn với tục kết chạ giữa các làng, lễ hội và nghệ thuật ứng xử tinh tế.',f:['Thường hát vào dịp lễ hội mùa xuân'],g:['L10: Văn minh Đại Việt (văn hóa dân gian)']},
+{id:'catru',t:'Ca trù',c:'pvt',k:'Cần bảo vệ khẩn cấp',y:2009,p:'Nhiều tỉnh, thành phía Bắc và Bắc Trung Bộ',la:20.98,lo:105.72,e:'song',pd:'Di sản sống',d:'Loại hình nghệ thuật trình diễn kết hợp thơ ca và âm nhạc, gồm đào nương hát, kép đàn đáy và người cầm chầu; từng phổ biến ở cung đình, đình làng và các nhà hát.',f:['Được ghi vào Danh sách cần bảo vệ khẩn cấp'],g:['L10: Văn minh Đại Việt (nghệ thuật)']},
+{id:'giong',t:'Hội Gióng ở đền Phù Đổng và đền Sóc',c:'pvt',k:'Danh sách đại diện',y:2010,p:'TP Hà Nội',la:21.07,lo:105.96,e:'tien',pd:'Gắn với truyền thuyết Thánh Gióng thời Hùng Vương',d:'Lễ hội tưởng niệm Thánh Gióng, người anh hùng trong truyền thuyết đánh giặc Ân thời Hùng Vương, với các nghi lễ và diễn xướng tái hiện trận đánh.',f:['Thể hiện truyền thống chống ngoại xâm trong tâm thức dân gian'],g:['L10: Văn minh Văn Lang – Âu Lạc']},
+{id:'xoan',t:'Hát Xoan Phú Thọ',c:'pvt',k:'Danh sách đại diện',y:2011,yt:'2011 (cần bảo vệ khẩn cấp); 2017 (chuyển sang Danh sách đại diện)',p:'Phú Thọ',la:21.3,lo:105.43,e:'song',pd:'Di sản sống',d:'Loại hình dân ca nghi lễ gắn với tín ngưỡng thờ Vua Hùng, thường trình diễn vào mùa xuân tại đình, miếu. Năm 2017, UNESCO chuyển Hát Xoan từ Danh sách cần bảo vệ khẩn cấp sang Danh sách đại diện nhờ những nỗ lực bảo vệ hiệu quả.',f:['Ví dụ tiêu biểu về hiệu quả của công tác bảo vệ di sản'],g:['L10: Sử học với công tác bảo tồn di sản']},
+{id:'hungvuong',t:'Tín ngưỡng thờ cúng Hùng Vương ở Phú Thọ',c:'pvt',k:'Danh sách đại diện',y:2012,p:'Phú Thọ',la:21.37,lo:105.32,e:'tien',pd:'Gắn với thời dựng nước',d:'Thực hành tín ngưỡng thờ các Vua Hùng – những người có công dựng nước theo quan niệm dân gian, với trung tâm là Khu di tích Đền Hùng; thể hiện đạo lý “uống nước nhớ nguồn” và ý thức cội nguồn dân tộc.',f:['Giỗ Tổ Hùng Vương vào ngày 10 tháng 3 âm lịch'],g:['L10: Văn minh Văn Lang – Âu Lạc']},
+{id:'taitu',t:'Nghệ thuật Đờn ca tài tử Nam Bộ',c:'pvt',k:'Danh sách đại diện',y:2013,p:'Các tỉnh, thành Nam Bộ',la:10.25,lo:105.95,e:'song',pd:'Hình thành từ cuối thế kỷ XIX',d:'Loại hình nghệ thuật dân gian kết hợp đờn (đàn) và ca, hình thành ở Nam Bộ từ cuối thế kỷ XIX, thường được trình diễn trong sinh hoạt cộng đồng.',f:['Gắn với đời sống cư dân vùng sông nước Nam Bộ'],g:['L10: Văn minh Đại Việt (văn hóa các vùng miền)']},
+{id:'vigiam',t:'Dân ca Ví, Giặm Nghệ Tĩnh',c:'pvt',k:'Danh sách đại diện',y:2014,p:'Nghệ An, Hà Tĩnh',la:18.6,lo:105.55,e:'song',pd:'Di sản sống',d:'Các làn điệu dân ca gắn với lao động và sinh hoạt của cư dân xứ Nghệ, lời ca phản ánh đời sống, tình cảm và đạo lý.',f:['Gắn với nhiều nghề lao động như dệt vải, chèo thuyền, làm ruộng'],g:['L10: Văn minh Đại Việt (văn hóa dân gian)']},
+{id:'keoco',t:'Nghi lễ và trò chơi kéo co',c:'pvt',k:'Danh sách đại diện (hồ sơ đa quốc gia)',y:2015,p:'Lào Cai, Phú Thọ, Bắc Ninh, Hà Nội',la:21.12,lo:105.68,e:'song',pd:'Di sản sống',d:'Nghi lễ, trò chơi gắn với nghề trồng lúa và cầu mùa, được Việt Nam cùng Campuchia, Hàn Quốc và Philippines đệ trình chung.',f:['Hồ sơ đa quốc gia, thể hiện điểm chung của văn hóa lúa nước châu Á'],g:['L10: Văn minh Đông Nam Á']},
+{id:'thomau',t:'Thực hành Tín ngưỡng thờ Mẫu Tam phủ của người Việt',c:'pvt',k:'Danh sách đại diện',y:2016,p:'Nhiều địa phương; tiêu biểu là Phủ Dầy (Ninh Bình, Nam Định cũ)',la:20.37,lo:106.12,e:'song',pd:'Di sản sống',d:'Tín ngưỡng thờ Mẫu với các thực hành như nghi lễ hầu đồng, âm nhạc chầu văn, trang phục, lễ hội…; thể hiện khát vọng về sức khỏe, may mắn và tôn vinh vai trò người phụ nữ.',f:['Tam phủ: Thiên phủ, Địa phủ, Thoải phủ (Thủy phủ)'],g:['L10: Văn minh Đại Việt (tín ngưỡng, tôn giáo)']},
+{id:'baichoi',t:'Nghệ thuật Bài chòi Trung Bộ Việt Nam',c:'pvt',k:'Danh sách đại diện',y:2017,p:'Các tỉnh, thành miền Trung',la:14.3,lo:108.95,e:'song',pd:'Di sản sống',d:'Loại hình nghệ thuật kết hợp âm nhạc, thơ ca, diễn xuất và trò chơi dân gian, ra đời từ nhu cầu liên lạc giữa các chòi canh trên nương rẫy.',f:['Vừa là diễn xướng, vừa là trò chơi dân gian'],g:['L10: Văn minh Đại Việt (văn hóa dân gian)']},
+{id:'then',t:'Thực hành Then của người Tày, Nùng, Thái ở Việt Nam',c:'pvt',k:'Danh sách đại diện',y:2019,p:'Các tỉnh miền núi phía Bắc',la:22.15,lo:105.85,e:'song',pd:'Di sản sống',d:'Thực hành nghi lễ gắn với tín ngưỡng của người Tày, Nùng, Thái, kết hợp hát, đàn tính, múa…, phản ánh quan niệm về con người, tự nhiên và vũ trụ.',f:['Đàn tính là nhạc cụ tiêu biểu'],g:['L10: Văn minh Đông Nam Á – đời sống văn hóa các dân tộc']},
+{id:'xoe',t:'Nghệ thuật Xòe Thái',c:'pvt',k:'Danh sách đại diện',y:2021,p:'Lai Châu, Điện Biên, Sơn La, Lào Cai (Yên Bái cũ)',la:21.33,lo:103.9,e:'song',pd:'Di sản sống',d:'Hình thức múa dân gian của người Thái trong nghi lễ, lễ hội và sinh hoạt cộng đồng; vòng xòe nắm tay nhau thể hiện tinh thần đoàn kết.',f:['Gắn với đời sống cộng đồng người Thái vùng Tây Bắc'],g:['L10: Văn minh Đông Nam Á – đời sống văn hóa các dân tộc']},
+{id:'gomcham',t:'Nghệ thuật làm gốm của người Chăm',c:'pvt',k:'Cần bảo vệ khẩn cấp',y:2022,p:'Khánh Hòa (Ninh Thuận cũ), Lâm Đồng (Bình Thuận cũ)',la:11.53,lo:108.94,e:'cham',pd:'Di sản sống của cộng đồng Chăm',d:'Nghề gốm thủ công truyền thống chủ yếu do phụ nữ Chăm thực hiện: tạo hình bằng tay, không dùng bàn xoay, nung lộ thiên bằng củi, rơm. Tiêu biểu là làng Bàu Trúc.',f:['Được ghi vào Danh sách cần bảo vệ khẩn cấp'],g:['L10: Văn minh Champa']},
+{id:'bachuaxu',t:'Lễ hội Vía Bà Chúa Xứ núi Sam',c:'pvt',k:'Danh sách đại diện',y:2024,p:'An Giang',la:10.68,lo:105.08,e:'song',pd:'Di sản sống',d:'Lễ hội tín ngưỡng thờ Bà Chúa Xứ tại núi Sam (Châu Đốc), phản ánh sự giao thoa văn hóa của các cộng đồng Kinh, Khmer, Hoa, Chăm ở Tây Nam Bộ.',f:['Ghi danh ngày 4/12/2024 tại kỳ họp 19 Ủy ban Liên chính phủ Công ước 2003 (Paraguay)'],g:['L10: Văn minh Đại Việt (tín ngưỡng, giao lưu văn hóa)']},
+{id:'dongho',t:'Nghề làm tranh dân gian Đông Hồ',c:'pvt',k:'Cần bảo vệ khẩn cấp',y:2025,p:'Bắc Ninh',la:21.05,lo:106.1,e:'song',pd:'Ra đời khoảng 500 năm trước',d:'Nghề làm tranh in khắc gỗ trên giấy điệp, dùng màu từ chất liệu tự nhiên, ở làng Đông Hồ (phường Thuận Thành). Hiện chỉ còn một số ít gia đình duy trì nghề.',f:['Ghi danh ngày 9/12/2025 tại kỳ họp 20 Ủy ban Liên chính phủ Công ước 2003 (Ấn Độ)','Di sản phi vật thể thứ 17 của Việt Nam'],g:['L10: Sử học với công tác bảo tồn di sản']},
+{id:'mocbannguyen',t:'Mộc bản triều Nguyễn',c:'tl',k:'Di sản tư liệu thế giới',y:2009,p:'Trung tâm Lưu trữ quốc gia IV (Đà Lạt, Lâm Đồng)',la:11.94,lo:108.44,e:'nguyen',pd:'Thời Nguyễn',d:'Những ván gỗ khắc chữ Hán – Nôm ngược để in sách, do triều Nguyễn tổ chức biên soạn và khắc in, gồm chính sử, sách điển chế, luật lệ, văn thơ…',f:['Di sản tư liệu thế giới đầu tiên của Việt Nam','Có nhiều nội dung về quá trình xác lập, thực thi chủ quyền của Việt Nam ở Hoàng Sa, Trường Sa'],g:['L11: Bảo vệ chủ quyền biển đảo','L10: Văn minh Đại Việt (chữ viết, sử học)']},
+{id:'biatiensi',t:'82 bia đá các khoa thi tiến sĩ tại Văn Miếu – Quốc Tử Giám',c:'tl',k:'Di sản tư liệu thế giới',y:2011,yt:'2010 (khu vực); 2011 (thế giới)',p:'TP Hà Nội',la:21.03,lo:105.83,e:'le',pd:'Các khoa thi 1442 – 1779',d:'82 tấm bia đá ghi tên, quê quán của những người đỗ tiến sĩ các khoa thi từ năm 1442 đến 1779; bia đầu tiên được dựng năm 1484 dưới thời Lê Thánh Tông.',f:['Câu “Hiền tài là nguyên khí của quốc gia” trích từ văn bia khoa thi năm 1442 do Thân Nhân Trung soạn'],g:['L10: Văn minh Đại Việt (giáo dục, khoa cử)']},
+{id:'chauban',t:'Châu bản triều Nguyễn',c:'tl',k:'Di sản tư liệu thế giới',y:2014,yt:'2014 (khu vực); 2017 (thế giới)',p:'Trung tâm Lưu trữ quốc gia I (Hà Nội)',la:21.04,lo:105.85,e:'nguyen',pd:'1802 – 1945',d:'Văn bản hành chính của triều Nguyễn có bút tích phê duyệt của các vua bằng mực son (châu phê), phản ánh hoạt động quản lý nhà nước thời Nguyễn.',f:['Có các văn bản về việc triều đình cử người ra Hoàng Sa, khẳng định chủ quyền của Việt Nam'],g:['L11: Cuộc cải cách của Minh Mạng','L11: Bảo vệ chủ quyền biển đảo']},
+{id:'hoangvan',t:'Bộ sưu tập của nhạc sĩ Hoàng Vân',c:'tl',k:'Di sản tư liệu thế giới',y:2025,p:'TP Hà Nội',la:21.0,lo:105.81,e:'hiendai',pd:'1951 – 2010',d:'Bộ sưu tập hơn 700 tác phẩm âm nhạc của nhạc sĩ Hoàng Vân (1930 – 2018), sáng tác từ năm 1951 đến 2010, phản ánh đời sống âm nhạc Việt Nam qua các giai đoạn lịch sử.',f:['Ghi danh ngày 10/4/2025 (giờ Paris) bởi Hội đồng Chấp hành UNESCO'],g:['L12: Lịch sử Việt Nam từ 1945 đến nay (đời sống văn hóa)']},
+{id:'vinhnghiem',t:'Mộc bản kinh Phật chùa Vĩnh Nghiêm',c:'tl',k:'Di sản tư liệu khu vực châu Á – Thái Bình Dương',y:2012,p:'Bắc Ninh (Bắc Giang cũ)',la:21.25,lo:106.25,e:'nhieu',pd:'Nhiều thời kỳ',d:'Kho ván khắc in kinh sách Phật giáo lưu giữ tại chùa Vĩnh Nghiêm, gắn với Thiền phái Trúc Lâm. Chùa Vĩnh Nghiêm cũng là một thành phần của di sản thế giới Yên Tử – Vĩnh Nghiêm – Côn Sơn, Kiếp Bạc.',f:['Liên hệ trực tiếp với di sản thế giới ghi danh năm 2025'],g:['L10: Văn minh Đại Việt (tôn giáo)']},
+{id:'thovanhue',t:'Thơ văn trên kiến trúc cung đình Huế',c:'tl',k:'Di sản tư liệu khu vực châu Á – Thái Bình Dương',y:2016,p:'TP Huế',la:16.47,lo:107.58,e:'nguyen',pd:'Thời Nguyễn',d:'Các bài thơ, văn chữ Hán được chạm khắc, khảm trang trí trên các công trình kiến trúc cung đình Huế.',f:['“Bảo tàng thơ” trên kiến trúc'],g:['L10: Văn minh Đại Việt (văn học, nghệ thuật)']},
+{id:'phucgiang',t:'Mộc bản Trường học Phúc Giang',c:'tl',k:'Di sản tư liệu khu vực châu Á – Thái Bình Dương',y:2016,p:'Hà Tĩnh',la:18.48,lo:105.7,e:'le',pd:'Thế kỷ XVIII',d:'Ván khắc in sách học của trường Phúc Giang do dòng họ Nguyễn Huy ở làng Trường Lưu lập ra, gắn với danh nhân Nguyễn Huy Oánh.',f:['Tư liệu về giáo dục tư thục thời phong kiến'],g:['L10: Văn minh Đại Việt (giáo dục)']},
+{id:'hoanghoa',t:'Hoàng Hoa sứ trình đồ',c:'tl',k:'Di sản tư liệu khu vực châu Á – Thái Bình Dương',y:2018,p:'Hà Tĩnh',la:18.48,lo:105.7,e:'le',pd:'Thế kỷ XVIII',d:'Tập bản đồ ghi lại hành trình đi sứ sang Trung Hoa của sứ đoàn Đại Việt do Nguyễn Huy Oánh làm chánh sứ; tư liệu về ngoại giao và giao lưu văn hóa ở Đông Á.',f:['Lưu giữ bởi dòng họ Nguyễn Huy (Trường Lưu)'],g:['L10: Văn minh Đại Việt (ngoại giao)']},
+{id:'nguhanhson',t:'Bia ma nhai ở danh thắng Ngũ Hành Sơn',c:'tl',k:'Di sản tư liệu khu vực châu Á – Thái Bình Dương',y:2022,p:'TP Đà Nẵng',la:16.0,lo:108.26,e:'nhieu',pd:'Nhiều thời kỳ',d:'Các văn bản khắc trực tiếp lên vách đá (ma nhai) trong hang động, chùa chiền ở Ngũ Hành Sơn, ghi lại hoạt động tôn giáo, xã hội và giao lưu văn hóa.',f:['“Ma nhai” là văn khắc trên vách đá tự nhiên'],g:['L10: Sử học – các loại hình sử liệu']},
+{id:'truongluu',t:'Văn bản Hán Nôm làng Trường Lưu',c:'tl',k:'Di sản tư liệu khu vực châu Á – Thái Bình Dương',y:2022,p:'Hà Tĩnh',la:18.48,lo:105.7,e:'nhieu',pd:'Nhiều thời kỳ',d:'Hệ thống văn bản Hán Nôm của làng khoa bảng Trường Lưu, phản ánh đời sống văn hóa, giáo dục của một làng Việt truyền thống.',f:['Cùng làng với Mộc bản Phúc Giang và Hoàng Hoa sứ trình đồ'],g:['L10: Sử học – các loại hình sử liệu']},
+{id:'cuudinh',t:'Những bản đúc nổi trên Cửu đỉnh ở Hoàng cung Huế',c:'tl',k:'Di sản tư liệu khu vực châu Á – Thái Bình Dương',y:2024,p:'TP Huế',la:16.47,lo:107.58,e:'nguyen',pd:'Đúc 1835 – 1837, thời Minh Mạng',d:'Chín đỉnh đồng đặt trước Thế Miếu, trên đó đúc nổi hình ảnh và chữ Hán về núi sông, sản vật, phương tiện… của đất nước, được ví như “bách khoa thư” về Việt Nam thời Nguyễn.',f:['Ghi danh ngày 8/5/2024 tại kỳ họp 10 MOWCAP (Mông Cổ)'],g:['L11: Cuộc cải cách của Minh Mạng']},
+{id:'phohien',t:'Văn bia Phố Hiến',c:'tl',k:'Di sản tư liệu khu vực châu Á – Thái Bình Dương',y:2026,p:'Hưng Yên',la:20.65,lo:106.06,e:'nhieu',pd:'Thế kỷ XVII – XX',d:'41 văn bia ở đô thị cảng Phố Hiến, phản ánh lịch sử giao thương, giao lưu văn hóa và sự giao thoa tôn giáo, tín ngưỡng của một đô thị cảng quốc tế.',f:['Ghi danh ngày 5/11/2026 tại kỳ họp 11 MOWCAP (Jakarta, Indonesia)'],g:['L10: Văn minh Đại Việt (kinh tế, đô thị)']},
+{id:'nonnuoc',t:'Ma nhai trên núi Non Nước',c:'tl',k:'Di sản tư liệu khu vực châu Á – Thái Bình Dương',y:2026,p:'Ninh Bình',la:20.26,lo:105.98,e:'nhieu',pd:'Nhiều thời kỳ',d:'43 bản khắc trên vách đá núi Non Nước, lưu giữ thơ văn của nhiều danh nhân qua các thời kỳ lịch sử.',f:['Ghi danh ngày 5/11/2026 tại kỳ họp 11 MOWCAP (Jakarta, Indonesia)'],g:['L10: Sử học – các loại hình sử liệu']}
+];
+const WQ={hue:'Quần thể di tích Cố đô Huế',halong:'Vịnh Hạ Long',hoian:'Phố cổ Hội An',myson:'Thánh địa Mỹ Sơn',phongnha:'Vườn quốc gia Phong Nha – Kẻ Bàng',thanglong:'Hoàng thành Thăng Long',thanhho:'Thành nhà Hồ',trangan:'Quần thể danh thắng Tràng An',yentu:'Yên Tử',nhanhac:'Nhã nhạc cung đình Huế',congchieng:'Không gian văn hóa Cồng Chiêng Tây Nguyên',quanho:'Dân ca quan họ',catru:'Ca trù',giong:'Hội Gióng',xoan:'Hát xoan',hungvuong:'Đền Hùng',taitu:'Đờn ca tài tử',vigiam:'Dân ca ví, giặm Nghệ Tĩnh',keoco:'Kéo co',thomau:'Đạo Mẫu',baichoi:'Bài chòi',then:'Hát then',xoe:'Xòe Thái',gomcham:'Gốm Bàu Trúc',bachuaxu:'Lễ hội Vía Bà Chúa Xứ Núi Sam',dongho:'Tranh Đông Hồ',mocbannguyen:'Mộc bản triều Nguyễn',biatiensi:'Bia tiến sĩ Văn Miếu – Quốc Tử Giám',chauban:'Châu bản triều Nguyễn',vinhnghiem:'Chùa Vĩnh Nghiêm (Bắc Giang)',thovanhue:'Thơ văn trên kiến trúc cung đình Huế',phucgiang:'Mộc bản trường học Phúc Giang',hoanghoa:'Hoàng Hoa sứ trình đồ',nguhanhson:'Ngũ Hành Sơn',truongluu:'Trường Lưu, Can Lộc',cuudinh:'Cửu đỉnh',phohien:'Phố Hiến',nonnuoc:'Núi Non Nước'};
+/* Video đã kiểm tra (24/11/2026): [mã YouTube, tiêu đề, kênh đăng]. Muốn đổi/thêm: sửa mã 11 ký tự sau "v=" trong link YouTube */
+const VIDEOS={
+hue:['nm772MwvvnM','Complex of Hué Monuments (UNESCO/NHK)','UNESCO'],
+halong:['VZ1SWWMSZq8','Ha Long Bay (UNESCO/NHK)','UNESCO'],
+hoian:['N0BIcOTSD9k','Hoi An Ancient Town (UNESCO/NHK)','UNESCO'],
+myson:['ZNkXdSmTJkQ','My Son Sanctuary (UNESCO/NHK)','UNESCO'],
+phongnha:['eU5T7MCBT0s','Phong Nha-Ke Bang National Park (UNESCO/NHK)','UNESCO'],
+thanglong:['xFi_-bgCOx4','Central Sector of the Imperial Citadel of Thang Long (UNESCO/NHK)','UNESCO'],
+thanhho:['dxkmE_MHJ4I','Nỗ lực bảo tồn và phát huy giá trị Di sản văn hóa thế giới Thành Nhà Hồ','Truyền hình Thanh Hóa'],
+trangan:['_GR3ni9ZTg4','Ninh Bình xây dựng Tràng An là trung tâm “Đô thị di sản thiên niên kỷ”','VNA Media (TTXVN)'],
+yentu:['Mr6viIyhAJQ','Yên Tử – Vĩnh Nghiêm – Côn Sơn, Kiếp Bạc: Những giá trị nổi bật toàn cầu','Quảng Ninh TV'],
+nhanhac:['G5X7KUtbEkk','Nha Nhac, Vietnamese Court Music','UNESCO'],
+congchieng:['l90_bPVujKc','The Space of Gong Culture','UNESCO'],
+quanho:['MlKtqU5685w','Quan Họ Bắc Ninh folk songs','UNESCO'],
+catru:['XrzGeo8GQX8','Ca trù singing','UNESCO'],
+giong:['uWI1TR7hbBI','Gióng festival of Phù Đổng and Sóc temples','UNESCO'],
+xoan:['Vair7eo_NHE','Xoan singing of Phú Thọ province, Viet Nam','UNESCO'],
+hungvuong:['XAhhNlJcW-s','Worship of Hùng kings in Phú Thọ','UNESCO'],
+taitu:['5M4h4AGteGU','Art of Đờn ca tài tử music and song in southern Viet Nam','UNESCO'],
+vigiam:['LAjFaHHYxXc','Ví and Giặm folk songs of Nghệ Tĩnh','UNESCO'],
+keoco:['hVNa5PG00RI','Tugging rituals and games','UNESCO'],
+thomau:['RdFbNpdV3Fo','Practices related to the Việt beliefs in the Mother Goddesses of Three Realms','UNESCO'],
+baichoi:['mcILpWU81GU','The art of Bài Chòi in Central Viet Nam','UNESCO'],
+then:['1cVpYm89scM','Practices of Then by Tày, Nùng and Thái ethnic groups in Viet Nam','UNESCO'],
+xoe:['KxJAkGGoAig','Art of Xòe dance of the Tai people in Viet Nam','UNESCO'],
+gomcham:['KMkqMxA6sHg','Art of pottery-making of Chăm people','UNESCO'],
+bachuaxu:['d9Es3BYHHkQ','Festival of Bà Chúa Xứ Goddess at Sam Mountain','UNESCO'],
+dongho:['j7-nHNFn1f0','Craft of making Đông Hồ folk woodblock printings','UNESCO'],
+mocbannguyen:['3RQxBMc5osQ','Mộc bản triều Nguyễn (Royal printing woodblocks of Nguyen Dynasty)','Trung tâm Lưu trữ quốc gia IV'],
+biatiensi:['KQgan_NMpDY','Bia đá kể chuyện','Đài Hà Nội'],
+chauban:['9go3zEUdOPM','Không gian di sản tư liệu thế giới và Ấn vàng triều Nguyễn','Đài Hà Nội'],
+hoangvan:['Pv3V690Oot8','UNESCO vinh danh bộ sưu tập của nhạc sĩ Hoàng Vân','Đài Hà Nội'],
+vinhnghiem:['PMHKnPNMFzQ','Chùa Vĩnh Nghiêm – Danh lam cổ tự ở Bắc Giang','Báo điện tử VOV'],
+phucgiang:['OxNo5K-aFE0','Di sản Việt Nam số 31: Mộc bản Trường Lưu – di sản từ nhà ra thế giới','Truyền hình Quốc hội'],
+hoanghoa:['wBsVLBsngC0','Thông điệp lịch sử: Hoàng Hoa sứ trình đồ và những giá trị còn mãi','VNA Media (TTXVN)'],
+nguhanhson:['RE5BMmYuKqQ','Ma nhai – Bí ẩn trong lòng di sản Ngũ Hành Sơn','VTV8 – Đài Truyền hình Việt Nam'],
+truongluu:['hpQbdcz1lnE','Kỷ niệm năm sinh 3 danh nhân dòng họ Nguyễn Huy, Trường Lưu và Lễ công bố Di sản tư liệu khu vực','Truyền hình Hà Tĩnh'],
+cuudinh:['iVwrgdoi7YE','Cửu đỉnh được ghi vào danh mục ký ức thế giới','Đài Hà Nội'],
+phohien:['kbAV5PIO3yk','Phố Hiến xưa qua tư liệu bia ký','Truyền hình Hưng Yên']
+};
+/* Trang chính thức của UNESCO về từng di sản phi vật thể (có ảnh, video, hồ sơ) */
+const UNESCO_ICH={nhanhac:'RL/nha-nhac-vietnamese-court-music-00074',congchieng:'RL/space-of-gong-culture-00120',quanho:'RL/quan-h-bc-ninh-folk-songs-00183',catru:'USL/ca-tru-singing-00309',giong:'RL/giong-festival-of-phu-djong-and-soc-temples-00443',xoan:'RL/xoan-singing-of-phu-th-province-viet-nam-01260',hungvuong:'RL/worship-of-hung-kings-in-phu-th-00735',taitu:'RL/art-of-n-ca-tai-t-music-and-song-in-southern-viet-nam-00733',vigiam:'RL/vi-and-gim-folk-songs-of-ngh-tnh-01008',keoco:'RL/tugging-rituals-and-games-01080',thomau:'RL/practices-related-to-the-viet-beliefs-in-the-mother-goddesses-of-three-realms-01064',baichoi:'RL/the-art-of-bai-choi-in-central-viet-nam-01222',then:'RL/practices-of-then-by-tay-nung-and-thai-ethnic-groups-in-viet-nam-01379',xoe:'RL/art-of-xoe-dance-of-the-tai-people-in-viet-nam-01575',gomcham:'USL/art-of-pottery-making-of-chm-people-01574',bachuaxu:'RL/festival-of-ba-chua-x-goddess-at-sam-mountain-01999',dongho:'USL/craft-of-making-ong-h-folk-woodblock-printings-01737'};
+const CAT={tg:'Di sản thế giới',pvt:'Di sản văn hóa phi vật thể',tl:'Di sản tư liệu'};
+const ERA=[['tien','Thời dựng nước','Văn Lang – Âu Lạc trong tâm thức dân gian'],['cham','Văn minh Champa','Thế kỷ IV – XIII và di sản sống của người Chăm'],['dai','Đại Việt: Đinh – Lý – Trần – Hồ','Thế kỷ X – đầu thế kỷ XV'],['le','Lê sơ – Lê trung hưng, Đàng Trong','Thế kỷ XV – XVIII'],['nguyen','Triều Nguyễn','1802 – 1945'],['hiendai','Việt Nam hiện đại','Từ năm 1945'],['nhieu','Tư liệu xuyên nhiều thời kỳ','Văn khắc, ván in qua nhiều thế kỷ'],['song','Di sản sống','Thực hành, trao truyền qua nhiều thế hệ'],['tn','Di sản thiên nhiên','Giá trị địa chất, cảnh quan, sinh học']];
+const VN='M87 528.5L88 530.5L87.5 535L86 539.5L86.5 541.5L85.5 543L83 534.5L79.5 530.5L79 529L80.5 529.5L84 527L85.5 527L87 528.5ZM237.5 83.5L235.5 84L231 84L227 88L224.5 89.5L220 90.5L215.5 92.5L214.5 96L214.5 99L213.5 102L206.5 106L204 105.5L203 104L200.5 104.5L199 105L197.5 105L195.5 106L193 105.5L190.5 104.5L189.5 104L187.5 104L187.5 105.5L190 111.5L190.5 114.5L182.5 123L183.5 128.5L181.5 132.5L177 136L168 144.5L164 144.5L161 146.5L154.5 160.5L154 165.5L153 169L153.5 172L150.5 179L147.5 181.5L147 185.5L151 193L151.5 194L154 198L155.5 201L157 204L164 211.5L167 213.5L170.5 215L177.5 222L180.5 226L179 229L180 235L175 233.5L176 234L181.5 237.5L190 249.5L197 255L204.5 262L207 268L213.5 272.5L221 278.5L222.5 281.5L228 284.5L231 288L232 291L234 291.5L236 291L238 290.5L239.5 291L242 294.5L245 297.5L246.5 300.5L247.5 300L248.5 300.5L249 303L249.5 304.5L253.5 309L255.5 313.5L260.5 320.5L264.5 324.5L267 327L270 329L273 337L274.5 344L277.5 352L280 355.5L280 362L282 368.5L284 373L285 378L285.5 380L286.5 382L288.5 390L288 393.5L286.5 390L286.5 400.5L288 406L287 413L289 415.5L291.5 423L293 425.5L293 435.5L294 440L291.5 437L289.5 434L287.5 435.5L285.5 438L288.5 448.5L284.5 447.5L285 461L286.5 464.5L287 466L286.5 467.5L285.5 465.5L285 463.5L284.5 465L283 467.5L283 470.5L284 473L284.5 475L283.5 477.5L282 480L278.5 480.5L277.5 485.5L276.5 490.5L270 491.5L265.5 496L259.5 498L254.5 502.5L249 506.5L245 507L242 508L238.5 515L232.5 516L221.5 522L218 524.5L214.5 525.5L210 528L209 527L207.5 525L203.5 524L201.5 522L200.5 519L200 517.5L199.5 519.5L198.5 526.5L198 528L196 528.5L192.5 526.5L189.5 522.5L185 525.5L188.5 525.5L190 526L191.5 529L191.5 530.5L190.5 532L186 532.5L180.5 532L184.5 535L189.5 536.5L191.5 538L191.5 539.5L189 541.5L187 544.5L186.5 546L186.5 548L184.5 549.5L183 549.5L178.5 546.5L167 535L168.5 538.5L181 551L183 555.5L183.5 558.5L182 560L180 561.5L176 562L169.5 557L158.5 545.5L155 544L166 557L167.5 560L169.5 564L169 566L168 568L142.5 580L138.5 585.5L135.5 592L130.5 595.5L127.5 599L119 600.5L114 600L119 594L116 592L116 576.5L117 560L119.5 551.5L122.5 549.5L126.5 548L126.5 546L126 544L124 541.5L121.5 540L118 539.5L115.5 536L113.5 536L110 537L108 535.5L107.5 533.5L104.5 530.5L101 527.5L102.5 527L104.5 525.5L106.5 523.5L111 523L116 523L117 522.5L119 520.5L122.5 517.5L125 516L125.5 514.5L124.5 511.5L124 508.5L125 507.5L129 508L134 509.5L135 510L138 506.5L140.5 506L145 505.5L150 504L152 504.5L154 507L156 509.5L159 508.5L161 510L165.5 512L168 512L166.5 507L168 503.5L167.5 502.5L165.5 501L157.5 494L156 492L156 489L156 484.5L155 481.5L155.5 480L155.5 478.5L157 478L158.5 478L159.5 476.5L161.5 473.5L165.5 474L170.5 475.5L174.5 476.5L177 476.5L177.5 474.5L177.5 467.5L177.5 466L180.5 465.5L186 465.5L188.5 465L191 462L197.5 461L202 457L206 453L208 452L210.5 451L212.5 451L215 453.5L217 452L219.5 449.5L220.5 446.5L221.5 442.5L221 435.5L219.5 430.5L218.5 426.5L218 423L221 415L223.5 406.5L222.5 403L220 398L217.5 391.5L215 384.5L214 383L213 381L212.5 379L214 371.5L214 369L217 366L219 362L220.5 358L220 356L219.5 351.5L220 349L219.5 347.5L218.5 345L219 343L221.5 341.5L222.5 339.5L224 336.5L225 334L224 331.5L221.5 328.5L217.5 325.5L213 321.5L210.5 319L209 317L207 314L206.5 312L207 310.5L214 307L215 306L215.5 304L215 302.5L213.5 301.5L211.5 300.5L208.5 298.5L202.5 293L200 291.5L197.5 290L196 288L194 283.5L192 284.5L190 286L188.5 285.5L186.5 284.5L186 282.5L184.5 280L182.5 278L182 271L182 269L181 266L179.5 264.5L178 264L174.5 258.5L172 255.5L161.5 247.5L160.5 246L158 243L153 238.5L149.5 234.5L147 230.5L146 227.5L145.5 224.5L143 221L140.5 218L138.5 217L136 216.5L133.5 214.5L129.5 210.5L127.5 208L126.5 206L126.5 204L127.5 201L128.5 199.5L128.5 198L127.5 197L123 195L112 192L108 189.5L104.5 186.5L101.5 184.5L88.5 176L85 175L81.5 173.5L80.5 172L80.5 170.5L82 169.5L85.5 167L87 164.5L86.5 161.5L85 158L86 157L89.5 156.5L94.5 156.5L105.5 159.5L107 159L113 154L115.5 150.5L116 148L117 146L120.5 143.5L120.5 140.5L119 137L117 136L116 135.5L111.5 136L110.5 135L110 132.5L110 131L108.5 129L103.5 127.5L99.5 127L98.5 126.5L100 124.5L103 123L105 122L106.5 120L107 118L105 116.5L102.5 114.5L98 111L92 107.5L88.5 106L86.5 106.5L80 109.5L76.5 111.5L73.5 115.5L70.5 116L67.5 114.5L64 113L54.5 110.5L50 108.5L41.5 96L40.5 93.5L41.5 90.5L42 86.5L42.5 84L44 81L44.5 79L44 76.5L43 75.5L41.5 75L40 74.5L39 71.5L37.5 75.5L36 77L34.5 77.5L33 77L32.5 75.5L32 73L31 70L30 68L26.5 65.5L25 63L19 57L14.5 52.5L12.5 49L14.5 47.5L16.5 45.5L19.5 42L22 38L23.5 35.5L24 34.5L25.5 34L27.5 34.5L30.5 36L35.5 38L39.5 40.5L41.5 43L43.5 45.5L45.5 46L49 44L51.5 42.5L51.5 40.5L53.5 38.5L56.5 35.5L57.5 33.5L58.5 33L60 34L64 40L65 40.5L66.5 39.5L68 34.5L70 32.5L81.5 42.5L83.5 42L84.5 40.5L85 37.5L86.5 34L90 32L92.5 31.5L93.5 33.5L96 35.5L99 36L105 32L107 31L109 31.5L111 31L113 29.5L115 27.5L116 23.5L116.5 20L118 18.5L119.5 17.5L123 16.5L130.5 13L132 11L133.5 10L136.5 11.5L140 14.5L142 16.5L143.5 19L144 21L149.5 23L153 25L155.5 27L158 27L160 26.5L161.5 25L164 25L167 25L168.5 26L171 29L172 29.5L174.5 29.5L179 28.5L182.5 27.5L185.5 29L191.5 33L190 35.5L188.5 38.5L186 40.5L184 41L182.5 44L182 48L182.5 50.5L184 51L186 52.5L186.5 54.5L187 58.5L186.5 63.5L187 65L188.5 64.5L189.5 64L192 64.5L195 66L197 67L199 67L200 68.5L200.5 70.5L202.5 72L207 75.5L210.5 75.5L213.5 79.5L216.5 78.5L218 80L224.5 79.5L229 78L231 78L235 81.5L237.5 83.5ZM185 596.5L184 597L183.5 596L187 593.5L186.5 595L185 596.5ZM206.5 528L203 530.5L203 528.5L205.5 527L206.5 526L206.5 528ZM195 111.5L192.5 110.5L191 109.5L192 107L194.5 109.5L195 111.5ZM223 95.5L217.5 100.5L215.5 100.5L217.5 94.5L218.5 93.5L221.5 95L223 95.5ZM220 107L218 108L215 108L218.5 106L220 103.5L221 102.5L221 104.5L220 107ZM201 114L199.5 114.5L196.5 111L198 109.5L201.5 110.5L202.5 111.5L201.5 113.5Z',NB='M31 477L30.5 481L28 479.5L29.5 476.5ZM24 464.5L19 465L18 459L22.5 461L24 464.5ZM-64.5 131.5L-61 130.5L-57 128.5L-55 130.5L-52.5 134.5L-50 136.5L-48.5 140.5L-49.5 144L-51 148.5L-54 153.5L-53 158L-49.5 162L-45 164L-40.5 163.5L-36.5 160.5L-32 159.5L-25 161L-22.5 164.5L-23 171L-22 175.5L-20 180.5L-20 185L-22.5 192.5L-24.5 199.5L-26.5 202.5L-28.5 205L-27 210L-25.5 212.5L-25 218.5L-26.5 222.5L-30.5 232L-34.5 240.5L-32.5 242.5L-29 243.5L-26.5 245L-19 239L-15 235.5L-9.5 231.5L-4.5 228.5L-2 226L-1 222.5L3 222L9 217L11.5 215.5L16.5 218L21 222L25.5 224.5L29 225.5L30.5 229L33 231.5L35.5 228.5L39 226L42 225L46 224.5L49.5 218.5L52 215L56 213L56 209L60 207L65 207.5L70.5 208.5L76.5 211.5L80.5 212L86.5 215.5L92 224.5L97 231.5L101 236L105.5 239.5L110 242L113 245.5L116 252L114 261L113 268.5L113.5 278L116 285.5L121 290.5L124 294.5L125 297.5L128.5 300.5L136 302.5L138.5 304.5L137.5 308.5L141 313L144.5 314.5L147 316L147.5 320.5L146.5 324.5L145 327.5L142.5 329.5L142 333.5L142 339L143.5 342.5L144 346.5L143 350.5L142.5 357.5L141.5 363L139.5 365L136 367.5L132.5 369.5L129.5 370.5L128 373L126 375L123 374L122 369.5L118.5 368L114.5 367L106.5 368.5L100.5 369L93.5 368L86.5 369.5L80.5 369.5L74.5 369L69 367L62.5 369L58 370L54 370.5L47.5 374L42.5 378.5L41.5 382L39 385L35.5 390.5L31.5 395.5L28.5 397.5L24 401.5L20 402.5L20.5 412.5L21.5 416.5L24 421L25.5 423.5L26.5 431L27 437L32 441L34.5 444.5L36.5 447L35 454L36 460.5L43 474.5L38 468.5L37 463.5L33 458L30.5 456L28.5 459.5L24.5 457L21 454L17.5 448L13 446.5L9 443L5.5 441.5L1.5 438.5L-3 436.5L-13.5 439L-27.5 437L-32.5 439L-36 435.5L-34.5 431.5L-34.5 422.5L-33 416.5L-33.5 412L-32.5 406.5L-44 403L-48.5 403.5L-60 404.5L-64.5 406.5L-68.5 410L-69.5 414.5L-67.5 417L-66 422L-70 433L-70.5 436.5L-69 450L-69.5 457L-72 462L-75.5 466.5L-77 474L-79.5 477.5L-83.5 485.5L-86 495.5L-88 500L-89 508.5L-97 521L-98.5 528.5L-101.5 531L-100 537L-101 546.5L-101.5 554.5L-100.5 559L-96.5 567.5L-98 573.5L-95 575L-80 571.5L-75.5 572.5L-74 576L-73 579.5L-70.5 597L-69.5 600.5L-67 603.5L-64 607L-63 603.5L-60.5 607L-58.5 613L-52 646.5L-50 650.5L-48.5 655L-52.5 652.5L-53.5 645.5L-54.5 642.5L-58.5 642L-57 638L-59.5 633L-63 635L-63 640L-61.5 644L-55 653L-53 656.5L-46.5 657L-42 660.5L-39 664L-30 669.5L-25 669L-19 667.5L-15.5 668L-11.5 669.5L-7 674L0 685L11.5 694.5L10 700L5.5 705L3 711L-0.5 713L-4.5 713L-7.5 709L-15 710L-21 712.5L-23.5 717.5L-26.5 718.5L-30 715L-31 710L-28 705.5L-28 697.5L-29.5 694L-35.5 694L-38 690.5L-39 687L-41.5 685L-45 686L-56 682L-59 676.5L-62.5 677L-64 684.5L-74 674L-81 669L-80 660L-82 658L-86.5 655L-84.5 650L-87.5 651L-91 650.5L-94 649L-96 641.5L-100.5 635L-104.5 635L-106 628.5L-108.5 625.5L-112.5 623L-115.5 621.5L-119 613.5L-121.5 612L-124 610L-127 611.5L-130 617L-134.5 615L-137 607L-137.5 602.5L-137 593.5L-133.5 585L-132 572.5L-129 564.5L-127 561.5L-124.5 550.5L-119 536.5L-117.5 530L-116.5 527L-116.5 521.5L-117 517.5L-112 512.5L-106.5 507L-100.5 500L-94 488.5L-90.5 482L-88 479L-85.5 476.5L-84 474L-87.5 460.5L-90 456.5L-91 451.5L-91.5 448L-92.5 445L-93.5 440.5L-96 438L-99 434.5L-101 428.5L-103 423L-102.5 417L-101 414.5L-101 404L-102.5 395.5L-104.5 391L-107 386L-110 382L-118.5 374.5L-124 369.5L-127 365L-130.5 360L-133.5 356L-136.5 351.5L-138.5 345L-139.5 338L-137 334.5L-133.5 333L-128.5 329.5L-124.5 329.5L-125 321.5L-124.5 313.5L-124 306.5L-123.5 302L-114.5 297L-113 294.5L-112 290L-114 287.5L-119.5 292L-123.5 283.5L-126 278.5L-128 274.5L-128 268L-129.5 265L-136 258L-139.5 254.5L-143.5 249L-149 242.5L-154 236.5L-156.5 233L-156 226.5L-157 222.5L-159.5 217L-160.5 213.5L-164.5 212L-167 209.5L-170 204L-166 204L-162.5 203L-159 201.5L-156 200.5L-157.5 186.5L-153.5 179L-154 173.5L-153 165.5L-149.5 160.5L-146.5 158L-145.5 154L-142 153.5L-137 156.5L-132 156.5L-128.5 156L-117 153L-112.5 153L-109 152L-107 142.5L-105 140L-100 139.5L-97 141L-92.5 140.5L-89 138L-89 133.5L-90.5 130L-87 130.5L-83 131L-78 130.5L-76 128.5L-73.5 127L-69 129L-64.5 131.5ZM12.5 49L14.5 52.5L19 57L25 63L26.5 65.5L30 68L32 73L33 77L37.5 75.5L38.5 72L40 74.5L43 75.5L44.5 79L42.5 84L41.5 90.5L40.5 93.5L50 108.5L54.5 110.5L64 113L67.5 114.5L70.5 116L76.5 111.5L80 109.5L86.5 106.5L92 107.5L98 111L102.5 114.5L105 116.5L106.5 120L103 123L100 124.5L103.5 127.5L108.5 129L110 132.5L111.5 136L116 135.5L119 137L120.5 140.5L117 146L115.5 150.5L113 154L107 159L94.5 156.5L89.5 156.5L86 157L86.5 161.5L85.5 167L82 169.5L80.5 172L85 175L88.5 176L101.5 184.5L104.5 186.5L108 189.5L112 192L123 195L127.5 197L127.5 201L126.5 204L127.5 208L129.5 210.5L133.5 214.5L136 216.5L140.5 218L143 221L145.5 224.5L147 230.5L149.5 234.5L153 238.5L158 243L160.5 246L172 255.5L174.5 258.5L178 264L181 266L182 269L182.5 278L184.5 280L186 282.5L188.5 285.5L192 284.5L196 288L200 291.5L202.5 293L208.5 298.5L211.5 300.5L215 302.5L214 307L207 310.5L209 317L213 321.5L217.5 325.5L221.5 328.5L224 331.5L224 336.5L222.5 339.5L219 343L219.5 347.5L219.5 351.5L220 356L216 361.5L211 360.5L208 364L204 367.5L199.5 368.5L197.5 371L193 371.5L190 368.5L187 366.5L184.5 365L182 362L178.5 363.5L175 366L170 365L169 368.5L162 369.5L161.5 373.5L165.5 379L164 387L158 387L155 385L152.5 382L143.5 378L138 379.5L134 377.5L131 373.5L130 370L136 367.5L139.5 365L141.5 363L142.5 357.5L143 350.5L144 346.5L143.5 342.5L142 339L142 333.5L142.5 329.5L145 327.5L146.5 324.5L147.5 320.5L147 316L144.5 314.5L141 313L138.5 311L137.5 306.5L136 302.5L128.5 300.5L125 297.5L124 294.5L121 290.5L116 285.5L113.5 278L113 268.5L114 261L116 252L113 245.5L110 242L105.5 239.5L101 236L97 231.5L92 224.5L86.5 215.5L82.5 211L76.5 211.5L70.5 208.5L65 207.5L60 207L56 209L57 212L54 213.5L49.5 218.5L48 223L42 225L39 226L35.5 228.5L34 231L30.5 229L29 225.5L25.5 224.5L21 222L16.5 218L13.5 216L9 217L5.5 221L0.5 221.5L-2 226L-4.5 228.5L-9 231L-15 235.5L-19 239L-24.5 244L-29 243.5L-32.5 242.5L-34.5 240.5L-30.5 232L-26.5 222.5L-25 218.5L-25.5 212.5L-27 210L-29 207.5L-26.5 202.5L-24.5 199.5L-22.5 192.5L-20 185L-20 180.5L-22 175.5L-23 171L-22.5 164.5L-25 161L-32 159.5L-36.5 160.5L-40.5 163.5L-45 164L-49.5 162L-53 158L-54 153.5L-51 148.5L-49.5 144L-48.5 140.5L-49.5 137L-52.5 134.5L-55 130.5L-57 128.5L-61 130.5L-62.5 133L-64 129L-62 120.5L-59.5 115L-56.5 112L-53.5 111L-50 111.5L-45.5 109.5L-49 107L-47.5 102.5L-44 99L-42 94L-40 91.5L-33.5 89.5L-27.5 85.5L-25.5 81.5L-24 87.5L-22.5 90.5L-22 95L-13.5 95L-10 94.5L-7 96.5L-3.5 98L-0.5 96L-1.5 93L-3 88L-2 82.5L-2 73L-4 68.5L-7.5 64.5L-9.5 59L-10 55.5L-7 51L-6 48L-3.5 44.5L1.5 48.5L5.5 46.5L11 47.5ZM630 -36L628.5 -33.5L626.5 -35.5L629.5 -36.5ZM330 100.5L335.5 100.5L334.5 105.5L331.5 103.5L326 104L327 101ZM452 32L448.5 30.5L446 28L450.5 30ZM422.5 80L420.5 77L422.5 73L425.5 74L423 76L422.5 80ZM237.5 83.5L235 81.5L231 78L224.5 79.5L218 80L213.5 79.5L210.5 75.5L202.5 72L200 68.5L197 67L192 64.5L187 65L187 58.5L186.5 54.5L184 51L182 48L182.5 44L184 41L188.5 38.5L190 35.5L191.5 33L185.5 29L182.5 27.5L179 28.5L174.5 29.5L171 29L168.5 26L164 25L160 26.5L155.5 27L153 25L149.5 23L144 21L142 16.5L140 14.5L136.5 11.5L133.5 10L130.5 13L123 16.5L119.5 17.5L116.5 20L116 23.5L115 27.5L113 29.5L109 31.5L105 32L99 36L93.5 33.5L90 32L86.5 34L85 37.5L83.5 42L70.5 33L68 34.5L66.5 39.5L60 34L56.5 35.5L53.5 38.5L51.5 40.5L49 44L46.5 46L41.5 43L39.5 40.5L35.5 38L30.5 36L27.5 34.5L23.5 35.5L22 38L19.5 42L16.5 45.5L14.5 47.5L8.5 46.5L1.5 48.5L-1.5 44.5L-5 45.5L-7 51L-9 53L-9 57.5L-8.5 62L-4 68.5L-2.5 71L-2 80L-3 88L-1.5 93L0 95.5L-3 98L-7 96.5L-10 94.5L-13.5 95L-20 96.5L-22.5 93L-23 88.5L-23.5 83L-26 76L-30 74.5L-37 78L-43 84L-46 85L-52 84.5L-56 84L-61 85.5L-65 83.5L-65 79.5L-67.5 76.5L-71.5 73.5L-71.5 68L-71 64.5L-76 62L-85 60.5L-92.5 59.5L-96 60L-100 59L-100 52.5L-98.5 49L-94.5 44L-94.5 36.5L-93 31L-89.5 27L-88.5 24L-91.5 21.5L-94.5 20L-99 20L-105.5 19L-113 16.5L-112 11.5L-113 6.5L-115.5 3L-114 -1L-116 -5.5L-118 -7.5L-120 -9.5L-119 -14.5L-114 -19.5L-123.5 -19L-127 -20.5L-132 -21L-138 -20.5L-145.5 -18.5L-152.5 -15.5L-155.5 -13.5L-158 -12L-163 -12.5L-158 -21L-157.5 -25L-159 -28.5L-160.5 -33L-164 -35.5L-164 -41L-162 -47L-159 -49L-156 -51L-157 -55L-155 -62.5L-153 -66L-149 -65.5L-146 -67.5L-143.5 -70L-140.5 -79L-134.5 -78.5L-130.5 -83L-128 -87.5L-124.5 -89L-121 -90.5L-123.5 -96L-124.5 -99L-120.5 -101.5L-120.5 -108L-119 -113L-118 -119.5L-117.5 -124L-118 -131L-118.5 -138L-120 -143.5L-120 -153L-121 -159L-126.5 -162L-130.5 -161.5L-132.5 -157.5L-135.5 -160L-137 -162.5L-141 -174.5L-141.5 -178L-142.5 -181.5L-145 -184.5L-148.5 -188.5L-150.5 -190.5L-155 -190.5L-158 -195L-161.5 -196.5L-165.5 -194.5L-168 -190L-171 -186L-179 -189.5L-185.5 -189.5L-191 -190.5L-198 -194L-206.5 -192.5L-209 -190.5L-212 -192.5L-210.5 -195L-208 -200.5L-200.5 -206.5L-202 -209L-204.5 -214.5L-206 -218L-209.5 -217L-217 -212.5L-218.5 -219.5L-212.5 -222.5L-210 -224.5L-214 -226L-218 -231L-220 -233L-227.5 -231.5L-234 -228.5L-241.5 -224.5L-242.5 -221.5L-245.5 -218L-250.5 -218L-256 -220L-261.5 -222L-270.5 -223L-271.5 -226L-274 -228L-282 -224.5L-288.5 -222L-292.5 -218.5L-295.5 -215L-299.5 -214.5L-301 -210.5L-303.5 -208L-309 -205L-313 -203.5L-324.5 -202L-328.5 -201L-332.5 -195.5L-333.5 -192L-337 -189L-343 -185L-350 -182L-351.5 -179.5L-350.5 -175.5L-355.5 -171L-358.5 -170L-363.5 -169L-367 -169.5L-370.5 -168.5L-377.5 -165L-383.5 -166L-388 -166.5L-391 -168L-390.5 -173L-396.5 -175.5L-401 -177L-403.5 -178.5L-409.5 -177L-412 -175L-416.5 -176L-426 -179L-435.5 -179L-440 -179L-440 -183L-445 -187L-449.5 -188L-454.5 -188.5L-461 -186L-463.5 -183.5L-467 -182.5L-471.5 -180.5L-473.5 -178.5L-477 -174.5L-481.5 -169.5L-486 -164.5L-488 -159.5L-491 -156.5L-494 -154.5L-496.5 -148.5L-498.5 -150.5L-501 -153L-502 -157L-498.5 -166.5L-498 -170.5L-499.5 -176.5L-507 -179.5L-510 -178.5L-514 -176.5L-520 -175L-525 -174L-527 -172L-533 -171.5L-543 -169L-547.5 -169L-558 -169L-563.5 -169.5L-568 -173L-571.5 -174.5L-575 -176L-578.5 -177L-581 -180L-586 -179.5L-587.5 -174.5L-592 -173L-595 -174.5L-599 -177L-601 -179.5L-604.5 -176L-607.5 -172.5L-610.5 -175.5L-613.5 -181.5L-617 -185L-620 -187L-630 -187L-638 -187.5L-641.5 -188.5L-641.5 -195.5L-640 -199L-643.5 -200.5L-651.5 -198L-655 -199L-658.5 -201L-666.5 -206L-668.5 -208L-672.5 -210.5L-675.5 -212.5L-677.5 -217.5L-679.5 -222.5L-683.5 -226L-687 -227L-692.5 -225L-697 -223.5L-705.5 -228L-709.5 -233.5L-714 -238L-717 -240.5L-722.5 -240.5L-728.5 -243.5L-736.5 -249L-742.5 -253.5L-753 -258.5L-755 -260.5L-757.5 -266L-759.5 -269L-767 -270.5L-775 -271.5L-784 -269.5L-790 -259.5L-793 -257.5L-797.5 -260L-799.5 -262.5L-800.5 -265.5L-804.5 -267.5L-809.5 -270.5L-812 -272.5L-815 -274L-822.5 -276.5L-828 -278.5L-831 -280L-830.5 -283.5L-832.5 -287.5L-841 -291.5L-846 -294.5L-851 -294.5L-855 -294L-857.5 -295.5L-861.5 -298.5L-863.5 -300.5L-868 -305.5L-872.5 -312L-876 -312.5L-877.5 -309L-882.5 -308L-886.5 -309L-886 -313.5L-886 -318L-884 -320.5L-886 -323L-888.5 -325.5L-887.5 -331.5L-887.5 -335.5L-896 -344.5L-897.5 -348L-898 -352L-900 -357L-895 -359L-891 -359L-888 -360L-886 -356L-883 -352.5L-880 -350.5L-874 -351.5L-872 -355L-868 -356L-867.5 -364L-868.5 -368.5L-869 -374L-871 -376L-873 -378L-871.5 -383L-874 -386L-878.5 -390L-882 -393L-884 -396L-885 -402L-885 -408.5L-886 -411.5L-887 -416.5L-886 -419.5L-879.5 -423.5L-877.5 -426.5L-879 -430L-882 -431.5L-886 -434L-889.5 -436.5L-895.5 -438.5L-902.5 -440L-904.5 -442L-906 -447L-909 -454L-912 -461.5L-914.5 -466L-913.5 -474L-917 -475L-921 -474.5L-926 -475L-931.5 -475L-936.5 -475L-942 -476.5L-950 -478L-958 -480.5L-962.5 -482.5L-967.5 -485L-970.5 -487L-971 -491.5L-977 -489.5L-982.5 -488.5L-986.5 -489L-988 -494L-991.5 -496L-995.5 -498L-994.5 -501.5L-993 -511.5L-994 -514.5L-996.5 -520L-1001 -524L-1005 -525.5L-1008.5 -526.5L-1013 -525L-1016 -531.5L-1025 -535L-1028.5 -535.5L-1032.5 -535L-1036.5 -535L-1039.5 -536.5L-1042.5 -537.5L-1048 -537L-1054.5 -541.5L-1047.5 -545.5L-1043 -546.5L-1039.5 -546L-1036.5 -545L-1033.5 -546L-1030 -547.5L-1027.5 -550L-1026.5 -554L-1031 -557L-1033.5 -559L-1034 -563.5L-1033 -567L-1034.5 -569.5L-1036.5 -577.5L-1038.5 -580L-1039 -583.5L-1039.5 -587L-1037 -592L-1040 -596.5L-1049 -600L-1058 -602.5L-1064 -602.5L-1066.5 -600.5L-1068 -597.5L-1074 -598.5L-1076.5 -600.5L-1078.5 -604L-1080 -608.5L-1079.5 -612.5L-1076.5 -614.5L-1078.5 -618L-1081 -620L-1084 -625L-1083 -632L-1080 -634.5L-1075.5 -635.5L-1073.5 -637.5L-1072 -640L-1073.5 -644.5L-1075.5 -648L-1073.5 -651L-1071.5 -655L-1069 -657.5L-1065.5 -659L-1059.5 -659.5L-1053 -661.5L-1045.5 -667L-1042.5 -668.5L-1037 -669L-1038 -673L-1035.5 -675.5L-1030.5 -674L-1026 -674L-1021 -675L-1010.5 -681L-1007 -676.5L-1005 -669L-997 -668L-992 -671L-986 -671L-982 -673L-980 -670L-976.5 -671.5L-973.5 -674L-972 -676.5L-970 -679L-968 -682.5L-966.5 -687L-960.5 -695.5L-957 -697L-946.5 -696.5L-942.5 -696.5L-931 -695.5L-926 -697L-922 -698L-917 -698L-910.5 -699L-902 -707L-901 -711L-898 -712.5L-894 -714.5L-886.5 -718.5L-871 -724.5L-865.5 -727.5L-857.5 -729L-847 -732L-844.5 -736L-830 -737.5L-829.5 -741L-828.5 -745.5L-830.5 -752L-831.5 -757L-832 -761L-830.5 -765.5L-828.5 -768L-822 -770L-817.5 -771L-821 -773.5L-823.5 -775L-819 -779.5L-814.5 -781L-809.5 -780L-808 -782.5L-810 -787L-812.5 -788.5L-811 -793L-813 -798.5L-815.5 -803.5L-819 -811.5L-821.5 -814L-823 -818L-824.5 -823L-824.5 -829L-825.5 -833.5L-824.5 -838L-823 -841L-820.5 -843.5L-824.5 -847L-828.5 -848.5L-833.5 -848L-838.5 -848L-843 -850.5L-840 -854L-836 -856.5L-829.5 -857.5L-822 -859L-818.5 -860L-814 -861L-808.5 -861.5L-798.5 -863L-787 -866L-776.5 -868.5L-773 -870L-770.5 -868.5L-769.5 -865L-766.5 -863.5L-763.5 -862.5L-756.5 -864L-751 -864.5L-746 -862.5L-743 -861L-740 -862L-738.5 -864.5L-737.5 -867.5L-737 -871L-739 -873.5L-744 -875L-748.5 -877L-748 -883L-745 -888.5L-741.5 -896.5L-740 -902.5L-734.5 -911.5L-730.5 -921L-724 -934.5L-722.5 -937.5L-722 -941.5L-719.5 -944.5L-715.5 -943.5L-706 -940.5L-698.5 -937.5L-691 -936L-684 -935L-679.5 -935L-676 -936L-671.5 -936L-664 -935L-659 -935L-655.5 -930.5L-651.5 -929.5L-645.5 -932.5L-641.5 -934.5L-637 -937.5L-632.5 -938L-627.5 -938.5L-623.5 -943.5L-620.5 -946L-621 -952L-623.5 -956L-624.5 -966L-626 -972.5L-624.5 -978L-622 -984L-619.5 -988.5L-617 -991.5L-614 -992.5L-605.5 -993L-597.5 -994L-593 -995.5L-589 -996L-582 -1001.5L-580 -1004L-578.5 -1010.5L-579.5 -1013.5L-578.5 -1016.5L-573.5 -1019.5L-567.5 -1020.5L-560 -1020L-556.5 -1019.5L-553 -1019L-549.5 -1021L-543.5 -1022L-539.5 -1022.5L-537.5 -1020.5L-535.5 -1016L-538 -1014L-540.5 -1011.5L-538 -1009.5L-533 -1006.5L-529.5 -1005.5L-530 -1001.5L-532 -999L-528 -997.5L-524.5 -996.5L-518.5 -995L-514.5 -992L-511 -991.5L-509 -988.5L-508.5 -985L-504.5 -983L-498.5 -980L-493.5 -978L-490.5 -976L-484.5 -975L-479.5 -977L-473.5 -977L-470.5 -976L-467.5 -972.5L-464.5 -970L-460.5 -969L-457 -970L-452.5 -971L-451 -968L-446.5 -964L-441.5 -963L-440.5 -960L-437.5 -956L-436 -952.5L-435.5 -949L-432.5 -944.5L-429 -940L-426 -936L-420.5 -934L-418.5 -931.5L-416 -926L-415.5 -922.5L-414 -918.5L-416.5 -911.5L-418.5 -909L-417.5 -903L-415.5 -900L-417 -895.5L-419.5 -893L-423 -890L-426.5 -885L-428 -880L-427 -875L-425 -873L-421 -866.5L-418.5 -864L-413.5 -864.5L-410 -864L-406.5 -862L-403 -860.5L-398 -861L-393 -859L-387 -859L-382.5 -859L-375.5 -859L-370 -857.5L-360.5 -856.5L-354.5 -856.5L-346.5 -857.5L-341.5 -857L-327 -855.5L-318.5 -854L-313 -852L-309.5 -849L-305 -845L-301.5 -843L-292 -842L-286 -836.5L-281 -835L-272.5 -830L-266.5 -828L-259.5 -826.5L-248 -827L-249 -820L-248 -816.5L-243.5 -815.5L-239.5 -811.5L-235 -802.5L-229 -791.5L-228.5 -787L-226.5 -784.5L-220 -780L-216.5 -776.5L-211.5 -773L-210 -770L-209.5 -766L-199 -766L-191 -766.5L-176.5 -767.5L-157 -765.5L-136.5 -763.5L-118.5 -761.5L-110 -760.5L-89.5 -758.5L-78.5 -761L-70 -763L-66 -763L-49.5 -760.5L-39.5 -759.5L-27.5 -758L-18.5 -757.5L-12 -757.5L-8.5 -757L-5.5 -756L3 -747.5L6.5 -744.5L13.5 -742.5L30 -739.5L39 -738L49 -736.5L55.5 -733.5L63.5 -730L73.5 -726L84.5 -728L96.5 -730L103.5 -731L103.5 -722.5L114.5 -721.5L122.5 -720L127.5 -722.5L130.5 -725.5L135 -727L143 -730L156.5 -736L173.5 -741.5L181.5 -744.5L188 -746.5L191 -747.5L196.5 -748.5L203.5 -749L211 -750L228.5 -752L241 -753L245 -754L251 -753.5L259.5 -753L265 -752.5L272 -753L282 -753.5L290 -753.5L294 -754.5L299.5 -756.5L303.5 -758L310 -760L317.5 -762.5L323 -764.5L326.5 -765.5L330.5 -767L333 -769.5L335.5 -772L339.5 -775.5L342.5 -779L347.5 -784L350.5 -786.5L354 -789.5L357 -791L361 -791.5L371 -795L375 -796L378.5 -798.5L381.5 -801L387.5 -803L390 -806L387.5 -811L386 -813.5L380 -817.5L377 -820.5L373.5 -823.5L372.5 -827L370.5 -829L369.5 -833L372.5 -836.5L375 -843L377.5 -849L380 -852L382.5 -855L388.5 -858.5L393.5 -859L403.5 -858.5L408 -858.5L411.5 -856.5L415 -852.5L419.5 -851.5L432.5 -848.5L438 -848L442.5 -847.5L448 -846.5L453 -846L459.5 -849L464.5 -852L470 -853.5L475.5 -858L480 -860.5L485 -864L488 -867L489 -870.5L494 -872.5L497.5 -873L504.5 -871L514 -871.5L524.5 -873L528 -873.5L534 -874.5L538 -877.5L543.5 -881L547.5 -883L553.5 -885.5L555 -888L554 -891.5L556 -894.5L560 -900L563 -902.5L566 -904.5L567.5 -907.5L572.5 -909L576.5 -911L583.5 -910.5L590.5 -910L595 -910L598 -911.5L599.5 -917.5L601.5 -919.5L605.5 -919.5L608.5 -918L613 -916.5L619.5 -921L625.5 -922.5L629 -923L635 -924.5L638.5 -924L645 -923.5L650.5 -923.5L653 -926L659.5 -925.5L662.5 -923.5L667.5 -921.5L674 -920.5L679.5 -921L685 -920L690 -921L694.5 -923L696 -925.5L696 -930.5L691.5 -935L690.5 -939.5L688.5 -942L684.5 -945L681.5 -946.5L676 -951.5L673 -953L670.5 -955.5L667.5 -957L665 -960.5L662 -963.5L656.5 -965L652 -966.5L649.5 -969L645 -974L642 -975.5L632 -976L628.5 -977L624.5 -976.5L617 -976L610.5 -972.5L605.5 -968L602 -965.5L599 -963L595.5 -962.5L592 -965.5L587 -968.5L582.5 -969.5L575.5 -971L571 -970.5L565.5 -969.5L560.5 -970L555 -970.5L549 -967.5L546 -964.5L542 -963.5L538.5 -965.5L535 -968L531.5 -971L529 -974L527.5 -981.5L532 -983.5L538 -986L538 -990L538 -994L539 -999L544.5 -1003.5L547 -1007.5L550 -1013.5L552 -1017.5L555.5 -1023L561.5 -1032L568.5 -1043.5L572 -1049L580 -1045.5L585.5 -1043.5L594 -1041L603 -1040.5L611.5 -1037.5L615.5 -1036.5L630 -1043.5L640 -1050L652 -1054.5L660.5 -1055L667 -1056.5L671.5 -1058.5L674 -1062L674.5 -1067L673 -1070L668.5 -1071L671 -1075.5L672 -1078.5L674.5 -1081.5L678.5 -1084L680.5 -1087L681 -1090.5L683.5 -1094L687.5 -1097L690 -1100.5L692.5 -1106.5L698.5 -1113L702.5 -1120L709 -1125L719.5 -1130L726 -1135L728.5 -1140L728.5 -1144L725.5 -1148L725 -1152L726.5 -1156L725 -1158.5L720 -1160.5L713.5 -1161L706.5 -1160L702.5 -1161.5L701.5 -1164.5L703.5 -1167.5L708 -1169.5L716 -1174.5L727 -1183L737.5 -1187.5L754 -1188.5L767 -1191.5L780 -1194L789.5 -1195.5L796.5 -1194.5L805.5 -1194.5L813.5 -1196L821 -1198L827 -1198.5L831.5 -1197L835.5 -1197L838.5 -1198L843.5 -1196.5L853.5 -1192L859.5 -1190.5L865 -1189.5L868 -1187L871.5 -1185L878 -1184.5L885 -1181.5L888.5 -1183L895 -1184L900.5 -1182.5L908.5 -1179.5L913 -1178L917 -1177.5L919 -1174L922 -1171.5L925.5 -1171L928.5 -1168L932.5 -1165.5L931.5 -1161.5L936.5 -1158L938.5 -1155.5L942.5 -1152L944 -1148.5L945.5 -1144.5L948 -1141L948.5 -1137.5L950 -1133L955.5 -1127.5L957.5 -1124L957 -1120.5L960 -1118L961.5 -1114L963 -1111L963.5 -1106.5L965.5 -1103L970 -1095.5L976.5 -1089L980.5 -1084.5L982.5 -1081L981 -1076L982 -1073L984 -1068L991.5 -1064.5L988.5 -1059L988 -1055L988 -1051L990 -1048L993.5 -1046.5L995.5 -1044.5L1000 -1041L1007.5 -1038.5L1016.5 -1038.5L1027.5 -1040L1034.5 -1040L1038 -1037.5L1039 -1034.5L1043.5 -1034L1046.5 -1033L1048.5 -1031L1053 -1031L1058 -1030L1060.5 -1031.5L1065 -1031.5L1066.5 -1029L1071.5 -1027L1076.5 -1024L1086 -1015L1092 -1011.5L1098 -1010.5L1105.5 -1010.5L1108 -1007L1106 -1003L1107 -999L1109.5 -995.5L1113 -993L1115.5 -989.5L1114.5 -986L1111.5 -981L1112.5 -976.5L1117 -973L1119.5 -969.5L1121 -964.5L1127.5 -964L1135 -965L1140.5 -965L1144 -963.5L1153 -963L1167 -964.5L1176 -965L1179.5 -964.5L1183 -966.5L1185.5 -971.5L1188.5 -974L1195 -975L1200.5 -978.5L1205.5 -980L1211 -980L1217.5 -980L1221.5 -981.5L1225.5 -984.5L1232 -987L1246 -990.5L1249.5 -991L1255.5 -990L1260 -989L1263.5 -986L1264 -982L1261.5 -979.5L1260 -977L1263 -971L1265 -968L1267 -964.5L1265 -961L1261 -957L1256.5 -954L1253 -953.5L1249.5 -952.5L1247 -950L1244.5 -948L1245.5 -944L1243.5 -939L1241.5 -935L1240 -931.5L1239 -924.5L1236.5 -920.5L1233 -916L1234 -913L1233.5 -909.5L1233 -906L1228.5 -903.5L1226.5 -901.5L1226 -896.5L1224.5 -894L1221 -892L1218.5 -888.5L1217 -884L1216.5 -880L1213.5 -879L1210 -878L1207 -876L1204 -869L1203.5 -865L1204 -861.5L1200 -859L1197 -857L1193.5 -858.5L1189 -859L1182.5 -861L1175 -862.5L1168 -864L1164 -865L1160.5 -866L1155.5 -869L1151.5 -865.5L1148 -864L1146.5 -861.5L1141.5 -856.5L1133 -853.5L1126 -852.5L1122 -850L1123 -846L1125 -842.5L1127.5 -834.5L1132.5 -819L1131 -816L1129.5 -804L1129.5 -798.5L1131 -795.5L1133 -793.5L1132 -789.5L1131 -786.5L1129.5 -781.5L1127 -778.5L1126 -774.5L1123 -771.5L1120.5 -770L1115 -770.5L1112 -769.5L1106.5 -768.5L1103 -767L1100.5 -765L1104.5 -763L1106.5 -761L1104.5 -757.5L1101.5 -759.5L1098 -761.5L1095.5 -763.5L1094 -766L1094 -771L1090 -772.5L1087.5 -775L1083.5 -775L1080.5 -776L1078 -772L1076 -767L1074.5 -760L1073.5 -755L1070 -754L1067.5 -751.5L1064.5 -752.5L1060 -753.5L1055.5 -750.5L1054 -747L1051 -742.5L1044.5 -739L1039.5 -737.5L1031.5 -737L1024 -736.5L1019 -737L1013.5 -736.5L1009 -735.5L1008.5 -732L1010.5 -729.5L1012.5 -727L1014.5 -724L1017.5 -722L1018.5 -718.5L1015 -713.5L1013 -711.5L1009.5 -712.5L1004.5 -714.5L995.5 -713.5L991 -714L985 -715.5L979.5 -717L974 -718L972.5 -722L969 -725.5L965 -727L961 -724.5L957.5 -723.5L953.5 -721.5L951 -716L950.5 -712L948 -710L943 -705L940.5 -701.5L936 -699L934 -697L930 -692L925.5 -691.5L922 -691L918.5 -689.5L917 -687L913 -685.5L908 -682.5L904 -682L899 -679.5L895 -678L892.5 -676L890 -674.5L883.5 -671.5L881 -669L872 -663.5L868.5 -660L867.5 -656L864 -653L857.5 -649.5L844.5 -649L840 -651.5L837.5 -647.5L834 -646.5L828.5 -646.5L825.5 -645L816.5 -643L813.5 -641L809 -640L789.5 -630.5L785.5 -626.5L781.5 -622L778.5 -619.5L776 -618L771.5 -616L767 -616.5L762.5 -614L764 -611.5L758 -609.5L750.5 -608.5L747.5 -606.5L744.5 -605L743 -608.5L742.5 -613L745.5 -614L764.5 -620.5L762.5 -625L767.5 -630L770 -631.5L758 -631L752 -631L750 -634L748.5 -638L754 -641L758 -641.5L756.5 -646L758 -650L769 -654L771.5 -658L776 -661.5L784 -670.5L787 -676L783.5 -680L782 -683.5L771.5 -689.5L770.5 -695L767.5 -691L761.5 -689.5L759 -691L745 -692L741.5 -689.5L738.5 -686L735.5 -683.5L732 -682L729.5 -679.5L718.5 -665L714 -664L694 -655.5L684 -652L676.5 -646L673.5 -642.5L671.5 -638.5L670 -632.5L663 -625L660.5 -623.5L654.5 -623L647 -623L641 -620.5L634.5 -618.5L628.5 -624L624.5 -625L618 -623.5L614.5 -621.5L608 -610L605.5 -603.5L609.5 -593L614 -588.5L623.5 -583.5L644 -580L648.5 -581L653.5 -581L659 -577.5L662.5 -572L663 -568.5L664.5 -564L661 -561.5L659.5 -556L659.5 -549.5L661 -547L665.5 -544L672.5 -541.5L678.5 -541L690.5 -542L695.5 -546L695.5 -550L706 -556L712 -561L709.5 -563L714 -564L728.5 -569.5L740 -565L746.5 -560L753 -559L757.5 -556.5L763 -554.5L769.5 -554.5L775.5 -554L779 -557L783 -554.5L789.5 -552L795.5 -552.5L800 -553L798.5 -548.5L799.5 -543L796.5 -541.5L794 -538.5L797 -536L794.5 -532.5L790 -529.5L786 -530L784.5 -533L778.5 -535L774 -534.5L764 -529.5L754 -525.5L743.5 -522.5L740.5 -520.5L733.5 -521.5L730.5 -520.5L734 -517.5L732.5 -513L729.5 -514.5L727 -512.5L726 -509.5L726 -502.5L720 -500.5L715 -498L712.5 -500.5L712.5 -505L707 -504L704.5 -502L707 -496.5L711 -495.5L708 -493.5L702 -490.5L699 -485.5L696.5 -483.5L692.5 -480.5L689 -479.5L685 -475L681.5 -470.5L678 -468L675 -460.5L669.5 -456.5L668 -450L669 -446L675 -446L677.5 -444.5L684 -439.5L691 -436L698.5 -434L707.5 -429L710 -427L712 -422.5L716 -410.5L719 -404.5L723.5 -395.5L728 -385.5L733 -376.5L734.5 -370L732.5 -366.5L732.5 -362.5L738 -358.5L749.5 -354.5L753.5 -351L753.5 -344.5L755.5 -342L764 -338L767 -335.5L770.5 -332L771 -328.5L771.5 -324L767.5 -324L752 -330.5L744 -329.5L737 -331L730 -337.5L725 -339L720 -340.5L707 -334.5L703.5 -335L701 -333.5L707 -332.5L713 -334L719 -337L727.5 -335.5L730 -329L736 -326L740.5 -325L746 -321L752 -315.5L763.5 -309L768.5 -302.5L770.5 -298.5L772 -292.5L768 -291L764 -290.5L758.5 -289.5L754.5 -287.5L750 -284L738 -278.5L736 -275L734.5 -271.5L731.5 -270L724 -271.5L717 -271.5L709.5 -267.5L707.5 -265.5L713.5 -266L719 -268L724 -261.5L734.5 -262.5L744.5 -268L751.5 -267.5L755 -265L764.5 -255L769.5 -254L774.5 -252L780 -251L773 -247L764 -239.5L760.5 -237.5L757.5 -235.5L765 -236.5L770 -240L774.5 -240.5L775.5 -235.5L773.5 -221.5L768.5 -225L763.5 -225.5L759 -225.5L757 -223.5L755.5 -221L764 -216.5L763 -212.5L759 -213L763.5 -210L762.5 -206.5L758 -204.5L756.5 -201.5L759 -197L761.5 -190.5L758 -189L752 -185L746.5 -190L742 -187.5L739.5 -182.5L736.5 -177.5L734 -176L728.5 -176.5L732 -173.5L726 -166L725.5 -161.5L722.5 -159L724 -155.5L723 -152.5L720.5 -148.5L718 -146L714.5 -142L710.5 -140L705 -131.5L703.5 -127L703 -123L698.5 -119.5L695.5 -120.5L694 -123.5L692.5 -128L688.5 -125L684 -127.5L685.5 -123L689 -120.5L691.5 -118L693.5 -114L695 -111L692 -108L688 -105.5L683 -101L679 -98L673.5 -98.5L670 -100L666.5 -101L671.5 -95L677.5 -94L680.5 -96.5L685 -96L686.5 -93L685 -89L682.5 -84L682 -79.5L685 -73.5L680.5 -72.5L677.5 -74.5L671.5 -74.5L667 -72.5L670.5 -68.5L672.5 -65.5L662.5 -65L658 -61L659.5 -56L658 -53L654.5 -52.5L650 -50L647.5 -48.5L650.5 -46L648 -41L644.5 -39L638.5 -40L634.5 -39L630.5 -41L626 -41L623.5 -38.5L620.5 -35L617 -33.5L624 -31L625 -26L619 -20.5L616.5 -16.5L610 -13.5L608.5 -9.5L602.5 -9.5L602.5 -5.5L600.5 -1L597 -4.5L593 -2L590 0L585.5 -1L581 -2L579 6L575 8.5L570 10L573 13L568.5 15.5L566 24L564 26L559 26.5L555.5 24.5L554 27L548.5 29L540.5 32L536.5 31L532 30L529 31L526.5 35L522.5 35L518.5 33L515 31.5L511 32.5L508 35.5L504.5 36.5L502 39.5L498 39L496.5 34.5L492 36L490 39L490.5 43L485.5 40.5L479.5 42.5L476.5 41.5L473 42L470 43.5L466.5 43L462.5 39.5L459.5 34.5L456 32L454.5 29.5L454 25L453.5 21L450.5 20L448 22L447.5 26.5L443.5 27.5L447 32.5L449.5 36.5L452 40L452 48L453 52L452 55L449 56L445 57.5L441 60.5L436.5 61L434 55.5L431 59L430 66.5L427 69L423.5 66L420 68L417.5 69.5L414.5 73L411.5 71.5L408.5 69L409 65.5L406.5 67.5L407 72L404 74.5L399.5 73.5L396.5 71.5L393 70.5L389.5 73L387.5 75.5L383.5 75L381 78L377 81.5L369 82.5L366 84.5L362.5 84L357.5 84.5L354.5 83.5L353.5 87L349 88L345 88.5L340.5 93L337 95.5L333 95L332 91L330.5 94L329.5 97L323 102.5L321.5 106L322 109.5L329.5 110.5L328 115L335 123.5L334 127L332.5 130L328.5 132L320 133.5L313 132L311 129.5L314.5 128L313.5 125L310 123.5L307.5 119L308 115.5L306.5 113L305 110.5L302.5 107.5L304 102L303 98.5L306 95L307 90.5L312.5 89L312.5 85L308.5 84.5L306 81.5L303.5 83L299.5 77L297.5 82.5L293.5 85L290 86L285.5 86.5L280 86.5L282 82L278 79L274 79L268 79L264.5 75L262 73L262 69L257 68L257.5 74.5L257.5 78.5L253 77L250 79L248 81.5L244 81.5L241 83L237.5 83.5ZM349.5 144.5L352.5 148.5L353.5 153.5L354 158L350.5 160.5L347 161.5L340 172.5L338.5 175.5L337 178.5L335.5 185L333.5 191.5L330.5 196L326.5 197L321.5 201L317 204L316 207.5L308.5 208L306 210L304 213.5L299.5 215L292 213L284 211L278 209.5L274 207.5L265.5 202.5L264.5 194L263 189.5L263.5 173.5L265 170.5L269 167.5L273 164.5L279 159.5L284 157L287.5 153.5L283.5 153.5L285.5 150.5L289 148L293 148.5L296.5 148L299.5 145L311.5 145.5L318.5 144.5L322 142L328.5 142.5L330.5 145L331.5 142L338 145L338 141L340.5 138.5L344 141.5L346.5 143.5L349.5 144.5ZM220 356L219 362L217 366L214 369L212.5 379L214 383L217.5 391.5L220 398L222.5 403L223.5 406.5L221 415L218 423L218.5 426.5L219.5 430.5L221 435.5L221.5 442.5L220.5 446.5L219.5 449.5L217 452L212.5 451L208 452L202 457L197.5 461L191 462L188.5 465L180.5 465.5L177.5 467.5L177.5 474.5L174.5 476.5L170.5 475.5L165.5 474L161.5 473.5L159.5 476.5L157 478L155 481.5L156 484.5L156 489L157.5 494L165.5 501L168 503.5L166.5 507L168 512L161 510L156.5 509.5L154 507L152 504.5L145 505.5L140.5 506L135 510L129 508L125 507.5L124.5 511.5L125.5 514.5L122.5 517.5L119 520.5L117 522.5L111 523L106.5 523.5L104.5 525.5L101 527.5L94.5 522.5L82 520.5L79.5 518L78.5 521L71.5 523.5L68.5 522L66.5 520L69 515L72.5 513.5L74 508.5L71.5 501.5L69 499.5L66.5 498L64 500.5L62 505L60 507L56.5 507.5L52 507.5L50 501L49.5 495.5L50 489.5L51 485.5L46.5 480.5L46 475.5L44 473L36 460.5L35 454L36 448.5L34.5 444.5L32 441L27 437L26.5 431L25.5 423.5L24 421L21.5 416.5L20.5 412.5L20 402.5L24 401.5L28.5 400.5L31.5 395.5L35.5 390.5L39 385L41.5 382L42.5 378.5L47.5 374L54 370.5L58 370L62.5 369L67 367.5L74.5 369L80.5 369.5L86.5 369.5L93.5 368L100.5 369L106.5 368.5L114.5 367L118.5 368L122 369.5L123 374L126 375L128 373L129.5 370.5L131 373.5L132.5 376L136.5 379.5L143.5 378L151.5 380.5L155 385L158 387L164 387L166 382L161.5 373.5L160.5 370.5L168 369L170 365L175 366L178.5 363.5L181 361L183 364L187 366.5L190 368.5L193 371.5L196.5 371L199.5 368.5L202.5 367.5L208 364L210 361L214.5 362L218 357.5Z';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const byId=Object.fromEntries(D.map(x=>[x.id,x]));
+const yt=x=>x.yt||String(x.y);
+const show={tg:true,pvt:true,tl:true};
+['tg','pvt','tl'].forEach(c=>{$('#s'+c[0].toUpperCase()+c.slice(1)).textContent=D.filter(x=>x.c===c).length});$('#sAll').textContent=D.length;
+
+/* ---------- map ---------- */
+const K=Math.cos(16*Math.PI/180),S=40,proj=(lo,la)=>[(lo-101.8)*K*S,(23.6-la)*S];
+const placed=[];
+D.forEach(x=>{let [px,py]=proj(x.lo,x.la),n=placed.filter(p=>Math.hypot(p[0]-px,p[1]-py)<4).length;
+ if(n){const a=n*2.1,r=11+3*Math.floor(n/3);x.mx=px+r*Math.cos(a);x.my=py+r*Math.sin(a)}else{x.mx=px;x.my=py}placed.push([px,py]);});
+function isl(lo0,lo1,la0,la1,n){let s='';for(let i=0;i<n;i++){const lo=lo0+(lo1-lo0)*((0.5+i*0.7548777)%1),la=la0+(la1-la0)*((0.5+i*0.5698403)%1),[a,b]=proj(lo,la);s+=`<circle cx="${a.toFixed(1)}" cy="${b.toFixed(1)}" r="1.8" fill="#f3e8d8"/>`}return s}
+function drawMap(){
+ const dots=D.filter(x=>show[x.c]).map(x=>`<circle class="dot" tabindex="0" role="button" aria-label="${esc(x.t)}" data-id="${x.id}" cx="${x.mx.toFixed(1)}" cy="${x.my.toFixed(1)}" r="6.5" fill="var(--${x.c})"/>`).join('');
+ const [hx,hy]=proj(111.9,16.9),[tx,ty]=proj(114.2,10.3);
+ $('#map').innerHTML=`<path d="${NB}" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+ <path d="${VN}" fill="#f3e8d8" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/>
+ ${isl(111.2,112.8,15.8,17.1,14)}${isl(111.6,115.6,8.6,11.4,22)}
+ <text x="${hx}" y="${hy-20}" fill="#f3e8d8" font-size="13" text-anchor="middle">QĐ Hoàng Sa</text>
+ <text x="${tx}" y="${ty-42}" fill="#f3e8d8" font-size="13" text-anchor="middle">QĐ Trường Sa</text>
+ <text x="${proj(106.9,23.25)[0]}" y="${proj(106.9,23.25)[1]}" fill="rgba(255,255,255,.55)" font-size="12">TRUNG QUỐC</text>
+ <text x="${proj(102.4,19.6)[0]}" y="${proj(102.4,19.6)[1]}" fill="rgba(255,255,255,.55)" font-size="12">LÀO</text>
+ <text x="${proj(103.6,12.6)[0]}" y="${proj(103.6,12.6)[1]}" fill="rgba(255,255,255,.55)" font-size="12">CAMPUCHIA</text>
+ <text x="${proj(110.6,14.2)[0]}" y="${proj(110.6,14.2)[1]}" fill="rgba(255,255,255,.4)" font-size="13" font-style="italic">Biển Đông</text>
+ ${dots}`;
+}
+const tip=$('#tip'),box=$('#mapbox');
+$('#map').addEventListener('mousemove',e=>{const id=e.target.dataset&&e.target.dataset.id;if(!id){tip.style.opacity=0;return}const r=box.getBoundingClientRect();tip.textContent=byId[id].t+' · '+yt(byId[id]);tip.style.left=(e.clientX-r.left)+'px';tip.style.top=(e.clientY-r.top)+'px';tip.style.opacity=1});
+$('#map').addEventListener('mouseleave',()=>tip.style.opacity=0);
+$('#map').addEventListener('click',e=>{const id=e.target.dataset&&e.target.dataset.id;if(id)openD(id)});
+$('#map').addEventListener('keydown',e=>{const id=e.target.dataset&&e.target.dataset.id;if(id&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openD(id)}});
+$('#legend').innerHTML=Object.entries(CAT).map(([c,n])=>`<button class="tog" type="button" aria-pressed="true" data-c="${c}"><i style="background:var(--${c})"></i>${n}</button>`).join('');
+$('#legend').addEventListener('click',e=>{const b=e.target.closest('.tog');if(!b)return;show[b.dataset.c]=!show[b.dataset.c];b.setAttribute('aria-pressed',show[b.dataset.c]);drawMap()});
+drawMap();
+
+/* ---------- explore ---------- */
+let fc='all';
+$('#cats').innerHTML=[['all','Tất cả'],['tg','Thế giới'],['pvt','Phi vật thể'],['tl','Tư liệu']].map(([c,n])=>`<button class="chip" type="button" data-c="${c}" aria-pressed="${c==='all'}">${n}</button>`).join('');
+$('#cats').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;fc=b.dataset.c;document.querySelectorAll('#cats .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));renderGrid()});
+const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/gi,'d').toLowerCase();
+function renderGrid(){const q=norm($('#q').value.trim()),so=$('#sort').value;
+ let L=D.filter(x=>(fc==='all'||x.c===fc)&&(!q||norm([x.t,x.p,x.d,x.pd,x.k].join(' ')).includes(q)));
+ L.sort(so==='t'?(a,b)=>a.t.localeCompare(b.t,'vi'):so==='n'?(a,b)=>b.la-a.la:(a,b)=>a.y-b.y||a.t.localeCompare(b.t,'vi'));
+ $('#grid').innerHTML=L.length?L.map(x=>`<button class="card" type="button" data-id="${x.id}">${WQ[x.id]?`<span class="tw" data-id="${x.id}"><span class="thumb"></span></span>`:''}<span class="tag c-${x.c}">${CAT[x.c]}</span><h3>${esc(x.t)}</h3><span class="meta">Ghi danh ${esc(yt(x))} · ${esc(x.p)}</span>${VIDEOS[x.id]?'<span class="vbadge">▶ Có video</span>':''}</button>`).join(''):'<p class="empty">Không tìm thấy di sản phù hợp. Thử từ khóa khác, ví dụ “Trần” hoặc “Huế”.</p>';if(window.__obs)document.querySelectorAll('#grid .tw').forEach(t=>window.__obs.observe(t))}
+$('#q').addEventListener('input',renderGrid);$('#sort').addEventListener('change',renderGrid);
+$('#grid').addEventListener('click',e=>{const b=e.target.closest('.card');if(b)openD(b.dataset.id)});
+renderGrid();
+
+/* ---------- timeline ---------- */
+$('#eras').innerHTML=ERA.map(([k,n,s])=>{const L=D.filter(x=>x.e===k);return `<div class="era"><div><h3>${n}</h3><p>${s}</p></div><div class="pills">${L.map(x=>`<button class="pill" type="button" data-id="${x.id}"><span class="tag c-${x.c}" aria-label="${CAT[x.c]}"></span>${esc(x.t)} <small>${esc(x.pd)}</small></button>`).join('')}</div></div>`}).join('');
+const ys=[...new Set(D.map(x=>x.y))].sort((a,b)=>a-b);
+$('#years').innerHTML=ys.map(y=>`<div class="yr"><span>${y}</span>${D.filter(x=>x.y===y).map(x=>`<button class="sq" type="button" data-id="${x.id}" title="${esc(x.t)}" aria-label="${esc(x.t)}, ${y}" style="background:var(--${x.c})"></button>`).join('')}</div>`).join('');
+$('#thoi-gian').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openD(b.dataset.id)});
+
+/* ---------- detail modal ---------- */
+const ov=$('#ov'),dlg=$('#dlg');let lastF=null;
+function openD(id){const x=byId[id];lastF=document.activeElement;
+ dlg.innerHTML=`<button class="x" type="button" aria-label="Đóng">×</button><span class="tag c-${x.c}">${CAT[x.c]} · ${esc(x.k)}</span><h2 id="dT" style="margin-top:8px">${esc(x.t)}</h2>
+ <div class="media" id="media"></div><dl><dt>Năm ghi danh</dt><dd>${esc(yt(x))}</dd><dt>Địa phương</dt><dd>${esc(x.p)}</dd><dt>Thời kỳ</dt><dd>${esc(x.pd)}</dd></dl>
+ <p>${esc(x.d)}</p><h3>Điểm cần nhớ</h3><ul>${x.f.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+ <h3>Gợi ý gắn chương trình Lịch sử 2018</h3><ul>${x.g.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>${(window.TL||{})[x.id]?`<h3>Câu hỏi thảo luận</h3><ol>${window.TL[x.id].map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:''}
+ <div class="row">${aiState==='on'?'<button class="btn" type="button" data-a="ask">Hỏi trợ lý AI về di sản này</button>':''}<button class="btn ghost" type="button" data-a="quiz">Luyện câu hỏi về di sản này</button></div>`;
+ dlg.dataset.id=id;ov.classList.add('on');dlg.querySelector('.x').focus();loadMedia(id)}
+function closeD(){ov.classList.remove('on');if(lastF)lastF.focus()}
+ov.addEventListener('click',e=>{if(e.target===ov||e.target.closest('.x'))return closeD();const a=e.target.closest('[data-a]');if(!a)return;const id=dlg.dataset.id;closeD();
+ if(a.dataset.a==='ask'){$('#focus').value=id;location.hash='tro-ly';$('#chatIn').value='Hãy giới thiệu ngắn gọn giá trị lịch sử của '+byId[id].t+' và gợi ý 2 câu hỏi để em suy nghĩ thêm.';$('#chatIn').focus()}
+ else{quizOnly=id;location.hash='trac-nghiem';$('#qLv').value='Hỗn hợp';makeHand(10)}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contains('on'))closeD()});
+
+/* ---------- AI plumbing ---------- */
+let sample=null,aiState='wait';
+const DATA=D.map(x=>`[${x.id}] ${x.t} | ${CAT[x.c]} – ${x.k} | ghi danh: ${yt(x)} | địa phương: ${x.p} | thời kỳ: ${x.pd} | ${x.d} | Điểm chính: ${x.f.join('; ')} | Gắn CT: ${x.g.join('; ')}`).join('\n');
+const SYS=`Bạn là trợ lý học tập môn Lịch sử cho học sinh và giáo viên THPT Việt Nam, chuyên về các di sản của Việt Nam được UNESCO ghi danh (cập nhật đến 24/11/2026: 9 di sản thế giới, 17 di sản văn hóa phi vật thể, 13 di sản tư liệu).
+Nguyên tắc bắt buộc:
+1. Ưu tiên tuyệt đối DỮ LIỆU ĐÃ KIỂM CHỨNG bên dưới. Có thể bổ sung kiến thức lịch sử phổ thông đã được thừa nhận rộng rãi (như trong SGK), nhưng không bịa năm tháng, số liệu, tên người, trích dẫn hay nguồn.
+2. Khi không chắc chắn hoặc thông tin không có trong dữ liệu, nói rõ "chưa đủ căn cứ để khẳng định" và gợi ý kiểm chứng tại trang UNESCO, Cục Di sản văn hóa hoặc sách giáo khoa.
+3. Văn phong trung tính, khoa học, rõ ràng, phù hợp học sinh THPT; trả lời bằng tiếng Việt; ngắn gọn (thường dưới 250 từ) trừ khi được yêu cầu chi tiết.
+4. Địa danh hành chính dùng theo dữ liệu (sau sắp xếp năm 2025). Khi liên quan, khẳng định Hoàng Sa, Trường Sa thuộc chủ quyền Việt Nam.
+5. Chỉ dùng định dạng đơn giản: đoạn văn, gạch đầu dòng "- ", tiêu đề "### ", chữ đậm **...**. Không dùng bảng.
+6. Nếu câu hỏi không liên quan đến học tập lịch sử, văn hóa, nhẹ nhàng hướng về chủ đề di sản.
+DỮ LIỆU ĐÃ KIỂM CHỨNG:
+${DATA}`;
+(async()=>{try{sample=await window.claude?.use?.('sample')}catch(e){sample=null}aiState=sample?'on':'off';if(document.readyState==='loading')addEventListener('DOMContentLoaded',aiReady);else aiReady()})();
+setTimeout(()=>{if(aiState==='wait'){aiState='off';aiReady()}},11000);
+function aiReady(){if(aiState==='on'){document.querySelectorAll('a[href="#hoi-ai"],#hoi-ai').forEach(n=>n.remove())}if(aiState==='off'){document.querySelectorAll('a[href="#tro-ly"],#tro-ly,#tForm,#tOut,.ai-only').forEach(n=>n.remove());$('#qSrc').querySelector('[value=ai]').remove();$('#acts').previousElementSibling.textContent='Gợi ý hoạt động số dùng ngay trên trang';}}
+async function ask(input,onText){try{return (await sample(input,{onText,cache:false})).text}catch(e){
+ if(e&&e.code==='not_granted'){aiState='off';throw new Error('Trang chưa được cấp quyền dùng AI.')}
+ if(e&&e.code==='rate_limited')throw new Error('Đang có quá nhiều yêu cầu. Vui lòng thử lại sau ít phút.');
+ throw new Error((e&&e.message)||'Không gọi được AI.')}}
+function md(t){const L=esc(t).split('\n');let h='',list='';const fl=()=>{if(list){h+=`</${list}>`;list=''}};
+ for(let l of L){l=l.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');let m;
+  if(m=l.match(/^#{1,4}\s+(.*)/)){fl();h+=`<h4 style="margin:.6em 0 .2em">${m[1]}</h4>`}
+  else if(m=l.match(/^\s*[-*•]\s+(.*)/)){if(list!=='ul'){fl();h+='<ul>';list='ul'}h+=`<li>${m[1]}</li>`}
+  else if(m=l.match(/^\s*\d+[.)]\s+(.*)/)){if(list!=='ol'){fl();h+='<ol>';list='ol'}h+=`<li>${m[1]}</li>`}
+  else if(l.trim()){fl();h+=`<p>${l}</p>`}else fl()}
+ fl();return h}
+
+/* ---------- chat ---------- */
+let hist=[];
+D.slice().sort((a,b)=>a.t.localeCompare(b.t,'vi')).forEach(x=>{const o=document.createElement('option');o.value=x.id;o.textContent=x.t;$('#focus').appendChild(o)});
+const SUG=['Vì sao Thành nhà Hồ được UNESCO ghi danh?','So sánh giá trị của Khu đền tháp Mỹ Sơn và Hoàng thành Thăng Long.','Châu bản và Mộc bản triều Nguyễn có ý nghĩa gì với chủ quyền biển đảo?','Bãi cọc Bạch Đằng liên quan thế nào đến di sản Yên Tử – Vĩnh Nghiêm – Côn Sơn, Kiếp Bạc?','Di sản “cần bảo vệ khẩn cấp” khác gì di sản “đại diện”?','Học sinh có thể làm gì để góp phần bảo tồn di sản ở địa phương?'];
+$('#sugg').innerHTML=SUG.map(s=>`<button class="pill" type="button">${esc(s)}</button>`).join('');
+$('#sugg').addEventListener('click',e=>{const b=e.target.closest('.pill');if(b){$('#chatIn').value=b.textContent;$('#chatForm').requestSubmit()}});
+function addMsg(r,t){const d=document.createElement('div');d.className='msg '+r;if(r==='u')d.textContent=t;else d.innerHTML=md(t);$('#log').appendChild(d);$('#log').scrollTop=1e9;return d}
+addMsg('a','Xin chào! Mình là trợ lý về di sản Việt Nam được UNESCO ghi danh. Em có thể hỏi về lịch sử, giá trị, năm ghi danh hay mối liên hệ giữa di sản với bài học.');
+$('#chatIn').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#chatForm').requestSubmit()}});
+$('#chatForm').addEventListener('submit',async e=>{e.preventDefault();const q=$('#chatIn').value.trim();if(!q||aiState!=='on')return;
+ $('#chatIn').value='';addMsg('u',q);const box=addMsg('a','Đang suy nghĩ…');$('#chatBtn').disabled=true;
+ const f=$('#focus').value,mode=$('#socratic').checked?'\n[Chế độ gợi mở: không đưa ngay đáp án đầy đủ; đặt 1–3 câu hỏi gợi ý, chỉ ra manh mối trong dữ liệu, khuyến khích học sinh tự lập luận; chỉ xác nhận hoặc sửa khi học sinh đã trả lời.]':'';
+ const foc=f?`\n[Học sinh đang tìm hiểu: ${byId[f].t}]`:'';
+ hist.push({role:'user',content:q+foc+mode});const msgs=hist.slice(-12);while(msgs[0].role!=='user')msgs.shift();msgs[0]={role:'user',content:SYS+'\n\n---\n'+msgs[0].content};
+ try{const t=await ask(msgs,({text})=>{box.innerHTML=md(text);$('#log').scrollTop=1e9});box.innerHTML=md(t);hist.push({role:'assistant',content:t})}
+ catch(err){box.innerHTML=md('⚠ '+err.message);hist.pop()}
+ $('#chatBtn').disabled=aiState!=='on'});
+$('#clearChat').addEventListener('click',()=>{hist=[];$('#log').innerHTML='';addMsg('a','Đã xóa hội thoại. Em muốn tìm hiểu di sản nào?')});
+
+/* ---------- quiz ---------- */
+let quizOnly=null;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=(arr,n,ex)=>shuf(arr.filter(v=>!ex.includes(v))).slice(0,n);
+function bankQ(x){const T=[];const others=D.filter(o=>o.id!==x.id);
+ const ysOpt=pick([...new Set(D.map(o=>o.y))],3,[x.y]);
+ T.push({q:`${x.t} được UNESCO ghi danh lần đầu vào năm nào?`,o:[x.y,...ysOpt].map(String),a:0,ex:`Năm ghi danh: ${yt(x)}.`});
+ T.push({q:`${x.t} thuộc loại hình di sản nào trong các danh mục của UNESCO?`,o:[CAT[x.c],...Object.values(CAT).filter(v=>v!==CAT[x.c]),'Di sản địa chất toàn cầu'],a:0,ex:`${x.t}: ${CAT[x.c]} (${x.k}).`});
+ if(x.p.length<34&&!x.t.includes(x.p.replace('TP ',''))){const ps=pick([...new Set(others.filter(o=>o.p.length<34).map(o=>o.p))],3,[x.p]);T.push({q:`${x.t} gắn với địa phương nào?`,o:[x.p,...ps],a:0,ex:`Địa phương: ${x.p}.`})}
+ const era=ERA.find(e=>e[0]===x.e);if(!['song','nhieu','tn'].includes(x.e)){const wr=pick(others.filter(o=>o.e!==x.e&&!['song','nhieu','tn'].includes(o.e)),3,[]);T.push({q:`Di sản nào sau đây phản ánh trực tiếp thời kỳ “${era[1]}”?`,o:[x.t,...wr.map(o=>o.t)],a:0,ex:`${x.t} – ${x.pd}.`})}
+ return T[Math.floor(Math.random()*T.length)]}
+function scopeList(){const s=$('#qScope').value;return quizOnly?[byId[quizOnly]]:D.filter(x=>s==='all'||x.c===s)}
+const LVN=['','Nhận biết','Thông hiểu','Vận dụng'];
+function makeHand(n){const QB=window.QB||{};const L=scopeList(),lv=LVN.indexOf($('#qLv').value);
+ let pool=[];L.forEach(x=>(QB[x.id]||[]).forEach(r=>pool.push({x,r})));
+ if(lv>0){const f=pool.filter(o=>o.r[0]===lv);if(f.length||!quizOnly)pool=f}
+ if(!pool.length){quizOnly=null;return makeBank(n)}
+ const qs=shuf(pool).slice(0,n).map(({x,r})=>{const idx=shuf([0,1,2,3]);const o=[r[2],r[3],r[4],r[5]];return{q:r[1],o:idx.map(i=>o[i]),a:idx.indexOf(0),ex:r[6],tag:LVN[r[0]]+' · '+x.t}});
+ renderQuiz(qs,(quizOnly?`Luyện tập: ${byId[quizOnly].t}`:'Đề từ ngân hàng soạn sẵn')+` · ${$('#qLv').value}`);quizOnly=null}
+function makeBank(n){const L=scopeList();const qs=[];let guard=0;const seen=new Set();
+ while(qs.length<n&&guard++<300){const x=L[Math.floor(Math.random()*L.length)],q=bankQ(x);if(seen.has(q.q))continue;seen.add(q.q);
+  const idx=shuf([0,1,2,3]);qs.push({q:q.q,o:idx.map(i=>q.o[i]),a:idx.indexOf(0),ex:q.ex})}
+ renderQuiz(qs,quizOnly?`Luyện tập: ${byId[quizOnly].t}`:'Đề từ ngân hàng câu hỏi');quizOnly=null}
+function renderQuiz(qs,title){let done=0,right=0;
+ $('#quiz').innerHTML=`<h3>${esc(title)}</h3><p class="note">${qs.length} câu · chọn một đáp án cho mỗi câu.</p>`+qs.map((q,i)=>`<div class="q" data-i="${i}">${q.tag?`<div class="cred" style="margin-bottom:4px">${esc(q.tag)}</div>`:''}<h4>Câu ${i+1}. ${esc(q.q)}</h4>${q.o.map((o,j)=>`<button class="opt" type="button" data-j="${j}">${'ABCD'[j]}. ${esc(o)}</button>`).join('')}<div class="exp" hidden></div></div>`).join('')+`<div id="res" class="q" hidden></div>`;
+ $('#quiz').onclick=e=>{const b=e.target.closest('.opt');if(!b)return;const box=b.closest('.q'),q=qs[box.dataset.i];if(box.dataset.done)return;box.dataset.done=1;done++;
+  const j=+b.dataset.j;box.querySelectorAll('.opt')[q.a].classList.add('ok');if(j===q.a)right++;else b.classList.add('no');
+  const ex=box.querySelector('.exp');ex.hidden=false;ex.textContent=(j===q.a?'Chính xác. ':'Chưa đúng. ')+(q.ex||'');
+  if(done===qs.length){const r=$('#res');r.hidden=false;r.innerHTML=`<div class="score">${right}/${qs.length} câu đúng</div><p class="note">${right/qs.length>=.8?'Rất tốt! Thử mức độ “Vận dụng” với AI.':'Xem lại hồ sơ các di sản trả lời chưa đúng ở mục Khám phá, rồi luyện thêm.'}</p><button class="btn" type="button" id="again">Làm đề mới</button>`;$('#again').onclick=()=>$('#quizForm').requestSubmit()}};
+ $('#quiz').scrollIntoView({block:'start'})}
+$('#quizForm').addEventListener('submit',async e=>{e.preventDefault();const n=+$('#qN').value;
+ const src=$('#qSrc').value;if(src==='hand')return makeHand(n);if(src!=='ai'||aiState!=='on')return makeBank(n);
+ const L=scopeList(),lv=$('#qLv').value;$('#quiz').innerHTML='<p class="note">AI đang soạn đề… (thường mất 10–30 giây)</p>';
+ const prompt=`${SYS}\n\n---\nNhiệm vụ: soạn ${n} câu hỏi trắc nghiệm 4 lựa chọn, mức độ "${lv}" (theo cách phân loại Nhận biết/Thông hiểu/Vận dụng), cho học sinh THPT, CHỈ dựa trên dữ liệu của các di sản có id: ${L.map(x=>x.id).join(', ')}. Mỗi câu có đúng 1 đáp án đúng, phương án nhiễu hợp lý, không đánh đố, không dùng "tất cả các ý trên". Giải thích ngắn (1–2 câu) vì sao đáp án đúng.\nTrả về DUY NHẤT một mảng JSON, không kèm chữ nào khác, dạng: [{"q":"câu hỏi","o":["A","B","C","D"],"a":0,"ex":"giải thích"}] với "a" là chỉ số (0–3) của đáp án đúng.`;
+ try{const t=await ask(prompt);const m=t.match(/\[[\s\S]*\]/);const arr=JSON.parse(m?m[0]:t);
+  const qs=arr.filter(q=>q&&typeof q.q==='string'&&Array.isArray(q.o)&&q.o.length===4&&Number.isInteger(q.a)&&q.a>=0&&q.a<4).map(q=>({q:String(q.q),o:q.o.map(String),a:q.a,ex:String(q.ex||'')}));
+  if(!qs.length)throw new Error('AI trả về dữ liệu không hợp lệ.');renderQuiz(qs,`Đề do AI soạn · mức độ ${lv}`)}
+ catch(err){$('#quiz').innerHTML=`<p class="warn">Không tạo được đề bằng AI (${esc(err.message)}). Đã chuyển sang ngân hàng có sẵn.</p>`;setTimeout(()=>makeBank(n),1200)}});
+
+/* ---------- teacher ---------- */
+$('#tChecks').innerHTML=Object.entries(CAT).map(([c,n])=>`<div class="note" style="margin:8px 0 2px"><span class="tag c-${c}">${n}</span></div>`+D.filter(x=>x.c===c).map(x=>`<label><input type="checkbox" value="${x.id}"${['yentu','thanglong'].includes(x.id)?' checked':''}> ${esc(x.t)}</label>`).join('')).join('');
+$('#tForm').addEventListener('submit',async e=>{e.preventDefault();if(aiState!=='on')return;
+ const ids=[...document.querySelectorAll('#tChecks input:checked')].map(i=>i.value);if(!ids.length){$('#tOut').innerHTML='<p class="warn">Hãy chọn ít nhất một di sản.</p>';return}
+ const type=$('#tType').value,prompt=`${SYS}\n\n---\nNhiệm vụ (dành cho GIÁO VIÊN): soạn bản nháp "${type}" cho ${$('#tGrade').value}, thời lượng ${$('#tTime').value}, chủ đề/bài: "${$('#tTopic').value}". Sử dụng các di sản: ${ids.map(i=>byId[i].t).join('; ')}.
+Yêu cầu: bám Chương trình GDPT 2018 môn Lịch sử (phát triển năng lực tìm hiểu lịch sử; nhận thức và tư duy lịch sử; vận dụng kiến thức, kỹ năng); với kế hoạch bài dạy, trình bày theo cấu trúc Công văn 5512: I. Mục tiêu (kiến thức, năng lực, phẩm chất), II. Thiết bị dạy học và học liệu, III. Tiến trình dạy học gồm 4 hoạt động (Mở đầu; Hình thành kiến thức mới; Luyện tập; Vận dụng), mỗi hoạt động nêu a) Mục tiêu b) Nội dung c) Sản phẩm d) Tổ chức thực hiện. Tích hợp các công cụ số có trên website này (bản đồ di sản, dòng thời gian, trợ lý AI ở chế độ gợi mở, trắc nghiệm) ở chỗ phù hợp. Có tiêu chí đánh giá ngắn gọn. Chỉ dùng thông tin trong dữ liệu đã kiểm chứng; chỗ nào giáo viên cần tự bổ sung tư liệu (tranh ảnh, trích đoạn SGK) thì ghi rõ "[GV bổ sung]".
+Yêu cầu thêm của giáo viên: ${$('#tExtra').value||'không có'}`;
+ $('#tBtn').disabled=true;$('#tOut').innerHTML='<p class="note">AI đang soạn… (có thể mất 30–60 giây)</p>';
+ try{const t=await ask(prompt,({text})=>{$('#tOut').innerHTML=md(text)});$('#tOut').innerHTML=md(t);$('#tOut').dataset.raw=t}
+ catch(err){$('#tOut').innerHTML=`<p class="warn">${esc(err.message)}</p>`}
+ $('#tBtn').disabled=aiState!=='on'});
+$('#tCopy').addEventListener('click',async()=>{const t=$('#tOut').dataset.raw;if(!t)return;try{await navigator.clipboard.writeText(t);$('#tCopy').textContent='Đã sao chép'}catch(e){$('#tCopy').textContent='Trình duyệt chặn sao chép – hãy bôi đen để chép'}setTimeout(()=>$('#tCopy').textContent='Sao chép kết quả',2500)});
+
+
+/* ---------- images & video from Wikimedia (free licences) ---------- */
+
+const WAPI='https://vi.wikipedia.org/w/api.php',CAPI='https://commons.wikimedia.org/w/api.php';
+const txt=h=>new DOMParser().parseFromString(String(h||''),'text/html').body.textContent.replace(/\s+/g,' ').trim();
+const httpsOnly=u=>/^https:\/\//.test(u||'')?u:'';
+const SKIP=/logo|flag|cờ|icon|symbol|seal|coat_of_arms|huy hiệu|map|bản đồ|location|locator|commons|wiki|edit|ambox|question|disambig|unesco_|signature|chữ ký|portrait|chân dung/i;
+const pageC={},infoC={};
+async function api(base,params){const r=await fetch(base+'?'+new URLSearchParams({format:'json',formatversion:'2',origin:'*',...params}));if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}
+async function wikiPage(id){if(id in pageC)return pageC[id];const q=WQ[id];if(!q)return pageC[id]=null;
+ pageC[id]=api(WAPI,{action:'query',generator:'search',gsrsearch:q,gsrlimit:'1',gsrnamespace:'0',prop:'pageimages|images|info',piprop:'name|thumbnail',pithumbsize:'640',imlimit:'80',inprop:'url'}).then(j=>(j.query&&j.query.pages&&j.query.pages[0])||null).catch(()=>null);
+ return pageC[id]}
+const fname=t=>String(t).replace(/^[^:]+:/,'').replace(/_/g,' ');
+async function fileInfo(names){const need=[...new Set(names.map(fname))].filter(n=>!(n in infoC));
+ for(let i=0;i<need.length;i+=40){const part=need.slice(i,i+40);
+  const batch=api(CAPI,{action:'query',titles:part.map(n=>'File:'+n).join('|'),prop:'imageinfo',iiprop:'url|extmetadata|mime',iiurlwidth:'960'}).then(j=>{const out={},norm={};
+   (j.query.normalized||[]).forEach(o=>norm[fname(o.to)]=fname(o.from));
+   (j.query.pages||[]).forEach(pg=>{const ii=pg.imageinfo&&pg.imageinfo[0];if(!ii||pg.missing)return;const m=ii.extmetadata||{},v=k=>m[k]&&m[k].value;
+    const rec={mime:ii.mime,thumb:httpsOnly(ii.thumburl||ii.url),url:httpsOnly(ii.url),page:httpsOnly(ii.descriptionurl),artist:txt(v('Artist'))||'Không rõ tác giả',lic:txt(v('LicenseShortName'))||'xem trang nguồn',desc:txt(v('ImageDescription')).slice(0,160)};
+    const n=fname(pg.title);out[n]=rec;if(norm[n])out[norm[n]]=rec});return out}).catch(()=>({}));
+  part.forEach(n=>infoC[n]=batch.then(o=>o[n]||null))}
+ return (await Promise.all(names.map(n=>infoC[fname(n)]))).filter(Boolean)}
+const credit=r=>`Ảnh: ${esc(r.artist)} · ${esc(r.lic)} · <a href="${esc(r.page)}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
+/* card thumbnails, loaded when visible */
+window.__obs=('IntersectionObserver' in window)?new IntersectionObserver(es=>es.forEach(async en=>{if(!en.isIntersecting)return;const t=en.target;window.__obs.unobserve(t);
+ const p=await wikiPage(t.dataset.id);if(!p||!p.pageimage||!p.thumbnail){t.remove();return}
+ const [r]=await fileInfo([p.pageimage]);if(!r||!r.thumb){t.remove();return}
+ t.innerHTML=`<img class="thumb" loading="lazy" alt="${esc(r.desc||'')}" src="${esc(r.thumb)}"><span class="cred" style="display:block;margin-top:4px">Ảnh: ${esc(r.artist)} · ${esc(r.lic)}</span>`;
+ t.querySelector('img').onerror=()=>t.remove()}),{rootMargin:'200px'}):null;
+if(window.__obs)document.querySelectorAll('#grid .tw').forEach(t=>window.__obs.observe(t));
+dlg.addEventListener('click',e=>{const b=e.target.closest('.vface');if(!b)return;const id=b.dataset.v;if(!/^[\w-]{11}$/.test(id))return;const w=document.createElement('div');w.className='vid';w.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;b.replaceWith(w)});
+async function loadMedia(id){const box=$('#media');if(!box)return;const x=byId[id];
+ const yt=`https://www.youtube.com/results?search_query=${encodeURIComponent(x.t+' UNESCO')}`;
+ const v=VIDEOS[id],vok=v&&/^[\w-]{11}$/.test(v[0]);
+ const vid=vok?`<h3 style="margin:14px 0 6px;font-size:16px">Video</h3><button type="button" class="vface" data-v="${esc(v[0])}" aria-label="Phát video: ${esc(v[1])}"><img alt="" loading="lazy" src="https://i.ytimg.com/vi/${esc(v[0])}/hqdefault.jpg"><span class="play" aria-hidden="true"></span></button><p class="cred" style="margin-top:4px">${esc(v[1])} · Nguồn: ${esc(v[2])} (YouTube) · <a href="https://www.youtube.com/watch?v=${esc(v[0])}" target="_blank" rel="noopener">Mở trên YouTube</a></p>`:'';
+ const links=(p)=>`<div class="row" style="margin-top:8px">${p&&httpsOnly(p.fullurl)?`<a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none" href="${esc(p.fullurl)}" target="_blank" rel="noopener">Đọc thêm trên Wikipedia</a>`:''}${UNESCO_ICH[id]?`<a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none" href="https://ich.unesco.org/en/${esc(UNESCO_ICH[id])}" target="_blank" rel="noopener">Trang UNESCO</a>`:''}${vok?'':`<a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none" href="${esc(yt)}" target="_blank" rel="noopener">Tìm video trên YouTube</a>`}</div>`;
+ if(!WQ[id]){box.innerHTML=vid+links(null);return}
+ box.innerHTML='<p class="note">Đang tải ảnh từ Wikimedia Commons…</p>';
+ const p=await wikiPage(id);if(dlg.dataset.id!==id)return;
+ if(!p){box.innerHTML='<p class="note">Không tải được ảnh (mạng có thể chặn Wikipedia, hoặc đang mở trang trên claude.ai).</p>'+vid+links(null);return}
+ let names=(p.images||[]).map(i=>i.title).filter(t=>/\.(jpe?g|png|webp|tiff?|webm|ogv)$/i.test(t)&&!SKIP.test(t));
+ if(p.pageimage){names=names.filter(n=>fname(n)!==fname(p.pageimage));names.unshift(p.pageimage)}
+ const recs=(await fileInfo(names.slice(0,24))).filter(r=>r.thumb||r.url);if(dlg.dataset.id!==id)return;
+ const figs=recs.map(r=>/^video\//.test(r.mime)?`<figure><video controls preload="none" src="${esc(r.url)}"></video><figcaption>${r.desc?esc(r.desc)+'<br>':''}Video: ${esc(r.artist)} · ${esc(r.lic)} · <a href="${esc(r.page)}" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>`
+  :`<figure><img loading="lazy" alt="${esc(r.desc||x.t)}" src="${esc(r.thumb)}"><figcaption>${r.desc?esc(r.desc)+'<br>':''}${credit(r)}</figcaption></figure>`);
+ box.innerHTML=(figs.length?`<div class="gal" id="gal" tabindex="0" aria-label="Thư viện ảnh ${esc(x.t)}">${figs.join('')}</div><div class="galnav"><button type="button" data-g="-1" aria-label="Ảnh trước">‹</button><span class="note" id="gpos">1 / ${figs.length}</span><button type="button" data-g="1" aria-label="Ảnh sau">›</button></div>`:'<p class="note">Chưa tìm thấy ảnh tự do phù hợp cho di sản này.</p>')+vid+links(p);
+ const g=$('#gal');if(!g)return;const n=figs.length;
+ const go=d=>{const i=Math.max(0,Math.min(n-1,Math.round(g.scrollLeft/g.clientWidth)+d));g.scrollTo({left:i*g.clientWidth,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})};
+ box.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>go(+b.dataset.g));
+ g.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});
+ g.addEventListener('scroll',()=>{$('#gpos').textContent=(Math.round(g.scrollLeft/g.clientWidth)+1)+' / '+n},{passive:true});
+ g.querySelectorAll('img').forEach(im=>im.onerror=()=>{im.closest('figure').remove()})}
+/* ---------- free AI via copy-prompt / NotebookLM ---------- */
+const NOTEBOOK_URL=''; /* Dán link NotebookLM công khai của lớp vào giữa hai dấu nháy */
+if(/^https:\/\//.test(NOTEBOOK_URL)){$('#nbLink').href=NOTEBOOK_URL;$('#nbBox').hidden=false}
+D.slice().sort((a,b)=>a.t.localeCompare(b.t,'vi')).forEach(x=>{const o=document.createElement('option');o.value=x.id;o.textContent=x.t;$('#pFocus').appendChild(o)});
+const PM={ask:'Trả lời câu hỏi của học sinh.',hint:'Chế độ gợi mở: KHÔNG đưa ngay đáp án đầy đủ; đặt 1–3 câu hỏi gợi ý, chỉ ra manh mối trong dữ liệu, khuyến khích học sinh tự lập luận; chỉ xác nhận hoặc sửa khi học sinh đã trả lời.',quiz:'Soạn 10 câu hỏi trắc nghiệm 4 lựa chọn (A–D), mỗi câu đúng 1 đáp án, phương án nhiễu hợp lý; ghi đáp án và giải thích ngắn sau mỗi câu; chỉ dựa trên dữ liệu.',plan:'Dành cho GIÁO VIÊN: soạn bản nháp kế hoạch bài dạy theo cấu trúc Công văn 5512 (I. Mục tiêu; II. Thiết bị dạy học và học liệu; III. Tiến trình: Mở đầu, Hình thành kiến thức mới, Luyện tập, Vận dụng – mỗi hoạt động có Mục tiêu, Nội dung, Sản phẩm, Tổ chức thực hiện); bám Chương trình GDPT 2018 môn Lịch sử; ghi [GV bổ sung] ở chỗ cần tư liệu ngoài dữ liệu.'};
+function buildP(){const f=$('#pFocus').value,q=$('#pQ').value.trim();
+ return SYS.replace('5. Chỉ dùng định dạng đơn giản: đoạn văn, gạch đầu dòng "- ", tiêu đề "### ", chữ đậm **...**. Không dùng bảng.','5. Trình bày rõ ràng, dễ đọc.')+'\n\n---\nNHIỆM VỤ: '+PM[$('#pMode').value]+(f?'\nTập trung vào: '+byId[f].t+'.':'')+'\nYÊU CẦU CỦA NGƯỜI DÙNG: '+(q||'(chưa nhập – hãy hỏi người dùng muốn tìm hiểu gì)')}
+const upd=()=>{$('#pOut').value=buildP()};['#pMode','#pFocus','#pQ'].forEach(k=>$(k).addEventListener('input',upd));upd();
+$('#pCopy').addEventListener('click',async()=>{upd();try{await navigator.clipboard.writeText($('#pOut').value);$('#pMsg').textContent='Đã sao chép. Mở một trợ lý AI, dán (Ctrl+V) rồi gửi.'}catch(e){$('#pOut').closest('details').open=true;$('#pOut').select();$('#pMsg').textContent='Trình duyệt chặn sao chép tự động: câu lệnh đã được bôi đen ở ô bên dưới, hãy nhấn Ctrl+C.'}});
+
+/* ---------- teacher lesson plans ---------- */
+{const K=window.KH||[];let cur=0;
+ if(!K.length){$('#kTabs').innerHTML='<p class="note">Chưa tải được tệp tai-lieu-giao-vien.js.</p>';$('#kActs').remove()}
+ const show=i=>{cur=i;const k=K[i];document.querySelectorAll('#kTabs .chip').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
+  $('#kOut').innerHTML=`<h3>${k.title}</h3><p class="meta">${k.meta}</p>${k.plan}<div class="sheet">${k.sheet}</div>`};
+ if(K.length){$('#kTabs').innerHTML=K.map((k,i)=>`<button class="chip" type="button" data-i="${i}" aria-pressed="false">${k.title.split(' – ')[0]}</button>`).join('');
+  $('#kTabs').addEventListener('click',e=>{const b=e.target.closest('.chip');if(b)show(+b.dataset.i)});show(0);
+  $('#kPrint').onclick=()=>window.print();
+  $('#kCopy').onclick=async()=>{try{await navigator.clipboard.writeText($('#kOut').innerText);$('#kCopy').textContent='Đã sao chép'}catch(e){$('#kCopy').textContent='Trình duyệt chặn sao chép'}setTimeout(()=>$('#kCopy').textContent='Sao chép nội dung',2500)};
+  $('#kDoc').onclick=()=>{const k=K[cur];const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>${k.title}</title><style>body{font-family:"Times New Roman",serif;font-size:13pt;line-height:1.4}table{border-collapse:collapse;width:100%}td,th{border:1px solid #000;padding:4pt;vertical-align:top}td{height:28pt}h3{font-size:15pt;text-align:center}h4{font-size:13pt}</style></head><body>${$('#kOut').innerHTML.replace('<div class="sheet">','<br style="page-break-before:always"><div>')}</body></html>`;
+   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿',html],{type:'application/msword'}));a.download=k.id+'.doc';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}}}
+const ACTS=[['Trạm bản đồ (10 phút)','Chia nhóm theo 3 loại di sản; mỗi nhóm dùng bản đồ để tìm di sản theo vùng miền, rút ra nhận xét về sự phân bố và điều kiện hình thành.'],['Nối di sản với thời kỳ','Dùng mục Dòng thời gian: học sinh chọn một thời kỳ trong bài học và giải thích di sản nào là “chứng nhân” của thời kỳ đó, dựa trên hồ sơ di sản.'],['Đối chiếu nguồn','Học sinh đọc hồ sơ một di sản, đối chiếu với SGK và trang UNESCO ở mục Nguồn, ghi lại điểm khớp và điểm cần kiểm tra thêm.'],['Tranh biện: bảo tồn và du lịch','Dùng trường hợp Hát Xoan (chuyển khỏi danh sách khẩn cấp) và Tranh Đông Hồ (mới vào danh sách khẩn cấp) để thảo luận giải pháp bảo tồn di sản sống.'],['Dự án “Hướng dẫn viên nhỏ tuổi”','Mỗi nhóm chọn một di sản, làm bài giới thiệu 3 phút (video, infographic) có trích dẫn nguồn; tự soạn 5 câu hỏi kiểm tra bạn cùng lớp.'],['Phiếu thoát lớp (Exit ticket)','Cuối tiết, học sinh làm 5 câu trắc nghiệm từ ngân hàng theo phạm vi bài học; giáo viên nắm nhanh mức độ hiểu bài.']];
+$('#acts').innerHTML=ACTS.map(([h,p])=>`<div class="act"><h3>${h}</h3><p>${p}</p></div>`).join('');
+}
+</script>
+</body>
+</html>
