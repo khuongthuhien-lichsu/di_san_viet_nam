@@ -15,7 +15,7 @@
 :root{color-scheme:light dark;
 --bg:light-dark(#ffffff,#12110f);--ink:light-dark(#1a1714,#f1ece4);--mut:light-dark(#5b554e,#b5ada2);
 --line:light-dark(#e6e0d7,#2e2b27);--panel:light-dark(#f5f2ec,#1c1a17);--lac:light-dark(#7a1a13,#4e110c);
---paper:#f3e8d8;--tg:light-dark(#b3261e,#f07a6e);--pvt:light-dark(#1d6b55,#5cc4a2);--tl:light-dark(#33418f,#8f9cf0);--tn:light-dark(#8a6410,#e6b84f);
+--paper:#f3e8d8;--tg:light-dark(#b3261e,#f07a6e);--pvt:light-dark(#1d6b55,#5cc4a2);--tl:light-dark(#33418f,#8f9cf0);
 --btn:light-dark(#7a1a13,#f07a6e);--btnink:light-dark(#fff,#1a0d0b)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
@@ -38,11 +38,11 @@ nav.top b{font-family:"Noto Serif",serif;margin-right:auto;display:flex;gap:8px;
 .hero{background:var(--lac);color:#fff}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(20px,4vw,56px);align-items:center}
 .hero .lead{color:#f1d9cf}
-.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:18px 0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}
 .stat{border-top:2px solid rgba(255,255,255,.35);padding-top:8px}.stat b{display:block;font:700 clamp(26px,3vw,36px)/1 "Noto Serif",serif}.stat span{font-size:13px;color:#f1d9cf}
 .legend{display:flex;flex-wrap:wrap;gap:8px}
 .tog{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;cursor:pointer}
-.tog[aria-pressed=false]{opacity:.45}.tog i{width:12px;height:12px;border-radius:3px;display:inline-block;box-shadow:0 0 0 1.5px rgba(255,255,255,.85)}
+.tog[aria-pressed=false]{opacity:.45}.tog i{width:12px;height:12px;border-radius:3px;display:inline-block}
 .mapbox{position:relative;aspect-ratio:608/616;max-height:78vh;margin-inline:auto;width:100%}
 .mapbox svg{width:100%;height:100%;display:block}
 .dot{cursor:pointer;stroke:#fff;stroke-width:1.6;transition:r .15s}.dot:hover,.dot:focus{r:9;outline:none}
@@ -166,7 +166,7 @@ label.sw input{width:20px;height:20px}
 @media print{body>*:not(#giao-vien){display:none!important}#giao-vien>.wrap>*:not(#kOut){display:none!important}#kOut{border:0;padding:0}.kdoc .sheet{break-before:page}}
 footer{font-size:13px;color:var(--mut)}
 @media(max-width:900px){.hero .wrap,.two{grid-template-columns:minmax(0,1fr)}.era{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stats .stat:first-child{grid-column:1/-1}.msg{max-width:96%}}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.msg{max-width:96%}}
 </style>
 </head>
 <body>
@@ -177,7 +177,7 @@ footer{font-size:13px;color:var(--mut)}
 <div>
 <h1>Di sản Việt Nam trong các danh mục của UNESCO</h1>
 <p class="lead">Học liệu số cho môn Lịch sử THPT: tra cứu 39 di sản trên bản đồ và dòng thời gian, luyện trắc nghiệm và gợi ý hoạt động dạy học<span class="ai-only">, hỏi đáp với trợ lý AI</span>.</p>
-<div class="stats"><div class="stat"><b id="sAll">39</b><span>di sản tất cả</span></div><div class="stat"><b id="sTgvh">6</b><span>di sản thế giới – văn hóa vật thể</span></div><div class="stat"><b id="sTgtn">3</b><span>di sản thế giới – thiên nhiên, hỗn hợp</span></div><div class="stat"><b id="sPvt">17</b><span>văn hóa phi vật thể</span></div><div class="stat"><b id="sTl">13</b><span>di sản tư liệu</span></div></div>
+<div class="stats"><div class="stat"><b id="sAll">39</b><span>di sản tất cả</span></div><div class="stat"><b id="sTg">9</b><span>di sản thế giới</span></div><div class="stat"><b id="sPvt">17</b><span>văn hóa phi vật thể</span></div><div class="stat"><b id="sTl">13</b><span>di sản tư liệu</span></div></div>
 <div class="legend" id="legend"></div>
 <p class="mapnote">Số liệu cập nhật đến 24/11/2026. Bấm vào một điểm trên bản đồ để mở hồ sơ di sản.</p>
 </div>
@@ -443,10 +443,8 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const byId=Object.fromEntries(D.map(x=>[x.id,x]));
 const yt=x=>x.yt||String(x.y);
-const show={tg:true,tn:true,pvt:true,tl:true};
-const MG=x=>x.c==='tg'?(x.k==='Di sản văn hóa'?'tg':'tn'):x.c;
-const MGN={tg:'Di sản thế giới – văn hóa vật thể',tn:'Di sản thế giới – thiên nhiên, hỗn hợp',pvt:'Di sản văn hóa phi vật thể',tl:'Di sản tư liệu'};
-$('#sTgvh').textContent=D.filter(x=>MG(x)==='tg').length;$('#sTgtn').textContent=D.filter(x=>MG(x)==='tn').length;['pvt','tl'].forEach(c=>{$('#s'+c[0].toUpperCase()+c.slice(1)).textContent=D.filter(x=>x.c===c).length});$('#sAll').textContent=D.length;
+const show={tg:true,pvt:true,tl:true};
+['tg','pvt','tl'].forEach(c=>{$('#s'+c[0].toUpperCase()+c.slice(1)).textContent=D.filter(x=>x.c===c).length});$('#sAll').textContent=D.length;
 
 /* ẢNH RIÊNG (ảnh từ báo chí, cơ quan... đã được nơi giữ bản quyền cho phép đăng lại).
    Cách thêm: lưu ảnh vào thư mục anh/ cùng chỗ với index.html (nên nén còn dưới 300 KB, rộng ~1200px),
@@ -467,7 +465,7 @@ D.forEach(x=>{let [px,py]=proj(x.lo,x.la),n=placed.filter(p=>Math.hypot(p[0]-px,
  if(n){const a=n*2.1,r=11+3*Math.floor(n/3);x.mx=px+r*Math.cos(a);x.my=py+r*Math.sin(a)}else{x.mx=px;x.my=py}placed.push([px,py]);});
 function isl(lo0,lo1,la0,la1,n){let s='';for(let i=0;i<n;i++){const lo=lo0+(lo1-lo0)*((0.5+i*0.7548777)%1),la=la0+(la1-la0)*((0.5+i*0.5698403)%1),[a,b]=proj(lo,la);s+=`<circle cx="${a.toFixed(1)}" cy="${b.toFixed(1)}" r="1.8" fill="#f3e8d8"/>`}return s}
 function drawMap(){
- const dots=D.filter(x=>show[MG(x)]).map(x=>`<circle class="dot" tabindex="0" role="button" aria-label="${esc(x.t)}" data-id="${x.id}" cx="${x.mx.toFixed(1)}" cy="${x.my.toFixed(1)}" r="6.5" fill="var(--${MG(x)})"/>`).join('');
+ const dots=D.filter(x=>show[x.c]).map(x=>`<circle class="dot" tabindex="0" role="button" aria-label="${esc(x.t)}" data-id="${x.id}" cx="${x.mx.toFixed(1)}" cy="${x.my.toFixed(1)}" r="6.5" fill="var(--${x.c})"/>`).join('');
  const [hx,hy]=proj(111.9,16.9),[tx,ty]=proj(114.2,10.3);
  $('#map').innerHTML=`<path d="${NB}" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
  <path d="${VN}" fill="#f3e8d8" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/>
@@ -485,18 +483,17 @@ $('#map').addEventListener('mousemove',e=>{const id=e.target.dataset&&e.target.d
 $('#map').addEventListener('mouseleave',()=>tip.style.opacity=0);
 $('#map').addEventListener('click',e=>{const id=e.target.dataset&&e.target.dataset.id;if(id)openD(id)});
 $('#map').addEventListener('keydown',e=>{const id=e.target.dataset&&e.target.dataset.id;if(id&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openD(id)}});
-$('#legend').innerHTML=Object.entries(MGN).map(([c,n])=>`<button class="tog" type="button" aria-pressed="true" data-c="${c}"><i style="background:var(--${c})"></i>${n}</button>`).join('');
+$('#legend').innerHTML=Object.entries(CAT).map(([c,n])=>`<button class="tog" type="button" aria-pressed="true" data-c="${c}"><i style="background:var(--${c})"></i>${n}</button>`).join('');
 $('#legend').addEventListener('click',e=>{const b=e.target.closest('.tog');if(!b)return;show[b.dataset.c]=!show[b.dataset.c];b.setAttribute('aria-pressed',show[b.dataset.c]);drawMap()});
 drawMap();
 
 /* ---------- explore ---------- */
 let fc='all';
-const FC={all:x=>true,tgvh:x=>x.c==='tg'&&x.k==='Di sản văn hóa',tgtn:x=>x.c==='tg'&&x.k!=='Di sản văn hóa',pvt:x=>x.c==='pvt',tl:x=>x.c==='tl'};
-$('#cats').innerHTML=[['all','Tất cả','Tất cả di sản'],['tgvh','Văn hóa vật thể','Di sản thế giới là di sản văn hóa (vật thể)'],['tgtn','Thiên nhiên, hỗn hợp','Di sản thế giới là di sản thiên nhiên hoặc di sản hỗn hợp (văn hóa và thiên nhiên)'],['pvt','Phi vật thể','Di sản văn hóa phi vật thể'],['tl','Tư liệu','Di sản tư liệu']].map(([c,n,t])=>`<button class="chip" type="button" data-c="${c}" title="${t} (${D.filter(FC[c]).length})" aria-pressed="${c==='all'}">${n}</button>`).join('');
+$('#cats').innerHTML=[['all','Tất cả'],['tg','Thế giới'],['pvt','Phi vật thể'],['tl','Tư liệu']].map(([c,n])=>`<button class="chip" type="button" data-c="${c}" aria-pressed="${c==='all'}">${n}</button>`).join('');
 $('#cats').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;fc=b.dataset.c;document.querySelectorAll('#cats .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));renderGrid()});
 const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/gi,'d').toLowerCase();
 function renderGrid(){const q=norm($('#q').value.trim()),so=$('#sort').value;
- let L=D.filter(x=>(FC[fc]||FC.all)(x)&&(!q||norm([x.t,x.p,x.d,x.pd,x.k].join(' ')).includes(q)));
+ let L=D.filter(x=>(fc==='all'||x.c===fc)&&(!q||norm([x.t,x.p,x.d,x.pd,x.k].join(' ')).includes(q)));
  L.sort(so==='t'?(a,b)=>a.t.localeCompare(b.t,'vi'):so==='n'?(a,b)=>b.la-a.la:(a,b)=>a.y-b.y||a.t.localeCompare(b.t,'vi'));
  $('#grid').innerHTML=L.length?L.map(x=>`<button class="card" type="button" data-id="${x.id}">${(PIN[x.id]||CATS[x.id]||ANH[x.id])?`<span class="tw" data-id="${x.id}"><span class="thumb"></span></span>`:''}<span class="tag c-${x.c}">${CAT[x.c]}</span><h3>${esc(x.t)}</h3><span class="meta">Ghi danh ${esc(yt(x))} · ${esc(x.p)}</span>${VIDEOS[x.id]?'<span class="vbadge">▶ Có video</span>':''}</button>`).join(''):'<p class="empty">Không tìm thấy di sản phù hợp. Thử từ khóa khác, ví dụ “Trần” hoặc “Huế”.</p>';if(window.__obs)document.querySelectorAll('#grid .tw').forEach(t=>window.__obs.observe(t));HK('decorate')}
 $('#q').addEventListener('input',renderGrid);$('#sort').addEventListener('change',renderGrid);
