@@ -489,11 +489,12 @@ drawMap();
 
 /* ---------- explore ---------- */
 let fc='all';
-$('#cats').innerHTML=[['all','Tất cả'],['tg','Thế giới'],['pvt','Phi vật thể'],['tl','Tư liệu']].map(([c,n])=>`<button class="chip" type="button" data-c="${c}" aria-pressed="${c==='all'}">${n}</button>`).join('');
+const FC={all:x=>true,tgvh:x=>x.c==='tg'&&x.k==='Di sản văn hóa',tgtn:x=>x.c==='tg'&&x.k!=='Di sản văn hóa',pvt:x=>x.c==='pvt',tl:x=>x.c==='tl'};
+$('#cats').innerHTML=[['all','Tất cả','Tất cả di sản'],['tgvh','Văn hóa vật thể','Di sản thế giới là di sản văn hóa (vật thể)'],['tgtn','Thiên nhiên, hỗn hợp','Di sản thế giới là di sản thiên nhiên hoặc di sản hỗn hợp (văn hóa và thiên nhiên)'],['pvt','Phi vật thể','Di sản văn hóa phi vật thể'],['tl','Tư liệu','Di sản tư liệu']].map(([c,n,t])=>`<button class="chip" type="button" data-c="${c}" title="${t} (${D.filter(FC[c]).length})" aria-pressed="${c==='all'}">${n}</button>`).join('');
 $('#cats').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;fc=b.dataset.c;document.querySelectorAll('#cats .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));renderGrid()});
 const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/gi,'d').toLowerCase();
 function renderGrid(){const q=norm($('#q').value.trim()),so=$('#sort').value;
- let L=D.filter(x=>(fc==='all'||x.c===fc)&&(!q||norm([x.t,x.p,x.d,x.pd,x.k].join(' ')).includes(q)));
+ let L=D.filter(x=>(FC[fc]||FC.all)(x)&&(!q||norm([x.t,x.p,x.d,x.pd,x.k].join(' ')).includes(q)));
  L.sort(so==='t'?(a,b)=>a.t.localeCompare(b.t,'vi'):so==='n'?(a,b)=>b.la-a.la:(a,b)=>a.y-b.y||a.t.localeCompare(b.t,'vi'));
  $('#grid').innerHTML=L.length?L.map(x=>`<button class="card" type="button" data-id="${x.id}">${(PIN[x.id]||CATS[x.id]||ANH[x.id])?`<span class="tw" data-id="${x.id}"><span class="thumb"></span></span>`:''}<span class="tag c-${x.c}">${CAT[x.c]}</span><h3>${esc(x.t)}</h3><span class="meta">Ghi danh ${esc(yt(x))} · ${esc(x.p)}</span>${VIDEOS[x.id]?'<span class="vbadge">▶ Có video</span>':''}</button>`).join(''):'<p class="empty">Không tìm thấy di sản phù hợp. Thử từ khóa khác, ví dụ “Trần” hoặc “Huế”.</p>';if(window.__obs)document.querySelectorAll('#grid .tw').forEach(t=>window.__obs.observe(t));HK('decorate')}
 $('#q').addEventListener('input',renderGrid);$('#sort').addEventListener('change',renderGrid);
