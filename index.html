@@ -19,6 +19,7 @@
 --btn:light-dark(#7a1a13,#f07a6e);--btnink:light-dark(#fff,#1a0d0b)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
+html{overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Be Vietnam Pro",system-ui,sans-serif;overflow-x:clip}
 h1,h2,h3{font-family:"Noto Serif",Georgia,serif;line-height:1.12;text-wrap:balance;margin:0 0 .4em}
 h1{font-size:clamp(32px,4.6vw,52px)}h2{font-size:clamp(26px,3.2vw,36px)}h3{font-size:20px}
@@ -404,6 +405,7 @@ const yt=x=>x.yt||String(x.y);
 const show={tg:true,pvt:true,tl:true};
 ['tg','pvt','tl'].forEach(c=>{$('#s'+c[0].toUpperCase()+c.slice(1)).textContent=D.filter(x=>x.c===c).length});$('#sAll').textContent=D.length;
 
+window.DS={hooks:{}};const HK=(n,...a)=>{try{const f=window.DS.hooks[n];if(f)f(...a)}catch(e){console.error(e)}};
 /* ---------- map ---------- */
 const K=Math.cos(16*Math.PI/180),S=40,proj=(lo,la)=>[(lo-101.8)*K*S,(23.6-la)*S];
 const placed=[];
@@ -423,7 +425,7 @@ function drawMap(){
  <text x="${proj(103.6,12.6)[0]}" y="${proj(103.6,12.6)[1]}" fill="rgba(255,255,255,.55)" font-size="12">CAMPUCHIA</text>
  <text x="${proj(110.6,14.2)[0]}" y="${proj(110.6,14.2)[1]}" fill="rgba(255,255,255,.4)" font-size="13" font-style="italic">Biển Đông</text>
  ${dots}`;
-}
+ HK('decorate')}
 const tip=$('#tip'),box=$('#mapbox');
 $('#map').addEventListener('mousemove',e=>{const id=e.target.dataset&&e.target.dataset.id;if(!id){tip.style.opacity=0;return}const r=box.getBoundingClientRect();tip.textContent=byId[id].t+' · '+yt(byId[id]);tip.style.left=(e.clientX-r.left)+'px';tip.style.top=(e.clientY-r.top)+'px';tip.style.opacity=1});
 $('#map').addEventListener('mouseleave',()=>tip.style.opacity=0);
@@ -441,7 +443,7 @@ const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/gi,'d').toLo
 function renderGrid(){const q=norm($('#q').value.trim()),so=$('#sort').value;
  let L=D.filter(x=>(fc==='all'||x.c===fc)&&(!q||norm([x.t,x.p,x.d,x.pd,x.k].join(' ')).includes(q)));
  L.sort(so==='t'?(a,b)=>a.t.localeCompare(b.t,'vi'):so==='n'?(a,b)=>b.la-a.la:(a,b)=>a.y-b.y||a.t.localeCompare(b.t,'vi'));
- $('#grid').innerHTML=L.length?L.map(x=>`<button class="card" type="button" data-id="${x.id}">${(WQ[x.id]||PIN[x.id])?`<span class="tw" data-id="${x.id}"><span class="thumb"></span></span>`:''}<span class="tag c-${x.c}">${CAT[x.c]}</span><h3>${esc(x.t)}</h3><span class="meta">Ghi danh ${esc(yt(x))} · ${esc(x.p)}</span>${VIDEOS[x.id]?'<span class="vbadge">▶ Có video</span>':''}</button>`).join(''):'<p class="empty">Không tìm thấy di sản phù hợp. Thử từ khóa khác, ví dụ “Trần” hoặc “Huế”.</p>';if(window.__obs)document.querySelectorAll('#grid .tw').forEach(t=>window.__obs.observe(t))}
+ $('#grid').innerHTML=L.length?L.map(x=>`<button class="card" type="button" data-id="${x.id}">${(WQ[x.id]||PIN[x.id])?`<span class="tw" data-id="${x.id}"><span class="thumb"></span></span>`:''}<span class="tag c-${x.c}">${CAT[x.c]}</span><h3>${esc(x.t)}</h3><span class="meta">Ghi danh ${esc(yt(x))} · ${esc(x.p)}</span>${VIDEOS[x.id]?'<span class="vbadge">▶ Có video</span>':''}</button>`).join(''):'<p class="empty">Không tìm thấy di sản phù hợp. Thử từ khóa khác, ví dụ “Trần” hoặc “Huế”.</p>';if(window.__obs)document.querySelectorAll('#grid .tw').forEach(t=>window.__obs.observe(t));HK('decorate')}
 $('#q').addEventListener('input',renderGrid);$('#sort').addEventListener('change',renderGrid);
 $('#grid').addEventListener('click',e=>{const b=e.target.closest('.card');if(b)openD(b.dataset.id)});
 renderGrid();
@@ -470,7 +472,7 @@ function openD(id){const x=byId[id];lastF=document.activeElement;
  <p>${esc(x.d)}</p>${(window.GT||{})[x.id]?`<h3>Giá trị nổi bật</h3><ul>${window.GT[x.id].gt.map(t=>`<li>${esc(t)}</li>`).join('')}</ul><h3>Đặc điểm tiêu biểu</h3><ul>${window.GT[x.id].dd.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}<h3>Điểm cần nhớ</h3><ul>${x.f.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
  <h3>Gợi ý gắn chương trình Lịch sử 2018</h3><ul>${x.g.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>${(window.TL||{})[x.id]?`<h3>Câu hỏi thảo luận</h3><ol>${window.TL[x.id].map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:''}
  <div class="row">${aiState==='on'?'<button class="btn" type="button" data-a="ask">Hỏi trợ lý AI về di sản này</button>':''}<button class="btn ghost" type="button" data-a="quiz">Luyện câu hỏi về di sản này</button></div>`;
- dlg.dataset.id=id;ov.classList.add('on');dlg.querySelector('.x').focus();loadMedia(id)}
+ dlg.dataset.id=id;ov.classList.add('on');HK('open',id,dlg);dlg.querySelector('.x').focus();loadMedia(id)}
 function closeD(){ov.classList.remove('on');if(lastF)lastF.focus()}
 ov.addEventListener('click',e=>{if(e.target===ov||e.target.closest('.x'))return closeD();const a=e.target.closest('[data-a]');if(!a)return;const id=dlg.dataset.id;closeD();
  if(a.dataset.a==='ask'){$('#focus').value=id;location.hash='tro-ly';$('#chatIn').value='Hãy giới thiệu ngắn gọn giá trị lịch sử của '+byId[id].t+' và gợi ý 2 câu hỏi để em suy nghĩ thêm.';$('#chatIn').focus()}
@@ -541,7 +543,7 @@ function makeHand(n){const QB=window.QB||{};const L=scopeList(),lv=LVN.indexOf($
  let pool=[];L.forEach(x=>(QB[x.id]||[]).forEach(r=>pool.push({x,r})));
  if(lv>0){const f=pool.filter(o=>o.r[0]===lv);if(f.length||!quizOnly)pool=f}
  if(!pool.length){quizOnly=null;return makeBank(n)}
- const qs=shuf(pool).slice(0,n).map(({x,r})=>{const idx=shuf([0,1,2,3]);const o=[r[2],r[3],r[4],r[5]];return{q:r[1],o:idx.map(i=>o[i]),a:idx.indexOf(0),ex:r[6],tag:LVN[r[0]]+' · '+x.t}});
+ const qs=shuf(pool).slice(0,n).map(({x,r})=>{const idx=shuf([0,1,2,3]);const o=[r[2],r[3],r[4],r[5]];return{q:r[1],o:idx.map(i=>o[i]),a:idx.indexOf(0),ex:r[6],tag:LVN[r[0]]+' · '+x.t,k:x.id+'|'+r[1]}});
  renderQuiz(qs,(quizOnly?`Luyện tập: ${byId[quizOnly].t}`:'Đề từ ngân hàng soạn sẵn')+` · ${$('#qLv').value}`);quizOnly=null}
 function makeBank(n){const L=scopeList();const qs=[];let guard=0;const seen=new Set();
  while(qs.length<n&&guard++<300){const x=L[Math.floor(Math.random()*L.length)],q=bankQ(x);if(seen.has(q.q))continue;seen.add(q.q);
@@ -550,7 +552,7 @@ function makeBank(n){const L=scopeList();const qs=[];let guard=0;const seen=new 
 function renderQuiz(qs,title){let done=0,right=0;
  $('#quiz').innerHTML=`<h3>${esc(title)}</h3><p class="note">${qs.length} câu · chọn một đáp án cho mỗi câu.</p>`+qs.map((q,i)=>`<div class="q" data-i="${i}">${q.tag?`<div class="cred" style="margin-bottom:4px">${esc(q.tag)}</div>`:''}<h4>Câu ${i+1}. ${esc(q.q)}</h4>${q.o.map((o,j)=>`<button class="opt" type="button" data-j="${j}">${'ABCD'[j]}. ${esc(o)}</button>`).join('')}<div class="exp" hidden></div></div>`).join('')+`<div id="res" class="q" hidden></div>`;
  $('#quiz').onclick=e=>{const b=e.target.closest('.opt');if(!b)return;const box=b.closest('.q'),q=qs[box.dataset.i];if(box.dataset.done)return;box.dataset.done=1;done++;
-  const j=+b.dataset.j;box.querySelectorAll('.opt')[q.a].classList.add('ok');if(j===q.a)right++;else b.classList.add('no');
+  const j=+b.dataset.j;box.querySelectorAll('.opt')[q.a].classList.add('ok');if(j===q.a)right++;else b.classList.add('no');HK('answer',q,j===q.a);
   const ex=box.querySelector('.exp');ex.hidden=false;ex.textContent=(j===q.a?'Chính xác. ':'Chưa đúng. ')+(q.ex||'');
   if(done===qs.length){const r=$('#res');r.hidden=false;r.innerHTML=`<div class="score">${right}/${qs.length} câu đúng</div><p class="note">${right/qs.length>=.8?'Rất tốt! Thử mức độ “Vận dụng” với AI.':'Xem lại hồ sơ các di sản trả lời chưa đúng ở mục Khám phá, rồi luyện thêm.'}</p><button class="btn" type="button" id="again">Làm đề mới</button>`;$('#again').onclick=()=>$('#quizForm').requestSubmit()}};
  $('#quiz').scrollIntoView({block:'start'})}
@@ -661,7 +663,10 @@ $('#pCopy').addEventListener('click',async()=>{upd();try{await navigator.clipboa
    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿',html],{type:'application/msword'}));a.download=k.id+'.doc';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}}}
 const ACTS=[['Trạm bản đồ (10 phút)','Chia nhóm theo 3 loại di sản; mỗi nhóm dùng bản đồ để tìm di sản theo vùng miền, rút ra nhận xét về sự phân bố và điều kiện hình thành.'],['Nối di sản với thời kỳ','Dùng mục Dòng thời gian: học sinh chọn một thời kỳ trong bài học và giải thích di sản nào là “chứng nhân” của thời kỳ đó, dựa trên hồ sơ di sản.'],['Đối chiếu nguồn','Học sinh đọc hồ sơ một di sản, đối chiếu với SGK và trang UNESCO ở mục Nguồn, ghi lại điểm khớp và điểm cần kiểm tra thêm.'],['Tranh biện: bảo tồn và du lịch','Dùng trường hợp Hát Xoan (chuyển khỏi danh sách khẩn cấp) và Tranh Đông Hồ (mới vào danh sách khẩn cấp) để thảo luận giải pháp bảo tồn di sản sống.'],['Dự án “Hướng dẫn viên nhỏ tuổi”','Mỗi nhóm chọn một di sản, làm bài giới thiệu 3 phút (video, infographic) có trích dẫn nguồn; tự soạn 5 câu hỏi kiểm tra bạn cùng lớp.'],['Phiếu thoát lớp (Exit ticket)','Cuối tiết, học sinh làm 5 câu trắc nghiệm từ ngân hàng theo phạm vi bài học; giáo viên nắm nhanh mức độ hiểu bài.']];
 $('#acts').innerHTML=ACTS.map(([h,p])=>`<div class="act"><h3>${h}</h3><p>${p}</p></div>`).join('');
+Object.assign(window.DS,{D,byId,CAT,ERA,EC,VN,NB,proj,esc,yt,openD,closeD,renderQuiz,UNESCO_WHC,UNESCO_ICH,islands:isl(111.2,112.8,15.8,17.1,14)+isl(111.6,115.6,8.6,11.4,22),
+ firstImg:async id=>{const p=await wikiPage(id);let r=null;if(PIN[id])[r]=await fileInfo([PIN[id][0]]);if((!r||!r.thumb)&&p&&p.pageimage)[r]=await fileInfo([p.pageimage]);if(!r||!r.thumb)r=(await commonsSearch(id)).find(o=>/^image/.test(o.mime));return r&&r.thumb?r:null}});
 }
 </script>
+<script src="tuong-tac.js"></script>
 </body>
 </html>

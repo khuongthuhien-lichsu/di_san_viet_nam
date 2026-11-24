@@ -11,13 +11,15 @@ Website gồm các tệp tĩnh, không cần máy chủ hay cơ sở dữ liệu
 | `ngan-hang-cau-hoi.js` | 235 câu trắc nghiệm (Nhận biết / Thông hiểu / Vận dụng) và 81 câu hỏi thảo luận cho 39 di sản |
 | `tai-lieu-giao-vien.js` | 3 kế hoạch bài dạy (Công văn 5512) và 3 phiếu học tập |
 | `nguon-du-lieu-di-san.md` | Tài liệu nguồn để tải vào NotebookLM |
+| `tuong-tac.js` | Tính năng tương tác: thẻ “Đọc như nhà sử học”, so sánh hai di sản, Học mà chơi, Sổ tay học tập, trình chiếu, mã QR, báo lỗi, cỡ chữ và giao diện sáng/tối |
+| `qrcode.js` | Thư viện tạo mã QR (qrcode-generator, Kazuhiko Arase, giấy phép MIT) |
 
 **Cần tải lên đủ tất cả các tệp, cùng một thư mục**; thiếu tệp `.js` nào thì phần tương ứng (giá trị di sản, trắc nghiệm soạn sẵn, tài liệu giáo viên) sẽ không hiện.
 
 ## Đưa lên GitHub Pages
 
 1. Đăng nhập github.com, bấm **New repository**, đặt tên (ví dụ `di-san-viet-nam`), chọn **Public**, bấm **Create repository**.
-2. Bấm **uploading an existing file**, kéo thả cả 6 tệp (`index.html`, `gia-tri-di-san.js`, `ngan-hang-cau-hoi.js`, `tai-lieu-giao-vien.js`, `nguon-du-lieu-di-san.md`, `README.md`) vào, bấm **Commit changes**.
+2. Bấm **uploading an existing file**, kéo thả cả 8 tệp (`index.html`, `gia-tri-di-san.js`, `ngan-hang-cau-hoi.js`, `tai-lieu-giao-vien.js`, `tuong-tac.js`, `qrcode.js`, `nguon-du-lieu-di-san.md`, `README.md`) vào, bấm **Commit changes**.
 3. Vào **Settings → Pages**. Ở mục **Build and deployment**, chọn **Source: Deploy from a branch**, **Branch: main**, thư mục **/(root)**, bấm **Save**.
 4. Đợi 1–3 phút, tải lại trang Settings → Pages để thấy địa chỉ dạng
    `https://<tên-tài-khoản>.github.io/di-san-viet-nam/`
@@ -78,3 +80,9 @@ Bản đồ nền dựng từ dữ liệu Natural Earth (thông qua gói `world-
 - Câu hỏi thảo luận nằm trong khối `const TL={…}` cùng tệp.
 - Kế hoạch bài dạy, phiếu học tập nằm trong `tai-lieu-giao-vien.js` (viết bằng HTML đơn giản). Trên trang có nút tải về file Word (.doc), in hoặc lưu PDF.
 - Lưu ý: giữ đúng dấu nháy đơn `'` và dấu phẩy; nếu câu có dấu nháy đơn bên trong, dùng dấu nháy kép “ ” thay thế.
+
+## Tính năng tương tác và dữ liệu Sổ tay
+
+- **Sổ tay học tập** (di sản đã tìm hiểu, ghi chép, câu sai, huy hiệu) chỉ lưu trên trình duyệt của từng máy (localStorage). Trang không có tài khoản và không gửi dữ liệu đi đâu. Xóa dữ liệu trình duyệt hoặc đổi máy thì Sổ tay bắt đầu lại; học sinh có thể bấm “Tải sổ tay (.txt)” để nộp bài.
+- **Liên kết tới từng hồ sơ:** thêm `#ds=<mã di sản>` vào cuối địa chỉ, ví dụ `…/di_san_viet_nam/#ds=hue`. Nút “Mã QR” trong hồ sơ tạo sẵn mã này.
+- **Báo lỗi nội dung:** tạo một Google Form góp ý, rồi mở `tuong-tac.js`, dán link vào dòng `const FORM_URL = '';` ở đầu tệp. Khi để trống, nút “Báo lỗi” chỉ giúp sao chép nội dung để gửi cho giáo viên.
