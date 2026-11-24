@@ -63,15 +63,30 @@ select{min-height:44px;padding:6px 10px;border:1px solid var(--line);border-radi
 .empty{padding:24px;color:var(--mut)}
 /* timeline */
 .alt{background:var(--panel)}
-.era{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid var(--line)}
-.era h3{font-size:17px;margin:0}.era p{margin:2px 0 0;font-size:13px;color:var(--mut)}
-.pills{display:flex;flex-wrap:wrap;gap:8px}
+.eras{position:relative}
+.era{display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);gap:16px;padding:14px 0 14px 0;position:relative}
+.era .lab{position:relative;padding:10px 12px 10px 40px;border-radius:12px;background:color-mix(in srgb,var(--ec) 14%,var(--bg));border-left:5px solid var(--ec)}
+.era .lab::before{content:"";position:absolute;left:12px;top:14px;width:16px;height:16px;border-radius:50%;background:var(--ec);box-shadow:0 0 0 4px color-mix(in srgb,var(--ec) 30%,transparent)}
+.era .lab::after{content:"";position:absolute;left:19px;top:34px;bottom:-30px;width:2px;background:color-mix(in srgb,var(--ec) 45%,transparent)}
+.era:last-child .lab::after{display:none}
+.era h3{font-size:17px;margin:0;color:color-mix(in srgb,var(--ec) 75%,var(--ink))}.era p{margin:2px 0 0;font-size:13px;color:var(--mut)}
+.era .n{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--ec);border-radius:999px;padding:1px 8px;margin-top:6px}
+.era .pill{border-color:color-mix(in srgb,var(--ec) 45%,var(--line));background:color-mix(in srgb,var(--ec) 6%,var(--bg))}
+.era .pill:hover,.era .pill:focus-visible{background:color-mix(in srgb,var(--ec) 18%,var(--bg))}
+.pills{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;align-content:flex-start}
 .pill{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:6px 10px;cursor:pointer;text-align:left;font-size:14px;display:flex;gap:8px;align-items:baseline}
 .pill small{color:var(--mut);white-space:nowrap}
-.years{display:flex;gap:6px;align-items:flex-end;overflow-x:auto;padding:8px 0 4px;margin-top:8px}
-.yr{flex:1 0 34px;display:flex;flex-direction:column-reverse;gap:3px;align-items:center}
-.yr span{font-size:12px;color:var(--mut);margin-top:4px;white-space:nowrap}
-.sq{width:22px;height:14px;border-radius:3px;border:0;cursor:pointer;padding:0}
+.ywrap{position:relative}
+.years{display:flex;gap:8px;align-items:flex-end;overflow-x:auto;padding:28px 4px 6px;margin-top:8px}
+.yr{flex:1 0 40px;display:flex;flex-direction:column-reverse;gap:4px;align-items:center}
+.yr span{font-size:12px;font-weight:700;color:#fff;background:var(--yc);border-radius:6px;padding:2px 6px;margin-top:6px;white-space:nowrap}
+.yr b{font-size:11px;color:var(--mut);font-weight:600}
+.sq{width:30px;height:22px;border-radius:5px;border:0;cursor:pointer;padding:0;background:var(--yc);position:relative;transition:transform .12s}
+.sq i{position:absolute;right:3px;bottom:3px;width:7px;height:7px;border-radius:50%;background:#fff;opacity:.9}
+.sq:hover,.sq:focus-visible{transform:scale(1.18)}
+.ytip{position:fixed;z-index:60;pointer-events:none;background:#1a1714;color:#fff;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:8px;max-width:260px;opacity:0;transform:translate(-50%,calc(-100% - 10px));transition:opacity .1s}
+.ytip small{display:block;color:#d9cfc4}
+.ylegend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--mut);margin-top:6px}
 /* AI */
 .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);gap:24px}
 .chat{border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;height:min(620px,80vh);background:var(--bg)}
@@ -170,10 +185,10 @@ footer{font-size:13px;color:var(--mut)}
 <section class="band alt" id="thoi-gian"><div class="wrap">
 <h2>Di sản trên dòng lịch sử</h2>
 <p class="lead">Xếp di sản theo thời kỳ lịch sử mà chúng phản ánh, giúp học sinh nối di sản với tiến trình lịch sử dân tộc. Di sản phi vật thể là “di sản sống”, được thực hành và trao truyền qua nhiều thế hệ nên được xếp riêng (trừ những di sản gắn rõ với một thời kỳ).</p>
-<div id="eras"></div>
+<div id="eras" class="eras"></div>
 <h3 style="margin-top:28px">Hành trình ghi danh, 1993 – 2026</h3>
-<p class="note">Mỗi ô là một di sản, theo năm được UNESCO ghi danh lần đầu.</p>
-<div class="years" id="years"></div>
+<p class="note">Mỗi cột là một mốc năm, mỗi ô là một di sản được UNESCO ghi danh lần đầu trong năm đó. Di chuột hoặc chạm vào ô để xem tên, bấm để mở hồ sơ.</p>
+<div class="years" id="years"></div><div class="ytip" id="ytip" role="tooltip"></div>
 </div></section>
 
 <section class="band" id="tro-ly"><div class="wrap">
@@ -266,6 +281,7 @@ footer{font-size:13px;color:var(--mut)}
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="dT"><div class="dlg" id="dlg"></div></div>
 
+<script src="gia-tri-di-san.js"></script>
 <script src="ngan-hang-cau-hoi.js"></script>
 <script src="tai-lieu-giao-vien.js"></script>
 <script>
@@ -350,7 +366,9 @@ hoanghoa:['wBsVLBsngC0','Thông điệp lịch sử: Hoàng Hoa sứ trình đ�
 nguhanhson:['RE5BMmYuKqQ','Ma nhai – Bí ẩn trong lòng di sản Ngũ Hành Sơn','VTV8 – Đài Truyền hình Việt Nam'],
 truongluu:['hpQbdcz1lnE','Kỷ niệm năm sinh 3 danh nhân dòng họ Nguyễn Huy, Trường Lưu và Lễ công bố Di sản tư liệu khu vực','Truyền hình Hà Tĩnh'],
 cuudinh:['iVwrgdoi7YE','Cửu đỉnh được ghi vào danh mục ký ức thế giới','Đài Hà Nội'],
-phohien:['kbAV5PIO3yk','Phố Hiến xưa qua tư liệu bia ký','Truyền hình Hưng Yên']
+phohien:['kbAV5PIO3yk','Phố Hiến xưa qua tư liệu bia ký','Truyền hình Hưng Yên'],
+thovanhue:['gxI80LWw-hI','Phim tài liệu: Bí ẩn thơ văn cung đình Huế','THVL – Truyền hình Vĩnh Long'],
+nonnuoc:['lET5gb_P5f4','Khám phá Núi Non Nước – Dục Thúy Sơn','Kênh cá nhân “Gia Hưng – Hành trình trải nghiệm”']
 };
 /* Trang chính thức của UNESCO về từng di sản phi vật thể (có ảnh, video, hồ sơ) */
 const UNESCO_ICH={nhanhac:'RL/nha-nhac-vietnamese-court-music-00074',congchieng:'RL/space-of-gong-culture-00120',quanho:'RL/quan-h-bc-ninh-folk-songs-00183',catru:'USL/ca-tru-singing-00309',giong:'RL/giong-festival-of-phu-djong-and-soc-temples-00443',xoan:'RL/xoan-singing-of-phu-th-province-viet-nam-01260',hungvuong:'RL/worship-of-hung-kings-in-phu-th-00735',taitu:'RL/art-of-n-ca-tai-t-music-and-song-in-southern-viet-nam-00733',vigiam:'RL/vi-and-gim-folk-songs-of-ngh-tnh-01008',keoco:'RL/tugging-rituals-and-games-01080',thomau:'RL/practices-related-to-the-viet-beliefs-in-the-mother-goddesses-of-three-realms-01064',baichoi:'RL/the-art-of-bai-choi-in-central-viet-nam-01222',then:'RL/practices-of-then-by-tay-nung-and-thai-ethnic-groups-in-viet-nam-01379',xoe:'RL/art-of-xoe-dance-of-the-tai-people-in-viet-nam-01575',gomcham:'USL/art-of-pottery-making-of-chm-people-01574',bachuaxu:'RL/festival-of-ba-chua-x-goddess-at-sam-mountain-01999',dongho:'USL/craft-of-making-ong-h-folk-woodblock-printings-01737'};
@@ -407,9 +425,20 @@ $('#grid').addEventListener('click',e=>{const b=e.target.closest('.card');if(b)o
 renderGrid();
 
 /* ---------- timeline ---------- */
-$('#eras').innerHTML=ERA.map(([k,n,s])=>{const L=D.filter(x=>x.e===k);return `<div class="era"><div><h3>${n}</h3><p>${s}</p></div><div class="pills">${L.map(x=>`<button class="pill" type="button" data-id="${x.id}"><span class="tag c-${x.c}" aria-label="${CAT[x.c]}"></span>${esc(x.t)} <small>${esc(x.pd)}</small></button>`).join('')}</div></div>`}).join('');
+const EC={tien:'#b7791f',cham:'#c2532b',dai:'#b3261e',le:'#9c2f6e',nguyen:'#7b3fa0',hiendai:'#2b6cb0',nhieu:'#2c7a7b',song:'#2f855a',tn:'#4f7d1f'};
+$('#eras').innerHTML=ERA.map(([k,n,s])=>{const L=D.filter(x=>x.e===k);return `<div class="era" style="--ec:${EC[k]}"><div class="lab"><h3>${n}</h3><p>${s}</p><span class="n">${L.length} di sản</span></div><div class="pills">${L.map(x=>`<button class="pill" type="button" data-id="${x.id}"><span class="tag c-${x.c}" aria-label="${CAT[x.c]}"></span>${esc(x.t)} <small>${esc(x.pd)}</small></button>`).join('')}</div></div>`}).join('');
 const ys=[...new Set(D.map(x=>x.y))].sort((a,b)=>a-b);
-$('#years').innerHTML=ys.map(y=>`<div class="yr"><span>${y}</span>${D.filter(x=>x.y===y).map(x=>`<button class="sq" type="button" data-id="${x.id}" title="${esc(x.t)}" aria-label="${esc(x.t)}, ${y}" style="background:var(--${x.c})"></button>`).join('')}</div>`).join('');
+const yc=i=>`hsl(${Math.round(18+i*(300/Math.max(1,ys.length-1)))%360} 62% 44%)`;
+$('#years').innerHTML=ys.map((y,i)=>{const L=D.filter(x=>x.y===y);return `<div class="yr" style="--yc:${yc(i)}"><span>${y}</span>${L.map(x=>`<button class="sq" type="button" data-id="${x.id}" data-y="${y}" aria-label="${esc(x.t)}, ghi danh ${y}"><i style="background:var(--${x.c})"></i></button>`).join('')}<b>${L.length}</b></div>`}).join('');
+{const tip=$('#ytip');let hide;
+ const showTip=b=>{const x=byId[b.dataset.id],r=b.getBoundingClientRect();clearTimeout(hide);tip.innerHTML=`${esc(x.t)}<small>${esc(b.dataset.y)} · ${esc(CAT[x.c])}</small>`;tip.style.left=(r.left+r.width/2)+'px';tip.style.top=r.top+'px';tip.style.opacity=1};
+ const hideTip=()=>{hide=setTimeout(()=>tip.style.opacity=0,80)};
+ $('#years').addEventListener('pointerover',e=>{const b=e.target.closest('.sq');if(b)showTip(b)});
+ $('#years').addEventListener('pointerout',e=>{if(e.target.closest('.sq'))hideTip()});
+ $('#years').addEventListener('focusin',e=>{const b=e.target.closest('.sq');if(b)showTip(b)});
+ $('#years').addEventListener('focusout',hideTip);
+ $('#years').addEventListener('scroll',hideTip,{passive:true});addEventListener('scroll',hideTip,{passive:true})}
+$('#years').insertAdjacentHTML('afterend',`<div class="ylegend">Chấm nhỏ trong ô cho biết loại di sản: ${Object.entries(CAT).map(([c,n])=>`<span class="tag c-${c}">${n}</span>`).join('')}</div>`);
 $('#thoi-gian').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openD(b.dataset.id)});
 
 /* ---------- detail modal ---------- */
@@ -417,7 +446,7 @@ const ov=$('#ov'),dlg=$('#dlg');let lastF=null;
 function openD(id){const x=byId[id];lastF=document.activeElement;
  dlg.innerHTML=`<button class="x" type="button" aria-label="Đóng">×</button><span class="tag c-${x.c}">${CAT[x.c]} · ${esc(x.k)}</span><h2 id="dT" style="margin-top:8px">${esc(x.t)}</h2>
  <div class="media" id="media"></div><dl><dt>Năm ghi danh</dt><dd>${esc(yt(x))}</dd><dt>Địa phương</dt><dd>${esc(x.p)}</dd><dt>Thời kỳ</dt><dd>${esc(x.pd)}</dd></dl>
- <p>${esc(x.d)}</p><h3>Điểm cần nhớ</h3><ul>${x.f.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+ <p>${esc(x.d)}</p>${(window.GT||{})[x.id]?`<h3>Giá trị nổi bật</h3><ul>${window.GT[x.id].gt.map(t=>`<li>${esc(t)}</li>`).join('')}</ul><h3>Đặc điểm tiêu biểu</h3><ul>${window.GT[x.id].dd.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}<h3>Điểm cần nhớ</h3><ul>${x.f.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
  <h3>Gợi ý gắn chương trình Lịch sử 2018</h3><ul>${x.g.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>${(window.TL||{})[x.id]?`<h3>Câu hỏi thảo luận</h3><ol>${window.TL[x.id].map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:''}
  <div class="row">${aiState==='on'?'<button class="btn" type="button" data-a="ask">Hỏi trợ lý AI về di sản này</button>':''}<button class="btn ghost" type="button" data-a="quiz">Luyện câu hỏi về di sản này</button></div>`;
  dlg.dataset.id=id;ov.classList.add('on');dlg.querySelector('.x').focus();loadMedia(id)}
@@ -429,7 +458,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contai
 
 /* ---------- AI plumbing ---------- */
 let sample=null,aiState='wait';
-const DATA=D.map(x=>`[${x.id}] ${x.t} | ${CAT[x.c]} – ${x.k} | ghi danh: ${yt(x)} | địa phương: ${x.p} | thời kỳ: ${x.pd} | ${x.d} | Điểm chính: ${x.f.join('; ')} | Gắn CT: ${x.g.join('; ')}`).join('\n');
+const DATA=D.map(x=>`[${x.id}] ${x.t} | ${CAT[x.c]} – ${x.k} | ghi danh: ${yt(x)} | địa phương: ${x.p} | thời kỳ: ${x.pd} | ${x.d} | Điểm chính: ${x.f.join('; ')} | Gắn CT: ${x.g.join('; ')}${(window.GT||{})[x.id]?` | Giá trị: ${window.GT[x.id].gt.join('; ')} | Đặc điểm: ${window.GT[x.id].dd.join('; ')}`:''}`).join('\n');
 const SYS=`Bạn là trợ lý học tập môn Lịch sử cho học sinh và giáo viên THPT Việt Nam, chuyên về các di sản của Việt Nam được UNESCO ghi danh (cập nhật đến 24/11/2026: 9 di sản thế giới, 17 di sản văn hóa phi vật thể, 13 di sản tư liệu).
 Nguyên tắc bắt buộc:
 1. Ưu tiên tuyệt đối DỮ LIỆU ĐÃ KIỂM CHỨNG bên dưới. Có thể bổ sung kiến thức lịch sử phổ thông đã được thừa nhận rộng rãi (như trong SGK), nhưng không bịa năm tháng, số liệu, tên người, trích dẫn hay nguồn.
@@ -550,9 +579,16 @@ async function fileInfo(names){const need=[...new Set(names.map(fname))].filter(
  return (await Promise.all(names.map(n=>infoC[fname(n)]))).filter(Boolean)}
 const credit=r=>`Ảnh: ${esc(r.artist)} · ${esc(r.lic)} · <a href="${esc(r.page)}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
 /* card thumbnails, loaded when visible */
+const CQ={hue:'Hue Imperial City citadel',halong:'Ha Long Bay',hoian:'Hoi An ancient town',myson:'My Son sanctuary Cham',phongnha:'Phong Nha Ke Bang cave',thanglong:'Imperial Citadel of Thang Long',thanhho:'Citadel of the Ho Dynasty',trangan:'Trang An Ninh Binh',yentu:'Yen Tu mountain pagoda',nhanhac:'Nha nhac Hue royal court music',congchieng:'gong culture Central Highlands Vietnam',quanho:'Quan ho Bac Ninh',catru:'Ca tru',giong:'Giong festival Phu Dong',xoan:'Hat Xoan Phu Tho',hungvuong:'Hung Kings Temple Phu Tho',taitu:'Don ca tai tu',vigiam:'Vi Giam Nghe Tinh folk song',keoco:'tug of war Vietnam festival',thomau:'Hau dong Mother Goddess Vietnam',baichoi:'Bai choi',then:'Then Tay Nung',xoe:'Xoe dance Thai Vietnam',gomcham:'Bau Truc pottery Cham',bachuaxu:'Ba Chua Xu temple Sam mountain',dongho:'Dong Ho painting',mocbannguyen:'Nguyen dynasty woodblocks',biatiensi:'Temple of Literature stelae doctors Hanoi',chauban:'Nguyen dynasty imperial archives',vinhnghiem:'Vinh Nghiem pagoda Bac Giang',thovanhue:'Hue imperial city poem inscription',phucgiang:'Truong Luu Ha Tinh',hoanghoa:'Hoang Hoa su trinh do',nguhanhson:'Marble Mountains Da Nang',truongluu:'Truong Luu Can Loc',cuudinh:'Nine Dynastic Urns Hue',phohien:'Pho Hien Hung Yen',nonnuoc:'Non Nuoc mountain Ninh Binh'};
+const csC={};
+function commonsSearch(id){if(id in csC)return csC[id];const q=CQ[id];if(!q)return csC[id]=Promise.resolve([]);
+ return csC[id]=api(CAPI,{action:'query',generator:'search',gsrsearch:q,gsrnamespace:'6',gsrlimit:'14',prop:'imageinfo',iiprop:'url|extmetadata|mime',iiurlwidth:'960'}).then(j=>((j.query&&j.query.pages)||[]).sort((a,b)=>(a.index||0)-(b.index||0)).filter(pg=>!SKIP.test(pg.title)).map(pg=>{const ii=pg.imageinfo&&pg.imageinfo[0];if(!ii||!/^(image\/(jpeg|png|webp)|video\/)/.test(ii.mime))return null;const m=ii.extmetadata||{},v=k=>m[k]&&m[k].value;
+  return{mime:ii.mime,thumb:httpsOnly(ii.thumburl||ii.url),url:httpsOnly(ii.url),page:httpsOnly(ii.descriptionurl),artist:txt(v('Artist'))||'Không rõ tác giả',lic:txt(v('LicenseShortName'))||'xem trang nguồn',desc:txt(v('ImageDescription')).slice(0,160)}}).filter(r=>r&&(r.thumb||r.url))).catch(()=>[])}
 window.__obs=('IntersectionObserver' in window)?new IntersectionObserver(es=>es.forEach(async en=>{if(!en.isIntersecting)return;const t=en.target;window.__obs.unobserve(t);
- const p=await wikiPage(t.dataset.id);if(!p||!p.pageimage||!p.thumbnail){t.remove();return}
- const [r]=await fileInfo([p.pageimage]);if(!r||!r.thumb){t.remove();return}
+ const p=await wikiPage(t.dataset.id);let r=null;
+ if(p&&p.pageimage)[r]=await fileInfo([p.pageimage]);
+ if(!r||!r.thumb)r=(await commonsSearch(t.dataset.id)).find(o=>/^image/.test(o.mime));
+ if(!r||!r.thumb){t.remove();return}
  t.innerHTML=`<img class="thumb" loading="lazy" alt="${esc(r.desc||'')}" src="${esc(r.thumb)}"><span class="cred" style="display:block;margin-top:4px">Ảnh: ${esc(r.artist)} · ${esc(r.lic)}</span>`;
  t.querySelector('img').onerror=()=>t.remove()}),{rootMargin:'200px'}):null;
 if(window.__obs)document.querySelectorAll('#grid .tw').forEach(t=>window.__obs.observe(t));
@@ -565,10 +601,11 @@ async function loadMedia(id){const box=$('#media');if(!box)return;const x=byId[i
  if(!WQ[id]){box.innerHTML=vid+links(null);return}
  box.innerHTML='<p class="note">Đang tải ảnh từ Wikimedia Commons…</p>';
  const p=await wikiPage(id);if(dlg.dataset.id!==id)return;
- if(!p){box.innerHTML='<p class="note">Không tải được ảnh (mạng có thể chặn Wikipedia, hoặc đang mở trang trên claude.ai).</p>'+vid+links(null);return}
- let names=(p.images||[]).map(i=>i.title).filter(t=>/\.(jpe?g|png|webp|tiff?|webm|ogv)$/i.test(t)&&!SKIP.test(t));
- if(p.pageimage){names=names.filter(n=>fname(n)!==fname(p.pageimage));names.unshift(p.pageimage)}
+ let names=((p&&p.images)||[]).map(i=>i.title).filter(t=>/\.(jpe?g|png|webp|tiff?|webm|ogv)$/i.test(t)&&!SKIP.test(t));
+ if(p&&p.pageimage){names=names.filter(n=>fname(n)!==fname(p.pageimage));names.unshift(p.pageimage)}
  const recs=(await fileInfo(names.slice(0,24))).filter(r=>r.thumb||r.url);if(dlg.dataset.id!==id)return;
+ if(recs.length<6){const seen=new Set(recs.map(r=>r.url));(await commonsSearch(id)).forEach(r=>{if(recs.length<16&&!seen.has(r.url)){seen.add(r.url);recs.push(r)}});if(dlg.dataset.id!==id)return}
+ if(!recs.length&&!p){box.innerHTML='<p class="note">Không tải được ảnh (mạng có thể chặn Wikipedia/Wikimedia, hoặc đang mở trang trên claude.ai).</p>'+vid+links(null);return}
  const figs=recs.map(r=>/^video\//.test(r.mime)?`<figure><video controls preload="none" src="${esc(r.url)}"></video><figcaption>${r.desc?esc(r.desc)+'<br>':''}Video: ${esc(r.artist)} · ${esc(r.lic)} · <a href="${esc(r.page)}" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>`
   :`<figure><img loading="lazy" alt="${esc(r.desc||x.t)}" src="${esc(r.thumb)}"><figcaption>${r.desc?esc(r.desc)+'<br>':''}${credit(r)}</figcaption></figure>`);
  box.innerHTML=(figs.length?`<div class="gal" id="gal" tabindex="0" aria-label="Thư viện ảnh ${esc(x.t)}">${figs.join('')}</div><div class="galnav"><button type="button" data-g="-1" aria-label="Ảnh trước">‹</button><span class="note" id="gpos">1 / ${figs.length}</span><button type="button" data-g="1" aria-label="Ảnh sau">›</button></div>`:'<p class="note">Chưa tìm thấy ảnh tự do phù hợp cho di sản này.</p>')+vid+links(p);

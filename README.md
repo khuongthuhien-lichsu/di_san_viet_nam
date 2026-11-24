@@ -7,16 +7,17 @@ Website gồm các tệp tĩnh, không cần máy chủ hay cơ sở dữ liệu
 | Tệp | Nội dung |
 |---|---|
 | `index.html` | Trang chính (bản đồ, hồ sơ, dòng thời gian, trắc nghiệm, khu giáo viên) |
+| `gia-tri-di-san.js` | Giá trị nổi bật và đặc điểm tiêu biểu của 39 di sản (di sản thế giới ghi theo tiêu chí UNESCO) |
 | `ngan-hang-cau-hoi.js` | 235 câu trắc nghiệm (Nhận biết / Thông hiểu / Vận dụng) và 81 câu hỏi thảo luận cho 39 di sản |
 | `tai-lieu-giao-vien.js` | 3 kế hoạch bài dạy (Công văn 5512) và 3 phiếu học tập |
 | `nguon-du-lieu-di-san.md` | Tài liệu nguồn để tải vào NotebookLM |
 
-**Cần tải lên đủ cả bốn tệp, cùng một thư mục**; thiếu tệp `.js` thì trắc nghiệm soạn sẵn và tài liệu giáo viên sẽ không hiện.
+**Cần tải lên đủ tất cả các tệp, cùng một thư mục**; thiếu tệp `.js` nào thì phần tương ứng (giá trị di sản, trắc nghiệm soạn sẵn, tài liệu giáo viên) sẽ không hiện.
 
 ## Đưa lên GitHub Pages
 
 1. Đăng nhập github.com, bấm **New repository**, đặt tên (ví dụ `di-san-viet-nam`), chọn **Public**, bấm **Create repository**.
-2. Bấm **uploading an existing file**, kéo thả cả 5 tệp (`index.html`, `ngan-hang-cau-hoi.js`, `tai-lieu-giao-vien.js`, `nguon-du-lieu-di-san.md`, `README.md`) vào, bấm **Commit changes**.
+2. Bấm **uploading an existing file**, kéo thả cả 6 tệp (`index.html`, `gia-tri-di-san.js`, `ngan-hang-cau-hoi.js`, `tai-lieu-giao-vien.js`, `nguon-du-lieu-di-san.md`, `README.md`) vào, bấm **Commit changes**.
 3. Vào **Settings → Pages**. Ở mục **Build and deployment**, chọn **Source: Deploy from a branch**, **Branch: main**, thư mục **/(root)**, bấm **Save**.
 4. Đợi 1–3 phút, tải lại trang Settings → Pages để thấy địa chỉ dạng
    `https://<tên-tài-khoản>.github.io/di-san-viet-nam/`
@@ -37,7 +38,8 @@ Không nên dán toàn bộ mã vào **Nhúng → Mã nhúng**: Google Sites b�
 - Ảnh đại diện hiện trên thẻ di sản; bấm vào thẻ để xem thư viện ảnh (vuốt ngang, nút ‹ ›, phím mũi tên). Nếu bài Wikipedia có video trên Commons, video hiện trong thư viện.
 - Cần kết nối Internet và mạng của trường không chặn wikipedia.org, wikimedia.org.
 - Video: 37/39 di sản đã có video gắn sẵn từ nguồn chính thống, đã kiểm tra mã, tiêu đề và kênh đăng (24/11/2026): kênh UNESCO (17 di sản phi vật thể, 6 di sản thế giới – loạt UNESCO/NHK), VTV, TTXVN (VNA Media), VOV, Truyền hình Quốc hội, Trung tâm Lưu trữ quốc gia IV, Đài Hà Nội và đài truyền hình Quảng Ninh, Thanh Hóa, Hà Tĩnh, Hưng Yên. Video chỉ tải khi người dùng bấm nút phát (chế độ youtube-nocookie), nên trang vẫn nhẹ.
-- Chưa có video: Thơ văn trên kiến trúc cung đình Huế và Ma nhai núi Non Nước (chưa tìm được video từ kênh chính thống). Hồ sơ hai di sản này có nút “Tìm video trên YouTube”.
+- Thơ văn trên kiến trúc cung đình Huế dùng phim tài liệu của THVL; Ma nhai núi Non Nước tạm dùng video của một kênh cá nhân (ghi rõ tên kênh) vì chưa có video từ kênh chính thống – nên thay khi có video của Đài PT-TH Ninh Bình.
+- Ảnh: nếu bài Wikipedia có ít ảnh, trang tự tìm thêm ảnh trên Wikimedia Commons theo từ khóa (bảng `CQ` trong `index.html`).
 - Đổi hoặc thêm video: mở `index.html`, tìm `const VIDEOS={`, sửa dòng của di sản tương ứng theo dạng `['MÃ_VIDEO','Tiêu đề','Kênh đăng']` (mã là 11 ký tự sau `v=` trong link YouTube).
 - Video của UNESCO/NHK có lời thuyết minh tiếng Anh; video của các đài trong nước bằng tiếng Việt. Video đăng trên YouTube có thể bị chủ kênh gỡ; khi đó thay mã khác.
 - Di sản phi vật thể có thêm nút “Trang UNESCO” dẫn tới hồ sơ chính thức trên ich.unesco.org.
