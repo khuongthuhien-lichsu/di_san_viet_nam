@@ -150,7 +150,7 @@ taitu:[
 vigiam:[
 [1,'Dân ca Ví, Giặm thuộc địa phương nào?','Nghệ An và Hà Tĩnh','Bắc Ninh','Phú Thọ','An Giang','Ví, Giặm là dân ca xứ Nghệ.'],
 [1,'Dân ca Ví, Giặm Nghệ Tĩnh được UNESCO ghi danh năm nào?','2014','2012','2017','2019','Ghi danh năm 2014.'],
-[2,'Dân ca Ví, Giặm gắn với hoạt động nào?','Lao động và sinh hoạt như dệt vải, chèo thuyền, làm ruộng','Nghi lễ đăng quang của triều đình','Lễ thi đình','Nghi lễ hầu đồng','Nhiều làn điệu gắn với các nghề lao động.'],
+[2,'Dân ca Ví, Giặm gắn với hoạt động nào?','Lao động và sinh hoạt như làm ruộng, chèo thuyền, làm nón, ru con','Nghi lễ đăng quang của triều đình','Lễ thi đình','Nghi lễ hầu đồng','Nhiều làn điệu gắn với các nghề lao động.'],
 [2,'Lời ca Ví, Giặm phản ánh điều gì?','Đời sống, tình cảm và đạo lý của cư dân xứ Nghệ','Lịch sử các triều đại phương Bắc','Giáo lý Hindu giáo','Luật lệ của triều Nguyễn','Dân ca là tiếng nói của cộng đồng lao động.'],
 [3,'Hà Tĩnh còn có những di sản tư liệu nào được UNESCO ghi danh?','Mộc bản Trường học Phúc Giang, Hoàng Hoa sứ trình đồ, Văn bản Hán Nôm làng Trường Lưu','Châu bản và Mộc bản triều Nguyễn','Văn bia Phố Hiến và Ma nhai Non Nước','Cửu đỉnh và Thơ văn trên kiến trúc cung đình Huế','Cả ba di sản tư liệu đều gắn với làng Trường Lưu, Hà Tĩnh.'],
 [3,'Điểm chung giữa Ví, Giặm và Quan họ là gì?','Đều là dân ca của cộng đồng, phản ánh đời sống, tình cảm con người','Đều là âm nhạc cung đình','Đều thuộc Tây Nguyên','Đều là di sản tư liệu','Cả hai là dân ca, gắn với cộng đồng ở hai vùng khác nhau.']
@@ -167,7 +167,7 @@ thomau:[
 [1,'Nghi lễ tiêu biểu trong Thực hành Tín ngưỡng thờ Mẫu Tam phủ là gì?','Hầu đồng (lên đồng)','Tế Nam Giao','Kéo co','Hát đối đáp','Hầu đồng là nghi lễ tiêu biểu của tín ngưỡng thờ Mẫu.'],
 [1,'Âm nhạc gắn liền với nghi lễ thờ Mẫu là gì?','Hát chầu văn','Nhã nhạc','Đờn ca tài tử','Hát Then','Chầu văn là âm nhạc nghi lễ của tín ngưỡng thờ Mẫu.'],
 [1,'Thực hành Tín ngưỡng thờ Mẫu Tam phủ của người Việt được UNESCO ghi danh năm nào?','2016','2013','2019','2024','Ghi danh năm 2016.'],
-[2,'“Tam phủ” gồm những phủ nào?','Thiên phủ, Địa phủ, Thoải phủ (Thủy phủ)','Kinh thành, Hoàng thành, Tử Cấm thành','Kim Sơn, Mộc Sơn, Thủy Sơn','Yên Tử, Vĩnh Nghiêm, Côn Sơn','Tam phủ là ba cõi trời, đất, nước.'],
+[2,'“Tam phủ” gồm những phủ nào?','Thiên phủ, Nhạc phủ, Thoải phủ','Kinh thành, Hoàng thành, Tử Cấm thành','Kim Sơn, Mộc Sơn, Thủy Sơn','Yên Tử, Vĩnh Nghiêm, Côn Sơn','Theo hồ sơ UNESCO, Tam phủ là ba cõi: trời (Thiên phủ), rừng núi (Nhạc phủ), sông nước (Thoải phủ).'],
 [2,'Tín ngưỡng thờ Mẫu thể hiện điều gì?','Khát vọng về sức khỏe, may mắn và sự tôn vinh vai trò người phụ nữ','Quy định về khoa cử','Kỹ thuật xây dựng đền tháp','Hoạt động ngoại thương','Hình tượng Mẫu thể hiện sự tôn vinh người mẹ, người phụ nữ.'],
 [3,'Khi tìm hiểu một tín ngưỡng dân gian, thái độ nào là khoa học và phù hợp?','Tôn trọng niềm tin của cộng đồng, phân biệt giá trị văn hóa với hành vi mê tín, trục lợi','Chế giễu người thực hành','Coi mọi hoạt động lễ hội là mê tín','Tham gia trục lợi từ lễ hội','Tôn trọng và phân tích có phê phán là thái độ khoa học.']
 ],

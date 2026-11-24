@@ -432,12 +432,12 @@ Giá trị nổi bật:
 - Là phương tiện giáo dục, trao truyền giá trị đạo đức trong cộng đồng.
 
 Đặc điểm tiêu biểu:
-- Gắn với lao động và sinh hoạt: dệt vải, chèo thuyền, làm ruộng, ru con…
+- Gắn với lao động và sinh hoạt: làm ruộng, chèo thuyền, làm nón, ru con… (theo hồ sơ UNESCO).
 - Ví có giai điệu tự do, ngân dài; Giặm có tiết tấu rõ, thường kể chuyện.
 - Chủ thể là cộng đồng ở Nghệ An và Hà Tĩnh.
 
 Điểm cần nhớ:
-- Gắn với nhiều nghề lao động như dệt vải, chèo thuyền, làm ruộng
+- Gắn với nhiều công việc lao động như làm ruộng, chèo thuyền, làm nón
 
 Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (văn hóa dân gian)
 
@@ -478,12 +478,12 @@ Giá trị nổi bật:
 - Thể hiện khát vọng về sức khỏe, may mắn, cuộc sống tốt đẹp; là môi trường bảo tồn nhiều loại hình nghệ thuật dân gian.
 
 Đặc điểm tiêu biểu:
-- Thờ Mẫu với các phủ: Thiên phủ, Địa phủ, Thoải phủ; Mẫu Liễu Hạnh là hình tượng tiêu biểu.
+- Theo hồ sơ UNESCO, Tam phủ gồm ba cõi: trời (Thiên phủ), rừng núi (Nhạc phủ), sông nước (Thoải phủ); Mẫu Liễu Hạnh là hình tượng tiêu biểu.
 - Nghi lễ hầu đồng kết hợp âm nhạc (hát chầu văn), trang phục, múa.
 - Trung tâm tiêu biểu là Phủ Dầy (Ninh Bình, Nam Định cũ).
 
 Điểm cần nhớ:
-- Tam phủ: Thiên phủ, Địa phủ, Thoải phủ (Thủy phủ)
+- Tam phủ: Thiên phủ (trời), Nhạc phủ (rừng núi), Thoải phủ (sông nước)
 
 Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (tín ngưỡng, tôn giáo)
 
@@ -643,7 +643,7 @@ Giá trị nổi bật:
 - Là di sản tư liệu thế giới đầu tiên của Việt Nam (2009).
 
 Đặc điểm tiêu biểu:
-- Gồm 34.618 tấm ván gỗ khắc chữ Hán – Nôm ngược để in sách.
+- Gồm hơn 3 vạn tấm ván gỗ khắc chữ ngược (chủ yếu chữ Hán) để in sách. Số liệu công bố khác nhau giữa các nguồn (34.555 – 34.619 tấm); năm 2025, Trung tâm Lưu trữ quốc gia IV nêu đang bảo quản 33.976 tấm.
 - Nội dung gồm chính sử, sách điển chế, luật lệ, địa lý, văn thơ… do triều Nguyễn tổ chức biên soạn.
 - Lưu giữ tại Trung tâm Lưu trữ quốc gia IV (Đà Lạt, Lâm Đồng).
 
