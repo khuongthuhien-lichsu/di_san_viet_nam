@@ -31,7 +31,7 @@ Giá trị nổi bật:
 - Di sản thế giới đầu tiên của Việt Nam (1993)
 - Huế còn có các di sản Nhã nhạc, Thơ văn trên kiến trúc cung đình, Cửu đỉnh
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt; L11: Cuộc cải cách của Minh Mạng
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (tiến trình phát triển thời Nguyễn; thành tựu về nghệ thuật kiến trúc); Lớp 11 – Bài 11. Cuộc cải cách của Minh Mạng (nửa đầu thế kỉ XIX); Lớp 11 – Chuyên đề học tập, Chuyên đề 1. Lịch sử nghệ thuật truyền thống Việt Nam (mục IV. Nghệ thuật thời Nguyễn); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Vịnh Hạ Long – Quần đảo Cát Bà
 
@@ -56,7 +56,7 @@ Giá trị nổi bật:
 - 2000: ghi danh thêm giá trị địa chất, địa mạo
 - 2023: mở rộng thành Vịnh Hạ Long – Quần đảo Cát Bà
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Sử học với công tác bảo tồn di sản văn hóa và thiên nhiên
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 3. Vai trò của Sử học (Sử học với công tác bảo tồn và phát huy giá trị di sản)
 
 ### Đô thị cổ Hội An
 
@@ -80,7 +80,7 @@ Giá trị nổi bật:
 - Phát triển mạnh ở thế kỷ XVII – XVIII dưới thời các chúa Nguyễn ở Đàng Trong
 - Ghi danh cùng năm với Khu đền tháp Mỹ Sơn (1999)
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (kinh tế, đô thị); L10: Văn minh Đông Nam Á – giao lưu văn hóa
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về kinh tế: thủ công nghiệp, thương nghiệp); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Khu đền tháp Mỹ Sơn
 
@@ -104,7 +104,7 @@ Giá trị nổi bật:
 - Kiến trúc gạch nung đặc sắc của người Chăm
 - Phản ánh ảnh hưởng của văn minh Ấn Độ đối với Đông Nam Á
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Champa; L10: Văn minh Đông Nam Á
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 9. Một số nền văn minh cổ trên đất nước Việt Nam (văn minh Champa); Lớp 10 – Bài 8. Hành trình phát triển và thành tựu của văn minh Đông Nam Á thời cổ – trung đại; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Vườn quốc gia Phong Nha – Kẻ Bàng và Hin Nam Nô
 
@@ -130,7 +130,7 @@ Giá trị nổi bật:
 - 2015: ghi danh mở rộng về hệ sinh thái và đa dạng sinh học
 - 2025: mở rộng xuyên biên giới với Lào
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Sử học với công tác bảo tồn di sản văn hóa và thiên nhiên
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 3. Vai trò của Sử học (Sử học với công tác bảo tồn và phát huy giá trị di sản)
 
 ### Khu trung tâm Hoàng thành Thăng Long – Hà Nội
 
@@ -155,7 +155,7 @@ Giá trị nổi bật:
 - Năm 1010: Lý Công Uẩn ban Chiếu dời đô, đổi Đại La thành Thăng Long
 - Được ghi danh đúng năm kỷ niệm 1000 năm Thăng Long – Hà Nội (2010)
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (tiến trình phát triển; thành tựu về chính trị, nghệ thuật); Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Thành nhà Hồ
 
@@ -179,7 +179,7 @@ Giá trị nổi bật:
 - Nhà Hồ tồn tại từ năm 1400 đến 1407
 - Khối đá lớn được ghép khít, không dùng vữa kết dính
 
-Gợi ý gắn chương trình Lịch sử 2018: L11: Cuộc cải cách của Hồ Quý Ly và triều Hồ
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 11 – Bài 9. Cuộc cải cách của Hồ Quý Ly và triều Hồ (đầu thế kỉ XV); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Quần thể danh thắng Tràng An
 
@@ -204,7 +204,7 @@ Giá trị nổi bật:
 - Hoa Lư là kinh đô nước Đại Cồ Việt từ năm 968 đến năm 1010
 - Kết hợp giá trị văn hóa, thẩm mỹ và địa chất
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (thời Đinh – Tiền Lê)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (tiến trình phát triển thời Ngô – Đinh – Tiền Lê, kinh đô Hoa Lư); Lớp 10 – Bài 3. Vai trò của Sử học (Sử học với công tác bảo tồn và phát huy giá trị di sản)
 
 ### Quần thể di tích và danh thắng Yên Tử – Vĩnh Nghiêm – Côn Sơn, Kiếp Bạc
 
@@ -229,7 +229,7 @@ Giá trị nổi bật:
 - Di sản văn hóa theo chuỗi đầu tiên của Việt Nam
 - Di sản thế giới liên tỉnh thứ hai, sau Vịnh Hạ Long – Quần đảo Cát Bà
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (tư tưởng, tôn giáo); L11: Kháng chiến chống quân Mông – Nguyên
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về tư tưởng, tôn giáo); Lớp 11 – Bài 7. Chiến tranh bảo vệ Tổ quốc trong lịch sử Việt Nam (kháng chiến chống quân Mông – Nguyên; Kiếp Bạc); Lớp 12 – Chuyên đề học tập, Chuyên đề 1. Lịch sử tín ngưỡng và tôn giáo ở Việt Nam (mục III. Một số tôn giáo ở Việt Nam – Phật giáo); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ## Di sản văn hóa phi vật thể (17)
 
@@ -255,7 +255,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Di sản văn hóa phi vật thể đầu tiên của Việt Nam được UNESCO vinh danh
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (nghệ thuật)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về nghệ thuật); Lớp 11 – Chuyên đề học tập, Chuyên đề 1. Lịch sử nghệ thuật truyền thống Việt Nam (mục IV. Nghệ thuật thời Nguyễn); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Không gian văn hóa Cồng chiêng Tây Nguyên
 
@@ -278,7 +278,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Cồng chiêng gắn với nghi lễ vòng đời người và chu kỳ nông nghiệp
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đông Nam Á – đời sống văn hóa các dân tộc
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Bài 11. Các dân tộc trên đất nước Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Dân ca Quan họ Bắc Ninh
 
@@ -301,7 +301,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Thường hát vào dịp lễ hội mùa xuân
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (văn hóa dân gian)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Ca trù
 
@@ -324,7 +324,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Được ghi vào Danh sách cần bảo vệ khẩn cấp
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (nghệ thuật)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về nghệ thuật); Lớp 11 – Chuyên đề học tập, Chuyên đề 1. Lịch sử nghệ thuật truyền thống Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Hội Gióng ở đền Phù Đổng và đền Sóc
 
@@ -347,7 +347,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Thể hiện truyền thống chống ngoại xâm trong tâm thức dân gian
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Văn Lang – Âu Lạc
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 9. Một số nền văn minh cổ trên đất nước Việt Nam (văn minh Văn Lang – Âu Lạc); Lớp 12 – Chuyên đề học tập, Chuyên đề 1. Lịch sử tín ngưỡng và tôn giáo ở Việt Nam (mục II. Một số tín ngưỡng ở Việt Nam); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Hát Xoan Phú Thọ
 
@@ -370,7 +370,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Ví dụ tiêu biểu về hiệu quả của công tác bảo vệ di sản
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Sử học với công tác bảo tồn di sản
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Tín ngưỡng thờ cúng Hùng Vương ở Phú Thọ
 
@@ -393,7 +393,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Giỗ Tổ Hùng Vương vào ngày 10 tháng 3 âm lịch
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Văn Lang – Âu Lạc
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 9. Một số nền văn minh cổ trên đất nước Việt Nam (văn minh Văn Lang – Âu Lạc); Lớp 12 – Chuyên đề học tập, Chuyên đề 1. Lịch sử tín ngưỡng và tôn giáo ở Việt Nam (mục II.1. Tín ngưỡng thờ cúng tổ tiên và Quốc tổ Hùng Vương); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Nghệ thuật Đờn ca tài tử Nam Bộ
 
@@ -416,7 +416,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Gắn với đời sống cư dân vùng sông nước Nam Bộ
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (văn hóa các vùng miền)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Dân ca Ví, Giặm Nghệ Tĩnh
 
@@ -439,7 +439,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Gắn với nhiều công việc lao động như làm ruộng, chèo thuyền, làm nón
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (văn hóa dân gian)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Nghi lễ và trò chơi kéo co
 
@@ -462,7 +462,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Hồ sơ đa quốc gia, thể hiện điểm chung của văn hóa lúa nước châu Á
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đông Nam Á
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Thực hành Tín ngưỡng thờ Mẫu Tam phủ của người Việt
 
@@ -485,7 +485,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Tam phủ: Thiên phủ (trời), Nhạc phủ (rừng núi), Thoải phủ (sông nước)
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (tín ngưỡng, tôn giáo)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 12 – Chuyên đề học tập, Chuyên đề 1. Lịch sử tín ngưỡng và tôn giáo ở Việt Nam (mục II.2. Tín ngưỡng thờ Mẫu); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Nghệ thuật Bài chòi Trung Bộ Việt Nam
 
@@ -508,7 +508,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Vừa là diễn xướng, vừa là trò chơi dân gian
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (văn hóa dân gian)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Thực hành Then của người Tày, Nùng, Thái ở Việt Nam
 
@@ -531,7 +531,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Đàn tính là nhạc cụ tiêu biểu
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đông Nam Á – đời sống văn hóa các dân tộc
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Bài 11. Các dân tộc trên đất nước Việt Nam; Lớp 12 – Chuyên đề học tập, Chuyên đề 1. Lịch sử tín ngưỡng và tôn giáo ở Việt Nam (mục II. Một số tín ngưỡng ở Việt Nam); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Nghệ thuật Xòe Thái
 
@@ -554,7 +554,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Gắn với đời sống cộng đồng người Thái vùng Tây Bắc
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đông Nam Á – đời sống văn hóa các dân tộc
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Bài 11. Các dân tộc trên đất nước Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Nghệ thuật làm gốm của người Chăm
 
@@ -577,7 +577,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Được ghi vào Danh sách cần bảo vệ khẩn cấp
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Champa
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Bài 11. Các dân tộc trên đất nước Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Lễ hội Vía Bà Chúa Xứ núi Sam
 
@@ -600,7 +600,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Ghi danh ngày 4/12/2024 tại kỳ họp 19 Ủy ban Liên chính phủ Công ước 2003 (Paraguay)
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (tín ngưỡng, giao lưu văn hóa)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 12 – Chuyên đề học tập, Chuyên đề 1. Lịch sử tín ngưỡng và tôn giáo ở Việt Nam (mục II. Một số tín ngưỡng ở Việt Nam); Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ### Nghề làm tranh dân gian Đông Hồ
 
@@ -624,7 +624,7 @@ Giá trị nổi bật:
 - Ghi danh ngày 9/12/2025 tại kỳ họp 20 Ủy ban Liên chính phủ Công ước 2003 (Ấn Độ)
 - Di sản phi vật thể thứ 17 của Việt Nam
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Sử học với công tác bảo tồn di sản
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 12. Khái quát về đời sống vật chất và tinh thần của cộng đồng các dân tộc Việt Nam; Lớp 10 – Chuyên đề học tập, Chuyên đề 2. Bảo tồn và phát huy giá trị di sản văn hóa ở Việt Nam
 
 ## Di sản tư liệu (13)
 
@@ -651,7 +651,7 @@ Giá trị nổi bật:
 - Di sản tư liệu thế giới đầu tiên của Việt Nam
 - Có nhiều nội dung về quá trình xác lập, thực thi chủ quyền của Việt Nam ở Hoàng Sa, Trường Sa
 
-Gợi ý gắn chương trình Lịch sử 2018: L11: Bảo vệ chủ quyền biển đảo; L10: Văn minh Đại Việt (chữ viết, sử học)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về chữ viết, văn học, sử học); Lớp 11 – Bài 13. Việt Nam và Biển Đông; Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu)
 
 ### 82 bia đá các khoa thi tiến sĩ tại Văn Miếu – Quốc Tử Giám
 
@@ -674,7 +674,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Câu “Hiền tài là nguyên khí của quốc gia” trích từ văn bia khoa thi năm 1442 do Thân Nhân Trung soạn
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (giáo dục, khoa cử)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về giáo dục, khoa cử); Lớp 11 – Bài 10. Cuộc cải cách của Lê Thánh Tông (thế kỉ XV); Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu)
 
 ### Mộc bản kinh Phật chùa Vĩnh Nghiêm
 
@@ -697,7 +697,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Liên hệ trực tiếp với di sản thế giới ghi danh năm 2025
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (tôn giáo)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 11 – Bài 11. Cuộc cải cách của Minh Mạng (nửa đầu thế kỉ XIX); Lớp 11 – Bài 13. Việt Nam và Biển Đông; Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu)
 
 ### Châu bản triều Nguyễn
 
@@ -720,7 +720,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Có các văn bản về việc triều đình cử người ra Hoàng Sa, khẳng định chủ quyền của Việt Nam
 
-Gợi ý gắn chương trình Lịch sử 2018: L11: Cuộc cải cách của Minh Mạng; L11: Bảo vệ chủ quyền biển đảo
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 12 – Bài 7. Cuộc kháng chiến chống thực dân Pháp (1945 – 1954) (chiến dịch Điện Biên Phủ – ca khúc “Hò kéo pháo”); Lớp 12 – Bài 8. Cuộc kháng chiến chống Mỹ, cứu nước (1954 – 1975); Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu)
 
 ### Thơ văn trên kiến trúc cung đình Huế
 
@@ -743,7 +743,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - “Bảo tàng thơ” trên kiến trúc
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (văn học, nghệ thuật)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về tư tưởng, tôn giáo); Lớp 12 – Chuyên đề học tập, Chuyên đề 1. Lịch sử tín ngưỡng và tôn giáo ở Việt Nam (mục III. Một số tôn giáo ở Việt Nam – Phật giáo); Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu)
 
 ### Mộc bản Trường học Phúc Giang
 
@@ -766,7 +766,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Tư liệu về giáo dục tư thục thời phong kiến
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (giáo dục)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về chữ viết, văn học); Lớp 11 – Chuyên đề học tập, Chuyên đề 1. Lịch sử nghệ thuật truyền thống Việt Nam (mục IV. Nghệ thuật thời Nguyễn)
 
 ### Hoàng Hoa sứ trình đồ
 
@@ -789,7 +789,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Lưu giữ bởi dòng họ Nguyễn Huy (Trường Lưu)
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (ngoại giao)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về giáo dục, khoa cử); Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu)
 
 ### Bia ma nhai ở danh thắng Ngũ Hành Sơn
 
@@ -812,7 +812,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - “Ma nhai” là văn khắc trên vách đá tự nhiên
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Sử học – các loại hình sử liệu
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về chữ viết, văn học, khoa học); Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu)
 
 ### Văn bản Hán Nôm làng Trường Lưu
 
@@ -835,7 +835,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Cùng làng với Mộc bản Phúc Giang và Hoàng Hoa sứ trình đồ
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Sử học – các loại hình sử liệu
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu); Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về chữ viết, văn học)
 
 ### Những bản đúc nổi trên Cửu đỉnh ở Hoàng cung Huế
 
@@ -858,7 +858,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Ghi danh ngày 8/5/2024 tại kỳ họp 10 MOWCAP (Mông Cổ)
 
-Gợi ý gắn chương trình Lịch sử 2018: L11: Cuộc cải cách của Minh Mạng
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu); Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về chữ viết, giáo dục)
 
 ### Bộ sưu tập của nhạc sĩ Hoàng Vân
 
@@ -881,7 +881,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Ghi danh ngày 10/4/2025 (giờ Paris) bởi Hội đồng Chấp hành UNESCO
 
-Gợi ý gắn chương trình Lịch sử 2018: L12: Lịch sử Việt Nam từ 1945 đến nay (đời sống văn hóa)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 11 – Bài 11. Cuộc cải cách của Minh Mạng (nửa đầu thế kỉ XIX); Lớp 11 – Chuyên đề học tập, Chuyên đề 1. Lịch sử nghệ thuật truyền thống Việt Nam (mục IV. Nghệ thuật thời Nguyễn); Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu)
 
 ### Văn bia Phố Hiến
 
@@ -904,7 +904,7 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Ghi danh ngày 5/11/2026 tại kỳ họp 11 MOWCAP (Jakarta, Indonesia)
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Văn minh Đại Việt (kinh tế, đô thị)
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về kinh tế: thương nghiệp, đô thị); Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu)
 
 ### Ma nhai trên núi Non Nước
 
@@ -927,4 +927,4 @@ Giá trị nổi bật:
 Điểm cần nhớ:
 - Ghi danh ngày 5/11/2026 tại kỳ họp 11 MOWCAP (Jakarta, Indonesia)
 
-Gợi ý gắn chương trình Lịch sử 2018: L10: Sử học – các loại hình sử liệu
+Gợi ý gắn với SGK Lịch sử (Kết nối tri thức với cuộc sống): Lớp 10 – Bài 1. Hiện thực lịch sử và lịch sử được con người nhận thức (nội dung về các nguồn sử liệu); Lớp 10 – Bài 10. Văn minh Đại Việt (thành tựu về chữ viết, văn học)
