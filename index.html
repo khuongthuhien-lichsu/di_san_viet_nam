@@ -187,7 +187,7 @@ footer{font-size:13px;color:var(--mut)}
 
 <section class="band" id="kham-pha"><div class="wrap">
 <h2>Khám phá từng di sản</h2>
-<p class="lead">Lọc theo loại hình, tìm theo tên hoặc địa phương, bấm vào thẻ để mở hồ sơ. Mỗi hồ sơ có: năm ghi danh, loại di sản, địa phương, thời kỳ lịch sử; giới thiệu khái quát; giá trị nổi bật (với di sản thế giới là các tiêu chí UNESCO đã ghi danh) và đặc điểm tiêu biểu; điểm cần nhớ; gợi ý bài học liên quan trong SGK Lịch sử bộ Kết nối tri thức với cuộc sống (lớp – bài – tên bài); câu hỏi thảo luận; thư viện ảnh và video; liên kết tới Wikipedia và trang chính thức của UNESCO (với di sản thế giới và di sản phi vật thể); nút luyện trắc nghiệm riêng cho di sản đó.</p>
+<p class="lead">Lọc theo loại hình, tìm theo tên hoặc địa phương, bấm vào thẻ để mở hồ sơ. Mỗi hồ sơ có: năm ghi danh, loại di sản, địa phương, thời kỳ lịch sử; giới thiệu khái quát; giá trị nổi bật (với di sản thế giới là các tiêu chí UNESCO đã ghi danh) và đặc điểm tiêu biểu; điểm cần nhớ; gợi ý bài học liên quan trong SGK Lịch sử THPT (lớp – bài – tên bài); câu hỏi thảo luận; thư viện ảnh và video; liên kết tới Wikipedia và trang chính thức của UNESCO (với di sản thế giới và di sản phi vật thể); nút luyện trắc nghiệm riêng cho di sản đó.</p>
 <div class="tools"><input type="search" id="q" placeholder="Tìm: Huế, nhà Trần, Champa, mộc bản…" aria-label="Tìm di sản">
 <div id="cats" style="display:flex;gap:8px;flex-wrap:wrap"></div>
 <select id="sort" aria-label="Sắp xếp"><option value="y">Theo năm ghi danh</option><option value="t">Theo tên</option><option value="n">Bắc vào Nam</option></select></div>
@@ -287,7 +287,7 @@ footer{font-size:13px;color:var(--mut)}
 <li><a href="https://www.vietnamplus.vn/hai-di-san-tu-lieu-viet-nam-vuon-tam-khu-vuc-nhan-len-gia-tri-bao-ton-post1146578.vnp">Vietnam+ – Văn bia Phố Hiến và Ma nhai núi Non Nước, nâng tổng số di sản tư liệu lên 13 (11/2026)</a></li>
 </ul>
 <p class="note">Cách đếm: 9 di sản thế giới (văn hóa, thiên nhiên, hỗn hợp); 17 di sản văn hóa phi vật thể (danh sách đại diện và danh sách cần bảo vệ khẩn cấp); 13 di sản tư liệu (4 cấp thế giới, 9 cấp khu vực châu Á – Thái Bình Dương). Bia tiến sĩ Văn Miếu và Châu bản triều Nguyễn từng được ghi danh cấp khu vực trước khi lên cấp thế giới, chỉ tính một lần. Khu di tích khảo cổ Óc Eo – Ba Thê đang trong quá trình thẩm định, chưa được ghi danh.</p>
-<p class="note">Mục "Gợi ý gắn với SGK Lịch sử" trong mỗi hồ sơ ghi Lớp – Bài – Tên bài theo bộ sách "Kết nối tri thức với cuộc sống" (NXB Giáo dục Việt Nam), bộ sách giáo khoa dùng thống nhất toàn quốc từ năm học 2026 – 2027 theo Quyết định 3588/QĐ-BGDĐT ngày 26/12/2025; gồm sách Lịch sử 10, 11, 12 và sách Chuyên đề học tập Lịch sử 10, 11, 12. Đây là gợi ý bài học có nội dung liên quan để giáo viên lồng ghép, không có nghĩa sách giáo khoa nhắc trực tiếp đến di sản đó. Số bài theo bản sách hiện hành; một số bản in cũ của Lịch sử 10 đánh số bài khác, giáo viên đối chiếu với cuốn sách đang dùng.</p>
+<p class="note">Mục "Gợi ý gắn với SGK Lịch sử THPT" trong mỗi hồ sơ ghi Lớp – Bài – Tên bài theo sách giáo khoa dùng thống nhất toàn quốc từ năm học 2026 – 2027 (Quyết định 3588/QĐ-BGDĐT ngày 26/12/2025), gồm sách Lịch sử 10, 11, 12 và sách Chuyên đề học tập Lịch sử 10, 11, 12. Đây là gợi ý bài học có nội dung liên quan để giáo viên lồng ghép, không có nghĩa sách giáo khoa nhắc trực tiếp đến di sản đó. Số bài theo bản sách hiện hành; một số bản in cũ của Lịch sử 10 đánh số bài khác, giáo viên đối chiếu với cuốn sách đang dùng.</p>
 <footer style="margin-top:20px">Học liệu phục vụ dạy học, phi thương mại.</footer>
 </div></section>
 
@@ -522,7 +522,7 @@ function openD(id){const x=byId[id];lastF=document.activeElement;
  dlg.innerHTML=`<button class="x" type="button" aria-label="Đóng">×</button><span class="tag c-${x.c}">${CAT[x.c]} · ${esc(x.k)}</span><h2 id="dT" style="margin-top:8px">${esc(x.t)}</h2>
  <div class="media" id="media"></div><dl><dt>Năm ghi danh</dt><dd>${esc(yt(x))}</dd><dt>Địa phương</dt><dd>${esc(x.p)}</dd><dt>Thời kỳ</dt><dd>${esc(x.pd)}</dd></dl>
  <p>${esc(x.d)}</p>${(window.GT||{})[x.id]?`<h3>Giá trị nổi bật</h3><ul>${window.GT[x.id].gt.map(t=>`<li>${esc(t)}</li>`).join('')}</ul><h3>Đặc điểm tiêu biểu</h3><ul>${window.GT[x.id].dd.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}<h3>Điểm cần nhớ</h3><ul>${x.f.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
- <h3>Gợi ý gắn với SGK Lịch sử (bộ Kết nối tri thức với cuộc sống)</h3><ul>${x.g.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>${(window.TL||{})[x.id]?`<h3>Câu hỏi thảo luận</h3><ol>${window.TL[x.id].map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:''}
+ <h3>Gợi ý gắn với SGK Lịch sử THPT</h3><ul>${x.g.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>${(window.TL||{})[x.id]?`<h3>Câu hỏi thảo luận</h3><ol>${window.TL[x.id].map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:''}
  <div class="row">${aiState==='on'?'<button class="btn" type="button" data-a="ask">Hỏi trợ lý AI về di sản này</button>':''}<button class="btn ghost" type="button" data-a="quiz">Luyện câu hỏi về di sản này</button></div>`;
  dlg.dataset.id=id;ov.classList.add('on');HK('open',id,dlg);dlg.querySelector('.x').focus();loadMedia(id)}
 function closeD(){ov.classList.remove('on');if(lastF)lastF.focus()}

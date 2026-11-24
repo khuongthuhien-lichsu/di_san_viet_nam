@@ -523,7 +523,8 @@ deep();
 document.head.insertAdjacentHTML('beforeend', `<style id="tt-sec">.one-sec>.band.sec-off{display:none!important}
 nav.top .scroll a[aria-current="page"]{background:var(--btn);color:var(--btnink);border-radius:6px}
 .pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:28px;padding-top:14px;border-top:1px solid var(--line)}
-.pager a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit;background:var(--panel)}
+.pager a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);font-weight:600;background:var(--panel)}
+.hero .pager{border-top-color:rgba(255,255,255,.35)}
 .pager a:hover,.pager a:focus{border-color:var(--btn)}
 .pager .nx{margin-left:auto}
 @media print{.pager{display:none}.one-sec>.band.sec-off{display:block!important}}</style>`);
